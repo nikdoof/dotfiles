@@ -1,0 +1,8 @@
+[user]
+	name = Andrew Williams
+	email = andy@tensixtyone.com
+[core]
+	editor = nano
+
+[alias]
+	prune = fetch --prune
