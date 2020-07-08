@@ -1,0 +1,68 @@
+servers = (
+  {
+    address = "eu.tilde.chat";
+    chatnet = "tildechat";
+    port = "6697";
+    use_tls = "yes";
+    tls_verify = "no";
+    autoconnect = "yes";
+  },
+  {
+    address = "irc.aachat.net";
+    chatnet = "AAChat";
+    port = "6697";
+    use_tls = "yes";
+    tls_verify = "no";
+    autoconnect = "yes";
+  },
+  {
+    address = "irc.gazellegames.net";
+    chatnet = "gazellegames";
+    port = "6667";
+    use_tls = "no";
+    tls_verify = "no";
+    autoconnect = "yes";
+  },
+  {
+    address = "irc.gazellegames.net";
+    chatnet = "gazellegames";
+    port = "6697";
+    use_tls = "yes";
+    tls_verify = "no";
+    autoconnect = "yes";
+  }
+);
+
+chatnets = {
+  tildechat = {
+    type = "IRC";
+    autosendcmd = "^MSG NickServ identify PASSWORD";
+  };
+  gazellegames = {
+    type = "IRC";
+    nick = "matalok";
+    username = "matalok";
+    realname = "matalok";
+    autosendcmd = "^MSG Nickserver identify pepper; ^MSG vertigo enter matalok PASSWORD";
+  };
+  AAChat = { type = "IRC"; };
+};
+
+channels = (
+  { name = "#dimension"; chatnet = "tilechat"; autojoin = "yes"; },
+  { name = "#dimension"; chatnet = "tildechat"; autojoin = "yes"; },
+  { name = "#meta"; chatnet = "tildechat"; autojoin = "yes"; },
+  { name = "#a&a"; chatnet = "AAChat"; autojoin = "yes"; }
+);
+settings = {
+  core = { 
+    real_name = "Unknown";
+    user_name = "nikdoof";
+    nick = "nikdoof";
+  };
+  "fe-text" = { actlist_sort = "refnum"; };
+  "fe-common/core" = {
+    activity_hide_level = "QUITS JOINS PARTS KICKS MODES TOPIC NICKS";
+  };
+};
+logs = { };
