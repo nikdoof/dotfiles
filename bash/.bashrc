@@ -13,3 +13,10 @@ export PATH
 # export SYSTEMD_PAGER=
 
 # User specific aliases and functions
+
+# OSX aliases
+if [ $(uname) == "Darwin" ]; then
+	alias ls="ls -FG"
+else
+	alias ls="ls -F"
+fi
