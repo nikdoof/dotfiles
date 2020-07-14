@@ -1,10 +1,10 @@
 #!/bin/bash
 
-if [ -d "${HOME}/.dotfiles" ];
+if [ -d "${HOME}/.dotfiles" ]; then
     cd $HOME/.dotfiles
     git reset --hard && git pull
 fi
-if [ -d "${HOME}/.dotfiles-private" ];
+if [ -d "${HOME}/.dotfiles-private" ]; then
     cd $HOME/.dotfiles-private
     git reset --hard && git pull
 fi
