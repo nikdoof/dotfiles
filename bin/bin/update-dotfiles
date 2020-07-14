@@ -2,9 +2,9 @@
 
 if [ -d "${HOME}/.dotfiles" ]; then
     cd $HOME/.dotfiles
-    git reset --hard && git pull
+    git pull --rebase --autostash
 fi
 if [ -d "${HOME}/.dotfiles-private" ]; then
     cd $HOME/.dotfiles-private
-    git reset --hard && git pull
+    git pull --rebase --autostash
 fi

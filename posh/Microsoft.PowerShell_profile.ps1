@@ -14,6 +14,12 @@ function Add-SshKey {
     }
 }
 
+function Update-Dotfiles {
+    Join-Path $HOME '.dotfiles' | Push-Location
+    Invoke-Expression -Command "git pull --rebase --autostash"
+    Pop-Location 
+}
+
 $DotFilesPath = Join-Path $HOME '.dotfiles'
 $DotFilesAutodetect = $true
 $DotFilesAllowNestedSymlinks = $true
