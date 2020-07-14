@@ -1,5 +1,5 @@
 # Add a SSH key to SSH-Agent
-function Add-Key {
+function Add-SshKey {
     if ($args.Count -gt 0) {
         $filename = "$ENV:USERPROFILE\.ssh\id_ed25519_" + $args[0]
         if (!(Test-Path $filename -PathType Leaf)) {
