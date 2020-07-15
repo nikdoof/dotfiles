@@ -9,3 +9,6 @@
 	prune = fetch --prune
 	co = checkout
 	dist = "!git archive --format=tar -v --prefix=$(git describe HEAD)/ $(git describe HEAD) | gzip -9 > ../$(git describe HEAD).tar.gz"
+
+[include]
+    path = ~/.gitconfig-win
