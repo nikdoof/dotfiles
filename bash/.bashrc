@@ -5,18 +5,16 @@ if [ -f /etc/bashrc ]; then
 	. /etc/bashrc
 fi
 
+# Source functions, if it exists
+if [ -e $HOME/.bash_functions ]; then
+    source $HOME/.bash_functions
+fi
+
+# Source aliases, if it exists
+if [ -e $HOME/.bash_aliases ]; then
+    source $HOME/.bash_aliases
+fi
+
 # User specific environment
 PATH="$HOME/.local/bin:$HOME/bin:$PATH"
 export PATH
-
-# Uncomment the following line if you don't like systemctl's auto-paging feature:
-# export SYSTEMD_PAGER=
-
-# User specific aliases and functions
-
-# OSX aliases
-if [ $(uname) == "Darwin" ]; then
-	alias ls="ls -FG"
-else
-	alias ls="ls -F --color=auto"
-fi
