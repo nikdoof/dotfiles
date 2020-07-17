@@ -52,7 +52,8 @@ channels = (
   { name = "#dimension"; chatnet = "tilechat"; autojoin = "yes"; },
   { name = "#dimension"; chatnet = "tildechat"; autojoin = "yes"; },
   { name = "#meta"; chatnet = "tildechat"; autojoin = "yes"; },
-  { name = "#a&a"; chatnet = "AAChat"; autojoin = "yes"; }
+  { name = "#a&a"; chatnet = "AAChat"; autojoin = "yes"; },
+  { name = "#idlerpg"; chatnet = "tildechat"; autojoin = "yes"; }
 );
 settings = {
   core = { 
@@ -66,3 +67,91 @@ settings = {
   };
 };
 logs = { };
+windows = {
+  1 = { immortal = "yes"; name = "(status)"; level = "ALL"; };
+  2 = {
+    items = (
+      {
+        type = "CHANNEL";
+        chat_type = "IRC";
+        name = "#dimension";
+        tag = "tildechat";
+      }
+    );
+  };
+  3 = {
+    items = (
+      {
+        type = "CHANNEL";
+        chat_type = "IRC";
+        name = "#linux";
+        tag = "tildechat";
+      }
+    );
+  };
+  4 = {
+    items = (
+      {
+        type = "CHANNEL";
+        chat_type = "IRC";
+        name = "#tildeverse";
+        tag = "tildechat";
+      }
+    );
+  };
+  5 = {
+    items = (
+      {
+        type = "CHANNEL";
+        chat_type = "IRC";
+        name = "#a&a";
+        tag = "AAChat";
+      }
+    );
+  };
+  6 = {
+    items = (
+      {
+        type = "CHANNEL";
+        chat_type = "IRC";
+        name = "#GazelleGames";
+        tag = "gazellegames";
+      }
+    );
+  };
+  7 = {
+    items = (
+      {
+        type = "CHANNEL";
+        chat_type = "IRC";
+        name = "#IdleRPG";
+        tag = "gazellegames";
+      }
+    );
+  };
+  8 = {
+    items = (
+      {
+        type = "CHANNEL";
+        chat_type = "IRC";
+        name = "#meta";
+        tag = "tildechat";
+      }
+    );
+  };
+  9 = {
+    items = (
+      {
+        type = "CHANNEL";
+        chat_type = "IRC";
+        name = "#idlerpg";
+        tag = "tildechat";
+      }
+    );
+  };
+  10 = { immortal = "yes"; name = "hilight"; sticky = "yes"; };
+};
+mainwindows = {
+  1 = { first_line = "7"; lines = "55"; };
+  10 = { first_line = "1"; lines = "6"; };
+};
