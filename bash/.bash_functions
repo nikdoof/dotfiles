@@ -26,3 +26,15 @@ function add-sshkey() {
         fi
     fi
 }
+
+# Switch to a simple prompt for demos (thanks Mark H for the idea)
+function demoprompt() {
+    if [ ! -z ${OLDPS1+x} ]; then
+        PS1=$OLDPS1
+        unset OLDPS1
+    else
+        OLDPS1=$PS1
+        PS1="\$ "
+        clear
+    fi
+}
