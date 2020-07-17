@@ -1,6 +1,7 @@
 
 # Git pulls latest dotfiles
 function update-dotfiles() {
+    prevdir=$PWD
     if [ -d "${HOME}/.dotfiles" ]; then
         cd $HOME/.dotfiles
         git pull --rebase --autostash
@@ -9,6 +10,7 @@ function update-dotfiles() {
         cd $HOME/.dotfiles-private
         git pull --rebase --autostash
     fi
+    cd $prevdir
 }
 
 function add-sshkey() {
