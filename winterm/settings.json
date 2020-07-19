@@ -26,7 +26,7 @@
             "cursorShape": "vintage",
             "fontFace": "Input Mono",
             "fontSize": 9,
-            "colorScheme": "Material Palenight"
+            "colorScheme": "Palenight"
         },
         "list": [
             {
@@ -47,33 +47,45 @@
                 "commandline": "ssh kronos.home.tensixtyone.com",
                 "hidden": false,
                 "icon": "%ONEDRIVECOMMERCIAL%/Icons/centos.png"
+            },
+            {
+                "guid": "{07b52e3e-de2c-5db4-bd2d-ba144ed6c273}",
+                "hidden": false,
+                "name": "Ubuntu-20.04",
+                "source": "Windows.Terminal.Wsl"
+            },
+            {
+                "guid": "{58ad8b0c-3ef8-5f4d-bc6f-13e4c00f2530}",
+                "hidden": false,
+                "name": "Debian",
+                "source": "Windows.Terminal.Wsl"
             }
         ]
     },
     // Add custom color schemes to this array.
     // To learn more about color schemes, visit https://aka.ms/terminal-color-schemes
     "schemes": [
-          {
+        {
             "name": "Material Palenight",
             "background":    "#292D3E",
             "foreground":    "#959DCB",
-            "black":         "#292D3E",
+            "black":         "#434758",
             "red":           "#F07178",
             "green":         "#C3E88D",
             "yellow":        "#FFCB6B",
             "blue":          "#82AAFF",
             "purple":        "#C792EA",
             "cyan":          "#89DDFF",
-            "white":         "#959DCB",
-            "brightBlack":   "#676E95",
-            "brightRed":     "#e7a9ac",
-            "brightGreen":   "#d6e4c2",
-            "brightYellow":  "#ffe9c2",
-            "brightBlue":    "#c5d7ff",
-            "brightPurple":  "#d7c2e5",
-            "brightCyan":    "#caf0ff",
-            "brightWhite":   "#FFFFFF"
-          }
+            "white":         "#D0D0D0",
+            "brightBlack":   "#434758",
+            "brightRed":     "#FF8B92",
+            "brightGreen":   "#DDFFA7",
+            "brightYellow":  "#FFE585",
+            "brightBlue":    "#9CC4FF",
+            "brightPurple":  "#E1ACFF",
+            "brightCyan":    "#E3F7FF",
+            "brightWhite":   "#FEFEFE"
+        }
     ],
     // Add custom keybindings to this array.
     // To unbind a key combination from your defaults.json, set the command to "unbound".
