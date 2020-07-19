@@ -3,7 +3,7 @@
     "latex-workshop.view.pdf.viewer": "tab",
     "git.autofetch": true,
     "editor.fontFamily": "Input Mono",
-    "workbench.colorTheme": "Community Material Theme Palenight",
+    "workbench.colorTheme": "Material Theme Palenight",
     "workbench.iconTheme": "material-icon-theme",
     "explorer.confirmDelete": false,
     "editor.fontSize": 12,
@@ -13,6 +13,8 @@
     "window.zoomLevel": 0,
     "workbench.startupEditor": "newUntitledFile",
     "remote.SSH.remotePlatform": {
-        "dimension.sh": "linux"
+        "dimension.sh": "linux",
+        "kronos.home.tensixtyone.com": "macOS",
+        "b1.dimension.sh": "linux"
     }
 }
