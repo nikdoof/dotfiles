@@ -43,7 +43,7 @@ chatnets = {
     nick = "matalok";
     username = "matalok";
     realname = "matalok";
-    autosendcmd = "^MSG Nickserver identify pepper; ^MSG vertigo enter matalok PASSWORD";
+    autosendcmd = "^MSG Nickserver identify PASSWORD; ^MSG vertigo enter matalok PASSWORD";
   };
   AAChat = { type = "IRC"; };
 };
@@ -61,7 +61,7 @@ settings = {
     user_name = "nikdoof";
     nick = "nikdoof";
   };
-  "fe-text" = { actlist_sort = "refnum"; };
+  "fe-text" = { actlist_sort = "refnum"; colors_ansi_24bit = "yes"; };
   "fe-common/core" = {
     activity_hide_level = "QUITS JOINS PARTS KICKS MODES TOPIC NICKS";
   };
@@ -155,3 +155,4 @@ mainwindows = {
   1 = { first_line = "7"; lines = "55"; };
   10 = { first_line = "1"; lines = "6"; };
 };
+hilights = ( { text = "matalok"; nick = "yes"; word = "yes"; } );
