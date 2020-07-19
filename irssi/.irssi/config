@@ -64,6 +64,7 @@ settings = {
   "fe-text" = { actlist_sort = "refnum"; colors_ansi_24bit = "yes"; };
   "fe-common/core" = {
     activity_hide_level = "QUITS JOINS PARTS KICKS MODES TOPIC NICKS";
+    theme = "IamCyan";
   };
 };
 logs = { };
