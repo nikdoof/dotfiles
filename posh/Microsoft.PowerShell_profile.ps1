@@ -14,6 +14,10 @@ function Add-SshKey {
     }
 }
 
+function Clear-SshKeys {
+    Invoke-Expression "ssh-add -D"
+}
+
 function Update-Dotfiles {
     Join-Path $HOME '.dotfiles' | Push-Location
     Invoke-Expression -Command "git pull --rebase --autostash"
