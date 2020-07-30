@@ -1,6 +1,9 @@
 set signature="~/.mutt/signature"
 set editor="nano -r 72 -b"
 
+set from = "nikdoof@dimension.sh"
+set realname = "Andrew Williams"
+set use_from
 set envelope_from                    # which from?
 set edit_headers                     # show headers when composing
 set fast_reply                       # skip to compose when replying
