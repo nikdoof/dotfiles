@@ -30,6 +30,13 @@ servers = (
     use_tls = "yes";
     tls_verify = "no";
     autoconnect = "yes";
+  },
+  {
+    address = "irc.freenode.net";
+    chatnet = "freenode";
+    port = "6667";
+    use_tls = "no";
+    tls_verify = "no";
   }
 );
 
@@ -46,6 +53,7 @@ chatnets = {
     autosendcmd = "^MSG Nickserver identify PASSWORD; ^MSG vertigo enter matalok PASSWORD";
   };
   AAChat = { type = "IRC"; };
+  freenode = { type = "IRC"; };
 };
 
 channels = (
@@ -53,7 +61,8 @@ channels = (
   { name = "#dimension"; chatnet = "tildechat"; autojoin = "yes"; },
   { name = "#meta"; chatnet = "tildechat"; autojoin = "yes"; },
   { name = "#a&a"; chatnet = "AAChat"; autojoin = "yes"; },
-  { name = "#idlerpg"; chatnet = "tildechat"; autojoin = "yes"; }
+  { name = "#idlerpg"; chatnet = "tildechat"; autojoin = "yes"; },
+  { name = "#geekhack"; chatnet = "freenode"; autojoin = "yes"; }
 );
 settings = {
   core = { 
