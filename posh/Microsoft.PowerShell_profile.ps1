@@ -45,7 +45,7 @@ function Send-0x0 {
 
         $httpClientHandler = New-Object System.Net.Http.HttpClientHandler
         $httpClient = New-Object System.Net.Http.Httpclient $httpClientHandler
-        $packageFileStream = New-Object System.IO.FileStream @($File, [System.IO.FileMode]::Open)
+        $packageFileStream = New-Object System.IO.FileStream @((Resolve-Path $File), [System.IO.FileMode]::Open)
 
         $contentDispositionHeaderValue = New-Object System.Net.Http.Headers.ContentDispositionHeaderValue "form-data"
         $contentDispositionHeaderValue.Name = "file"
@@ -74,7 +74,7 @@ function Send-0x0 {
                 throw [System.Net.Http.HttpRequestException] $errorMessage
             }
             $responseBody = $response.Content.ReadAsStringAsync().Result
-            return $responseBody
+            return "URL: {0}" -f $responseBody
         }
         catch [Exception] {
             $PSCmdlet.ThrowTerminatingError($_)
@@ -91,8 +91,6 @@ function Send-0x0 {
     }
     END { }
 }
-
-
 
 $DotFilesPath = Join-Path $HOME '.dotfiles'
 $DotFilesAutodetect = $true
