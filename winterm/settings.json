@@ -37,19 +37,13 @@
                 "hidden": false
             },
             {
-                "name": "Dimension.sh",
+                "name": "dimension.sh",
                 "commandline": "ssh dimension.sh",
                 "hidden": false,
                 "icon": "%ONEDRIVECOMMERCIAL%/Icons/centos.png"
             },
             {
-                "name": "Kronos",
-                "commandline": "ssh kronos.home.tensixtyone.com",
-                "hidden": false,
-                "icon": "%ONEDRIVECOMMERCIAL%/Icons/centos.png"
-            },
-            {
-                "name": "SRV1",
+                "name": "srv1.tensixtyone.com",
                 "commandline": "ssh srv1.tensixtyone.com",
                 "hidden": false,
                 "icon": "%ONEDRIVECOMMERCIAL%/Icons/centos.png"
