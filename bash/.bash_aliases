@@ -1,6 +1,7 @@
 # OSX aliases
 if [ $(uname) == "Darwin" ]; then
 	alias ls="ls -FG"
+	alias code="code-exploration"
 else
 	alias ls="ls -F --color=auto"
 fi
