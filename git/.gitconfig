@@ -12,3 +12,7 @@
 
 [include]
     path = ~/.gitconfig-win
+[commit]
+	gpgsign = true
+[init]
+	defaultBranch = main
