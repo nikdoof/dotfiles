@@ -21,8 +21,8 @@ function add-sshkey() {
         echo "Current Keys"
         ssh-add -L
     else
-        if [ -f "~/.ssh/id_ed25519_${NAME}" ]; then
-            ssh-add -t $TIMEOUT "~/.ssh/id_ed25519_${NAME}"
+        if [ -f "$HOME/.ssh/id_ed25519_${NAME}" ]; then
+            ssh-add -t $TIMEOUT "$HOME/.ssh/id_ed25519_${NAME}"
         else
             echo "No key named ${NAME} found..."
         fi
