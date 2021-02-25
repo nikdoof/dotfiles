@@ -22,6 +22,11 @@ if [ $(uname) == "Darwin" ]; then
 	# Shhh Catlina, we don't care!
 	export BASH_SILENCE_DEPRECATION_WARNING=1
 
+	# Homebrew
+	if [ -d /opt/homebrew ]; then
+		eval $(/opt/homebrew/bin/brew shellenv)
+	fi
+
 	# M1 specific hacks
 	if [ $(uname -p) == "arm" ]; then
 		# Stop golang progs having fun with Rosetta 2 (https://yaleman.org/post/2021/2021-01-01-apple-m1-terraform-and-golang/)
@@ -29,11 +34,12 @@ if [ $(uname) == "Darwin" ]; then
 	fi
 fi
 
+
 # Go stuff
 if [ -d /usr/local/go ]; then
 	export GOROOT=/usr/local/go/
 	export GOPATH=$HOME/go/
-	export PATH=$PATH:/usr/local/go/bin
+	export PATH=$PATH:/usr/local/go/bin:$HOME/go/bin
 fi
 
 export PS1="\[\e[0;90m\][\[\e[0;37m\]\u\[\e[0;37m\]@\[\e[0;37m\]\H\[\e[0;90m\]] \[\e[0;90m\](\[\e[0;37m\]\W\[\e[0;90m\]) \[\e[0;37m\]\$\[\e[0m\] "
