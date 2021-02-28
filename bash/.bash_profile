@@ -18,14 +18,13 @@ else
 	export VISUAL=vi
 fi
 
+# Load iTerm2 integration, for all hosts
+source ~/.bash/iterm2_integration.bash
+
 # OSX Specific envs
 if [ $(uname) == "Darwin" ]; then
 	# Shhh Catlina, we don't care!
 	export BASH_SILENCE_DEPRECATION_WARNING=1
-
-	if [ "${TERM_PROGRAM}" == "iTerm.app" ]; then
-		source ~/.bash/iterm2_integration.bash
-	fi
 
 	# M1 specific hacks
 	if [ $(uname -p) == "arm" ]; then
