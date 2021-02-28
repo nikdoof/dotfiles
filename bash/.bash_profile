@@ -9,6 +9,7 @@ fi
 export TZ=GB
 export LANG=en_GB.UTF-8
 
+# Make a sensible editor choice
 if [ -x /usr/bin/nano ]; then
 	export EDITOR=nano
 	export VISUAL=nano
@@ -21,6 +22,10 @@ fi
 if [ $(uname) == "Darwin" ]; then
 	# Shhh Catlina, we don't care!
 	export BASH_SILENCE_DEPRECATION_WARNING=1
+
+	if [ "${TERM_PROGRAM}" == "iTerm.app" ]; then
+		source ~/.bash/iterm2_integration.bash
+	fi
 
 	# M1 specific hacks
 	if [ $(uname -p) == "arm" ]; then
