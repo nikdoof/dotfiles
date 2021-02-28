@@ -8,6 +8,9 @@ Linux
 
 Installation is handled by `stow`.
 
+```
+curl https://raw.githubusercontent.com/nikdoof/dotfiles/main/bootstrap.sh | bash
+```
 
 Windows
 -------
