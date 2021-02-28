@@ -13,6 +13,11 @@
 
 [include]
     path = ~/.gitconfig-win
+
 [commit]
+
 [init]
 	defaultBranch = main
+
+[pull]
+	ff = only
