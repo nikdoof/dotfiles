@@ -8,14 +8,6 @@ servers = (
     autoconnect = "yes";
   },
   {
-    address = "irc.gazellegames.net";
-    chatnet = "gazellegames";
-    port = "6697";
-    use_tls = "yes";
-    tls_verify = "no";
-    autoconnect = "yes";
-  },
-  {
     address = "irc.freenode.net";
     chatnet = "freenode";
     port = "6667";
@@ -28,18 +20,29 @@ servers = (
 chatnets = {
   tildechat = {
     type = "IRC";
-    autosendcmd = "^MSG NickServ identify PASSWORD";
+    autosendcmd = "^MSG NickServ identify br6feoot";
   };
-  freenode = { type = "IRC"; };
+  freenode = {
+    type = "IRC";
+    autosendcmd = "^MSG nickserv identify br6feoot";
+  };
 };
 
 channels = (
   { name = "#dimension"; chatnet = "tilechat"; autojoin = "yes"; },
   { name = "#dimension"; chatnet = "tildechat"; autojoin = "yes"; },
   { name = "#meta"; chatnet = "tildechat"; autojoin = "yes"; },
-  { name = "#idlerpg"; chatnet = "tildechat"; autojoin = "yes"; },
+  {
+    name = "#idlerpg";
+    chatnet = "tildechat";
+    autojoin = "yes";
+    password = "-botmd";
+    botmasks = "ubergeek@thunix.net";
+    autosendcmd = "^MSG idlerpg_bot login Matalok br6feoot";
+  },
   { name = "#geekhack"; chatnet = "freenode"; autojoin = "yes"; },
-  { name = "#livlug"; chatnet = "Freenode"; autojoin = "yes"; }
+  { name = "#livlug"; chatnet = "Freenode"; autojoin = "yes"; },
+  { name = "#gemini"; chatnet = "tildechat"; autojoin = "yes"; }
 );
 settings = {
   core = { 
@@ -54,9 +57,30 @@ settings = {
   };
 };
 logs = { };
+hilights = ( { text = "matalok"; nick = "yes"; word = "yes"; } );
 windows = {
   1 = { immortal = "yes"; name = "(status)"; level = "ALL"; };
   2 = {
+    items = (
+      {
+        type = "CHANNEL";
+        chat_type = "IRC";
+        name = "#geekhack";
+        tag = "freenode";
+      }
+    );
+  };
+  3 = {
+    items = (
+      {
+        type = "CHANNEL";
+        chat_type = "IRC";
+        name = "#livlug";
+        tag = "freenode";
+      }
+    );
+  };
+  4 = {
     items = (
       {
         type = "CHANNEL";
@@ -66,57 +90,7 @@ windows = {
       }
     );
   };
-  3 = {
-    items = (
-      {
-        type = "CHANNEL";
-        chat_type = "IRC";
-        name = "#linux";
-        tag = "tildechat";
-      }
-    );
-  };
-  4 = {
-    items = (
-      {
-        type = "CHANNEL";
-        chat_type = "IRC";
-        name = "#tildeverse";
-        tag = "tildechat";
-      }
-    );
-  };
   5 = {
-    items = (
-      {
-        type = "CHANNEL";
-        chat_type = "IRC";
-        name = "#a&a";
-        tag = "AAChat";
-      }
-    );
-  };
-  6 = {
-    items = (
-      {
-        type = "CHANNEL";
-        chat_type = "IRC";
-        name = "#GazelleGames";
-        tag = "gazellegames";
-      }
-    );
-  };
-  7 = {
-    items = (
-      {
-        type = "CHANNEL";
-        chat_type = "IRC";
-        name = "#IdleRPG";
-        tag = "gazellegames";
-      }
-    );
-  };
-  8 = {
     items = (
       {
         type = "CHANNEL";
@@ -126,7 +100,7 @@ windows = {
       }
     );
   };
-  9 = {
+  6 = {
     items = (
       {
         type = "CHANNEL";
@@ -136,10 +110,9 @@ windows = {
       }
     );
   };
-  10 = { immortal = "yes"; name = "hilight"; sticky = "yes"; };
+  7 = { immortal = "yes"; name = "hilight"; sticky = "yes"; };
 };
 mainwindows = {
-  1 = { first_line = "7"; lines = "55"; };
-  10 = { first_line = "1"; lines = "6"; };
+  1 = { first_line = "9"; lines = "37"; };
+  7 = { first_line = "1"; lines = "8"; };
 };
-hilights = ( { text = "matalok"; nick = "yes"; word = "yes"; } );
