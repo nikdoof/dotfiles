@@ -55,6 +55,7 @@ function demoprompt() {
 
 function commit-pkm() {
     if [ -d $HOME/Documents/pkm ]; then
+        prevdir=$PWD
         cd ~/Documents/pkm
         if [[ `git status --porcelain` ]]; then
             echo "Changes detected, commiting..."
@@ -62,5 +63,6 @@ function commit-pkm() {
         else
             echo "No changes detected"
         fi
+        cd $PREVDIR
     fi
 }
