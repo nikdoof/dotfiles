@@ -41,6 +41,11 @@ function add-sshkey() {
     fi
 }
 
+function _add-sshkey-completions() {
+    COMPREPLY=( $(ls -1 ${HOME}/.ssh/id_*|cut -d'_' -f 3|cut -d'.' -f 1|sed 's/@//'|sort|uniq) ) 
+}
+complete -F _add-sshkey-completions add-sshkey
+
 # Switch to a simple prompt for demos (thanks Mark H for the idea)
 function demoprompt() {
     if [ ! -z ${OLDPS1+x} ]; then
