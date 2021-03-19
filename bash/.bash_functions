@@ -64,9 +64,13 @@ function commit-pkm() {
         cd ~/Documents/pkm
         if [[ `git status --porcelain` ]]; then
             echo "Changes detected, commiting..."
-            git add -A && git commit -a -m 'Manual savepoint' && git push origin
+            git add -A && git commit -a -m 'Manual savepoint'
         else
             echo "No changes detected"
+        fi
+        git fetch
+        if [ $(git rev-parse main) != $(git rev-parse refs/remotes/origin/main) ]; then
+            git push origin
         fi
         cd $PREVDIR
     fi
