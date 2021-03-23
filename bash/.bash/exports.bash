@@ -1,3 +1,7 @@
+# User specific environment
+PATH="$HOME/.local/bin:$HOME/bin:$PATH"
+export PATH
+
 # Prompt
 export PS1="\[\e[0;90m\][\[\e[0;37m\]\u\[\e[0;37m\]@\[\e[0;37m\]\H\[\e[0;90m\]] \[\e[0;90m\](\[\e[0;37m\]\W\[\e[0;90m\]) \[\e[0;37m\]\$\[\e[0m\] "
 
@@ -19,6 +23,11 @@ if [ -d /usr/local/go ]; then
 	export GOROOT=/usr/local/go/
 	export GOPATH=$HOME/go/
 	export PATH=$PATH:/usr/local/go/bin:$HOME/go/bin
+
+    # https://github.com/oz/tz
+    if [ -f $HOME/go/bin/tz ]; then
+        export TZ_LIST="America/New_York,America/Los_Angeles,Europe/Paris"
+    fi
 fi
 
 # OSX Specific envs
@@ -33,7 +42,3 @@ if [ $(uname) == "Darwin" ]; then
 	fi
 fi
 
-# https://github.com/oz/tz
-if [ -f $HOME/go/bin/tz ]; then
-	export TZ_LIST="America/New_York,America/Los_Angeles,Europe/Paris"
-fi
