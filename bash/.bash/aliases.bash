@@ -2,6 +2,7 @@
 if [ $(uname) == "Darwin" ]; then
 	alias ls="ls -FG"
 	alias code="code-insiders"
+    alias flushdns="sudo dscacheutil -flushcache && sudo killall -HUP mDNSResponder"
 else
 	alias ls="ls -F --color=auto"
 fi
