@@ -33,4 +33,4 @@ fi
 source ~/.bash/iterm2_integration.bash
 
 # Homebrew
-[ -d /opt/homebrew ]; eval $(/opt/homebrew/bin/brew shellenv)
+[ -d /opt/homebrew ] && eval $(/opt/homebrew/bin/brew shellenv)
