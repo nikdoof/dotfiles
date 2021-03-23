@@ -38,12 +38,16 @@ if [ $(uname) == "Darwin" ]; then
 	fi
 fi
 
-
 # Go stuff
 if [ -d /usr/local/go ]; then
 	export GOROOT=/usr/local/go/
 	export GOPATH=$HOME/go/
 	export PATH=$PATH:/usr/local/go/bin:$HOME/go/bin
+fi
+
+# https://github.com/oz/tz
+if [ -f $HOME/go/bin/tz ]; then
+	export TZ_LIST="America/New_York,America/Los_Angeles,Europe/Paris"
 fi
 
 export PS1="\[\e[0;90m\][\[\e[0;37m\]\u\[\e[0;37m\]@\[\e[0;37m\]\H\[\e[0;90m\]] \[\e[0;90m\](\[\e[0;37m\]\W\[\e[0;90m\]) \[\e[0;37m\]\$\[\e[0m\] "

@@ -6,13 +6,13 @@ if [ -f /etc/bashrc ]; then
 fi
 
 # Source functions, if it exists
-if [ -e $HOME/.bash_functions ]; then
-    source $HOME/.bash_functions
+if [ -e $HOME/.bash/functions.bash ]; then
+    source $HOME/.bash/functions.bash
 fi
 
 # Source aliases, if it exists
-if [ -e $HOME/.bash_aliases ]; then
-    source $HOME/.bash_aliases
+if [ -e $$HOME/.bash/aliases.bash ]; then
+    source $HOME/.bash/aliases.bash
 fi
 
 # User specific environment
