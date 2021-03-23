@@ -12,19 +12,6 @@ function update-dotfiles() {
     cd $prevdir
 }
 
-# Function to manage basic stowage tasks as stow
-function stow() {
-    if [ -d "${HOME}/.dotfiles" ]; then
-        if [ -d "${HOME}/.dotfiles/$1" ]; then
-            $HOME/.dotfiles/bin/bin/stowage $HOME/.dotfiles/$1
-        else
-            echo "Can't find $1 to stow"
-            echo "List of packages:"
-            ls -1 $HOME/.dotfiles
-        fi
-    fi
-}
-
 function add-sshkey() {
     TIMEOUT="2h"
     NAME=$1
