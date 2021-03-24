@@ -10,18 +10,16 @@ fi
 git clone https://github.com/nikdoof/dotfiles.git $HOME/.dotfiles > /dev/null
 
 # Clean bash files
-for file in .bash_profile .bashrc .bash_logout; do
+for file in .bash_profile .bashrc .bash_logout .zshrc; do
   if [ -e $file ]; then
     rm -f $file
   fi
 done
 
-cd $HOME/.dotfiles/
-
 # Stow the default packages
-for package in bin bash; do
+for package in bin bash zsh; do
   echo "Stowing ${package}"
-  ./bin/bin/stowage $package
+  $HOME/.dotfiles/bin/bin/stowage install $package
 done
 echo ""
-echo "Done, either source ~/.bash_profile or restart your shell."
+echo "Done, either source ~/.bash_profile / ~/.zshrc or restart your shell."

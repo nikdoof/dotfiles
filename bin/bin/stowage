@@ -1,9 +1,13 @@
 #!/usr/bin/env python3
 """
-stowage
-by Keith Gaughan <https://github.com/kgaughan/>
-Stow, but in Python, and in a single file.
+originally stowage, by Keith Gaughan <https://github.com/kgaughan/>
+modified by Andrew Williams <https://github.com/nikdoof/>
+
+A dotfile package manager
+
 Copyright (c) Keith Gaughan, 2017.
+Copyright (c) Andrew Williams, 2021.
+
 Permission is hereby granted, free of charge, to any person obtaining a copy of
 this software and associated documentation files (the "Software"), to deal in
 the Software without restriction, including without limitation the rights to
@@ -32,8 +36,8 @@ import sys
 
 def add(args):
     target = path.realpath(args.target)
-    file_path = path.realpath(args.add)
-    package = path.realpath(args.packages[0])
+    file_path = path.realpath(args.file)
+    package = path.realpath(os.path.join(args.repository, args.packages[0]))
     if path.commonprefix([target, file_path]) != target:
         print(f"error: '{args.add}' not under '{args.target}'",
               file=sys.stderr)
@@ -55,15 +59,16 @@ def add(args):
 
 def install(args, is_excluded):
     for package in args.packages:
-        if not path.isdir(package):
+        package_dir = os.path.join(args.repository, package)
+        if not path.isdir(package_dir):
             print(f"no such package: {package}; skipping", file=sys.stderr)
             continue
-        for root, _, files in os.walk(package, followlinks=True):
+        for root, _, files in os.walk(package_dir, followlinks=True):
             files = [
                 filename for filename in files if not is_excluded(filename)]
             if len(files) == 0:
                 continue
-            rest = root[len(package) + 1:]
+            rest = root[len(package_dir) + 1:]
             dest = path.join(args.target, rest)
             if rest != "":
                 if args.verbose:
@@ -90,15 +95,16 @@ def install(args, is_excluded):
 def uninstall(args, is_excluded):
     dirs = []
     for package in args.packages:
-        if not path.isdir(package):
+        package_dir = os.path.join(args.repository, package)
+        if not path.isdir(package_dir):
             print(f"no such package: {package}; skipping", file=sys.stderr)
             continue
-        for root, _, files in os.walk(package, followlinks=True):
+        for root, _, files in os.walk(package_dir, followlinks=True):
             files = [
                 filename for filename in files if not is_excluded(filename)]
             if len(files) == 0:
                 continue
-            rest = root[len(package) + 1:]
+            rest = root[len(package_dir) + 1:]
             dest = path.join(args.target, rest)
             if rest != "":
                 dirs.append(dest)
@@ -128,14 +134,22 @@ def uninstall(args, is_excluded):
 
 
 def make_argparser():
-    parser = argparse.ArgumentParser(description="A symlink farm manager.")
+    parser = argparse.ArgumentParser(description="A dotfile package manager.")
     parser.add_argument("--verbose", "-v",
                         action="store_true", help="Verbose output")
+    parser.add_argument("--dry-run", "-n",
+                        action="store_true", help="Dry run.")
     parser.add_argument(
         "--target",
         "-t",
         default=os.path.expanduser('~'),
         help="Target directory in which to place symlinks",
+    )
+    parser.add_argument(
+        "--repository",
+        "-r",
+        default=os.path.expanduser('~/.dotfiles'),
+        help="The location of the dotfile repository",
     )
     parser.add_argument(
         "--exclude",
@@ -145,46 +159,60 @@ def make_argparser():
         metavar="GLOB",
         help="Glob pattern of files to exclude",
     )
-    parser.add_argument("--dry-run", "-n",
-                        action="store_true", help="Dry run.")
 
-    group = parser.add_mutually_exclusive_group(required=False)
-    group.add_argument(
-        "--uninstall",
-        "-D",
-        action="store_false",
-        dest="install",
-        help="Uninstall symlinks",
-    )
-    group.add_argument(
-        "--add", "-a", metavar="FILE", help="Stow files in a particular package"
-    )
+    subparsers = parser.add_subparsers(dest='command', help='sub-command help')
 
-    parser.add_argument(
+    # List
+    parser_add = subparsers.add_parser('list', help='List packages in the repository')
+
+    # Add
+    parser_add = subparsers.add_parser('add', help='Add a file to a package')
+    parser_add.add_argument(
+        "file", metavar="FILE", help="File to stow"
+    )
+    parser_add.add_argument(
         "packages", metavar="PACKAGE", nargs="+", help="Packages to install"
     )
+
+    # Uninstall
+    parser_uninstall = subparsers.add_parser('uninstall', help='Remove a package')
+    parser_uninstall.add_argument(
+        "packages", metavar="PACKAGE", nargs="+", help="Packages to uninstall"
+    )
+
+    # Install
+    parser_install = subparsers.add_parser('install', help='Install packages')
+    parser_install.add_argument(
+        "packages", metavar="PACKAGE", nargs="+", help="Packages to install"
+    )
+
     return parser
 
 
 def main():
     parser = make_argparser()
     args = parser.parse_args()
+    if args.dry_run:
+        args.verbose = True
     exclude = [re.compile(fnmatch.translate(pattern))
                for pattern in args.exclude]
 
     def is_excluded(filename):
         return any(pattern.match(filename) for pattern in exclude)
 
-    if args.add:
+    if args.command == 'list':
+        for dir in os.listdir(args.repository):
+            if os.path.isdir(os.path.join(args.repository, dir)) and dir[0] != '.': print(dir) 
+    elif args.command == 'add':
         if len(args.packages) > 1:
             parser.error("--add only works with a single package")
-        args.add = path.normpath(path.join(args.target, args.add))
-        if not path.isfile(args.add):
-            parser.error(f"no such file: {args.add}")
+        args.file = path.normpath(path.join(args.target, args.file))
+        if not path.isfile(args.file):
+            parser.error(f"no such file: {args.file}")
         add(args)
-    elif args.install:
+    elif args.command == 'install':
         install(args, is_excluded)
-    else:
+    elif args.command == 'uninstall':
         uninstall(args, is_excluded)
 
 
