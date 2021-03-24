@@ -17,7 +17,7 @@ for file in .bash_profile .bashrc .bash_logout .zshrc; do
 done
 
 # Stow the default packages
-for package in bin bash zsh; do
+for package in bin shell-common bash zsh; do
   echo "Stowing ${package}"
   $HOME/.dotfiles/bin/bin/stowage install $package
 done
