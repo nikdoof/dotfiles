@@ -21,12 +21,9 @@ if [ -f $HOME/.bash/aliases.bash ]; then
 fi
 
 # Source completions, if it exists
-if [ -f $HOME/.bash/exports.bash ]; then
+if [ -f $HOME/.bash/completions.bash ]; then
     source $HOME/.bash/completions.bash
 fi
-
-# Load iTerm2 integration, for all hosts
-source ~/.bash/iterm2_integration.bash
 
 # Homebrew
 [ -d /opt/homebrew ] && eval $(/opt/homebrew/bin/brew shellenv)
