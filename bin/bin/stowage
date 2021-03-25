@@ -37,7 +37,7 @@ import sys
 def add(args):
     target = path.realpath(args.target)
     file_path = path.realpath(args.file)
-    package = path.realpath(os.path.join(args.repository, args.packages[0]))
+    package = path.realpath(path.join(args.repository, args.packages[0]))
     if path.commonprefix([target, file_path]) != target:
         print(f"error: '{args.add}' not under '{args.target}'",
               file=sys.stderr)
@@ -53,49 +53,69 @@ def add(args):
         print("SWAP", dest_path, file_path)
     if not args.dry_run:
         shutil.move(file_path, dest)
-        # XXX Should really check if the symlink fails here.
+        # TODO Should really check if the symlink fails here.
         os.symlink(dest_path, file_path)
 
 
 def install(args, is_excluded):
     for package in args.packages:
-        package_dir = os.path.join(args.repository, package)
+        package_dir = path.join(args.repository, package)
         if not path.isdir(package_dir):
             print(f"no such package: {package}; skipping", file=sys.stderr)
             continue
+
+        # Walk the package
         for root, _, files in os.walk(package_dir, followlinks=True):
-            files = [
-                filename for filename in files if not is_excluded(filename)]
+            files = [filename for filename in files if not is_excluded(filename)]
             if len(files) == 0:
                 continue
             rest = root[len(package_dir) + 1:]
             dest = path.join(args.target, rest)
+
+            # Create the directory path
             if rest != "":
+                # If a non-directory exists with the same name and clobber is enabled, get rid of it.
+                if path.exists(dest) and not path.isdir(dest) and args.clobber:
+                    if args.verbose:
+                        print("UNLINK", dest)
+                    if not args.dry_run:
+                        os.unlink(dest)
+
+                # Make directory
                 if args.verbose:
                     print("DIR", dest)
-                if not args.dry_run and not os.path.exists(dest):
+                if not args.dry_run and not path.exists(dest):
                     os.makedirs(dest, mode=0o755)
+
+            # Process files
             for filename in files:
+                src_path = path.realpath(path.join(root, filename))
                 dest_path = path.join(dest, filename)
-                if path.exists(dest_path):
+
+                # Skip if the file exists and we're not clobbering
+                if path.exists(dest_path) and not args.clobber:
                     if args.verbose:
                         print("SKIP", dest_path)
                     continue
-                src_path = path.realpath(path.join(root, filename))
+
+                # Does the file already exist?
+                if path.isfile(dest_path):
+                    if args.verbose:
+                        print("UNLINK", dest_path)
+                    if not args.dry_run:
+                        os.unlink(dest_path)
+
+                # Link the file
                 if args.verbose:
                     print("LINK", src_path, dest_path)
                 if not args.dry_run:
-                    if path.islink(dest_path):
-                        if args.verbose:
-                            print("DANGLE", dest_path)
-                        os.unlink(dest_path)
                     os.symlink(src_path, dest_path)
 
 
 def uninstall(args, is_excluded):
     dirs = []
     for package in args.packages:
-        package_dir = os.path.join(args.repository, package)
+        package_dir = path.join(args.repository, package)
         if not path.isdir(package_dir):
             print(f"no such package: {package}; skipping", file=sys.stderr)
             continue
@@ -142,13 +162,13 @@ def make_argparser():
     parser.add_argument(
         "--target",
         "-t",
-        default=os.path.expanduser('~'),
+        default=path.expanduser('~'),
         help="Target directory in which to place symlinks",
     )
     parser.add_argument(
         "--repository",
         "-r",
-        default=os.path.expanduser('~/.dotfiles'),
+        default=path.expanduser('~/.dotfiles'),
         help="The location of the dotfile repository",
     )
     parser.add_argument(
@@ -158,6 +178,11 @@ def make_argparser():
         default=[],
         metavar="GLOB",
         help="Glob pattern of files to exclude",
+    )
+    parser.add_argument(
+        "--clobber",
+        action="store_true",
+        help="Replace files even if they exist.",
     )
 
     subparsers = parser.add_subparsers(dest='command', help='sub-command help')
@@ -170,21 +195,15 @@ def make_argparser():
     parser_add.add_argument(
         "file", metavar="FILE", help="File to stow"
     )
-    parser_add.add_argument(
-        "packages", metavar="PACKAGE", nargs="+", help="Packages to install"
-    )
+    parser_add.add_argument("packages", metavar="PACKAGE", nargs="+", help="Packages to install")
 
     # Uninstall
     parser_uninstall = subparsers.add_parser('uninstall', help='Remove a package')
-    parser_uninstall.add_argument(
-        "packages", metavar="PACKAGE", nargs="+", help="Packages to uninstall"
-    )
+    parser_uninstall.add_argument("packages", metavar="PACKAGE", nargs="+", help="Packages to uninstall")
 
     # Install
     parser_install = subparsers.add_parser('install', help='Install packages')
-    parser_install.add_argument(
-        "packages", metavar="PACKAGE", nargs="+", help="Packages to install"
-    )
+    parser_install.add_argument("packages", metavar="PACKAGE", nargs="+", help="Packages to install")
 
     return parser
 
@@ -202,7 +221,8 @@ def main():
 
     if args.command == 'list':
         for dir in os.listdir(args.repository):
-            if os.path.isdir(os.path.join(args.repository, dir)) and dir[0] != '.': print(dir) 
+            if path.isdir(path.join(args.repository, dir)) and dir[0] != '.':
+                print(dir)
     elif args.command == 'add':
         if len(args.packages) > 1:
             parser.error("--add only works with a single package")
