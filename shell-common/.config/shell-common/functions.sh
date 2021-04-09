@@ -12,12 +12,13 @@ function update-dotfiles() {
     cd $prevdir
 }
 
+# Wrapper around ssh-add to ease usage and also ensure basic timeouts
 function add-sshkey() {
     TIMEOUT="2h"
     NAME=$1
 
     if [ -z "$NAME" ]; then
-        echo "Current Keys"
+        echo "Current Agent Keys"
         ssh-add -L | cut -d" " -f 3-
     else
         if [ -f "${HOME}/.ssh/id_ed25519_${NAME}" ]; then
