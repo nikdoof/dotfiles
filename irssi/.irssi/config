@@ -8,11 +8,11 @@ servers = (
     autoconnect = "yes";
   },
   {
-    address = "irc.freenode.net";
-    chatnet = "freenode";
-    port = "6667";
-    use_tls = "no";
-    tls_verify = "no";
+    address = "irc.libera.chat";
+    chatnet = "libera.chat";
+    port = "6697";
+    use_tls = "yes";
+    tls_verify = "yes";
     autoconnect = "yes";
   }
 );
@@ -22,9 +22,11 @@ chatnets = {
     type = "IRC";
     autosendcmd = "^MSG NickServ identify br6feoot";
   };
-  freenode = {
+  "libera.chat" = {
     type = "IRC";
-    autosendcmd = "^MSG nickserv identify br6feoot";
+    sasl_mechanism = "PLAIN";
+    sasl_username = "nikdoof";
+    sasl_password = "llamatroniceepachu";
   };
 };
 
@@ -40,7 +42,6 @@ channels = (
     botmasks = "ubergeek@thunix.net";
     autosendcmd = "^MSG idlerpg_bot login Matalok br6feoot";
   },
-  { name = "#geekhack"; chatnet = "freenode"; autojoin = "yes"; },
   { name = "#livlug"; chatnet = "Freenode"; autojoin = "yes"; },
   { name = "#gemini"; chatnet = "tildechat"; autojoin = "yes"; }
 );
@@ -116,3 +117,4 @@ mainwindows = {
   1 = { first_line = "9"; lines = "37"; };
   7 = { first_line = "1"; lines = "8"; };
 };
+ignores = ( { level = "JOINS PARTS QUITS"; } );
