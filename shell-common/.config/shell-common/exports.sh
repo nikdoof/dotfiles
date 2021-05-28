@@ -16,15 +16,15 @@ else
 fi
 
 # Go stuff
-if [ -d /usr/local/go ]; then
+export GOPATH=$HOME/go/
+if [ -z ${GOROOT+x} ] && [ -d /usr/local/go ]; then
 	export GOROOT=/usr/local/go/
-	export GOPATH=$HOME/go/
-	export PATH=$PATH:/usr/local/go/bin:$HOME/go/bin
+	export PATH=$PATH:$HOME/go/bin
+fi
 
-    # https://github.com/oz/tz
-    if [ -f $HOME/go/bin/tz ]; then
-        export TZ_LIST="America/New_York,America/Los_Angeles,Europe/Paris"
-    fi
+# https://github.com/oz/tz
+if [ -f $HOME/go/bin/tz ]; then
+	export TZ_LIST="America/New_York,America/Los_Angeles,Europe/Paris"
 fi
 
 # OSX Specific envs
