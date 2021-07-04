@@ -52,8 +52,9 @@ function commit-pkm() {
             echo "No changes detected"
         fi
         git fetch
-        if [ $(git rev-parse main) != $(git rev-parse refs/remotes/origin/main) ]; then
-            git push origin
+        branch=$(git rev-parse --abbrev-ref HEAD)
+        if [ $(git rev-parse ${branch}) != $(git rev-parse refs/remotes/origin/${branch}) ]; then
+            git push origin ${branch}
         fi
         cd $PREVDIR
     fi
