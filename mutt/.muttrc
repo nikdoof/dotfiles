@@ -21,3 +21,5 @@ unset mime_forward                   # forward attachments as part of body
 
 unmy_hdr *       # delete existing header-settings, if there are any.
 my_hdr X-PGP-Key: https://keybase.io/nikdoof/pgp_keys.asc
+
+unignore List-ID # Show list ID for mailing lists
