@@ -17,6 +17,7 @@ fi
 
 # Go stuff
 export GOPATH=$HOME/go/
+export PATH=${GOPATH}bin:$PATH
 if [ -z ${GOROOT+x} ] && [ -d /usr/local/go ]; then
 	export GOROOT=/usr/local/go/
 	export PATH=$PATH:$HOME/go/bin
