@@ -35,6 +35,9 @@ if [[ $(uname) == "Darwin" ]]; then
 		# Stop golang progs having fun with Rosetta 2 (https://yaleman.org/post/2021/2021-01-01-apple-m1-terraform-and-golang/)
 		export GODEBUG=asyncpreemptoff=1
 	fi
+
+        # Python user bin folder
+        [ -d $HOME/Library/Python/3.9/bin ] && export PATH=$PATH:$HOME/Library/Python/3.9/bin
 	
 	# Homebrew
 	[ -d /opt/homebrew ] && eval $(/opt/homebrew/bin/brew shellenv)
