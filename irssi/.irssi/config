@@ -13,21 +13,15 @@ servers = (
     chatnet = "libera.chat";
     port = "6697";
     use_tls = "yes";
+    tls_cert = "~/.irssi/certs/libera.pem";
     tls_verify = "yes";
     autoconnect = "yes";
   }
 );
 
-chatnets = {
-  tildechat = {
-    type = "IRC";
-  };
-  "libera.chat" = {
-    type = "IRC";
-    sasl_mechanism = "PLAIN";
-    sasl_username = "nikdoof";
-    sasl_password = "llamatroniceepachu";
-  };
+chatnets = { 
+  tildechat = { type = "IRC"; };
+  "libera.chat" = { type = "IRC"; };
 };
 
 channels = (
