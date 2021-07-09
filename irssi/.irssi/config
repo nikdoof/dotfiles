@@ -1,11 +1,12 @@
 servers = (
   {
-    address = "eu.tilde.chat";
+    address = "irc.tilde.chat";
     chatnet = "tildechat";
     port = "6697";
     use_tls = "yes";
     tls_verify = "no";
     autoconnect = "yes";
+    tls_cert = "~/.irssi/certs/tilde.pem";
   },
   {
     address = "irc.libera.chat";
@@ -20,7 +21,6 @@ servers = (
 chatnets = {
   tildechat = {
     type = "IRC";
-    autosendcmd = "^MSG NickServ identify br6feoot";
   };
   "libera.chat" = {
     type = "IRC";
@@ -43,7 +43,10 @@ channels = (
     autosendcmd = "^MSG idlerpg_bot login Matalok br6feoot";
   },
   { name = "#livlug"; chatnet = "Freenode"; autojoin = "yes"; },
-  { name = "#gemini"; chatnet = "tildechat"; autojoin = "yes"; }
+  { name = "#gemini"; chatnet = "tildechat"; autojoin = "yes"; },
+  { name = "#wiki"; chatnet = "tildechat"; autojoin = "yes"; },
+  { name = "#tw2002"; chatnet = "tildechat"; autojoin = "yes"; },
+  { name = "#southlondon"; chatnet = "tildechat"; }
 );
 settings = {
   core = { 
@@ -59,29 +62,10 @@ settings = {
 };
 logs = { };
 hilights = ( { text = "matalok"; nick = "yes"; word = "yes"; } );
+ignores = ( { level = "JOINS PARTS QUITS"; } );
 windows = {
   1 = { immortal = "yes"; name = "(status)"; level = "ALL"; };
   2 = {
-    items = (
-      {
-        type = "CHANNEL";
-        chat_type = "IRC";
-        name = "#geekhack";
-        tag = "freenode";
-      }
-    );
-  };
-  3 = {
-    items = (
-      {
-        type = "CHANNEL";
-        chat_type = "IRC";
-        name = "#livlug";
-        tag = "freenode";
-      }
-    );
-  };
-  4 = {
     items = (
       {
         type = "CHANNEL";
@@ -91,7 +75,7 @@ windows = {
       }
     );
   };
-  5 = {
+  3 = {
     items = (
       {
         type = "CHANNEL";
@@ -101,7 +85,7 @@ windows = {
       }
     );
   };
-  6 = {
+  4 = {
     items = (
       {
         type = "CHANNEL";
@@ -111,10 +95,49 @@ windows = {
       }
     );
   };
-  7 = { immortal = "yes"; name = "hilight"; sticky = "yes"; };
+  5 = { immortal = "yes"; name = "hilight"; sticky = "yes"; };
+  6 = {
+    items = (
+      {
+        type = "CHANNEL";
+        chat_type = "IRC";
+        name = "#gemini";
+        tag = "tildechat";
+      }
+    );
+  };
+  7 = {
+    items = (
+      {
+        type = "CHANNEL";
+        chat_type = "IRC";
+        name = "#wiki";
+        tag = "tildechat";
+      }
+    );
+  };
+  8 = {
+    items = (
+      {
+        type = "CHANNEL";
+        chat_type = "IRC";
+        name = "#tildeverse";
+        tag = "tildechat";
+      }
+    );
+  };
+  9 = {
+    items = (
+      {
+        type = "CHANNEL";
+        chat_type = "IRC";
+        name = "#tw2002";
+        tag = "tildechat";
+      }
+    );
+  };
 };
 mainwindows = {
-  1 = { first_line = "9"; lines = "37"; };
-  7 = { first_line = "1"; lines = "8"; };
+  1 = { first_line = "7"; lines = "41"; };
+  5 = { first_line = "1"; lines = "6"; };
 };
-ignores = ( { level = "JOINS PARTS QUITS"; } );
