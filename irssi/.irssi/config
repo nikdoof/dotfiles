@@ -19,9 +19,9 @@ servers = (
   }
 );
 
-chatnets = { 
+chatnets = {
   tildechat = { type = "IRC"; };
-  "libera.chat" = { type = "IRC"; };
+  "libera.chat" = { type = "IRC"; sasl_mechanism = "EXTERNAL"; };
 };
 
 channels = (
