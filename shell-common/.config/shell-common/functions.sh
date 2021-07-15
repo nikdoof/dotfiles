@@ -45,7 +45,7 @@ function commit-pkm() {
     if [ -d $HOME/Documents/pkm ]; then
         prevdir=$PWD
         cd ~/Documents/pkm
-        if [[ `git status --porcelain` ]]; then
+        if [[ $(git status --porcelain) ]]; then
             echo "Changes detected, commiting..."
             git add -A && git commit -a -m 'Manual savepoint'
         else
