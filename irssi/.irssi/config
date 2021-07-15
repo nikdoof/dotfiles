@@ -20,7 +20,7 @@ servers = (
 );
 
 chatnets = {
-  tildechat = { type = "IRC"; };
+  tildechat = { type = "IRC"; sasl_mechanism = "EXTERNAL"; };
   "libera.chat" = { type = "IRC"; sasl_mechanism = "EXTERNAL"; };
 };
 
