@@ -20,7 +20,7 @@ export GOPATH=$HOME/go/
 export PATH=${GOPATH}bin:$PATH
 if [ -z ${GOROOT+x} ] && [ -d /usr/local/go ]; then
     export GOROOT=/usr/local/go/
-    export PATH=$PATH:$HOME/go/bin
+    export PATH=$PATH:$GOROOT/bin:$HOME/go/bin
 fi
 
 # https://github.com/oz/tz
