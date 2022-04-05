@@ -40,7 +40,7 @@ channels = (
   { name = "#gemini"; chatnet = "tildechat"; autojoin = "yes"; },
   { name = "#wiki"; chatnet = "tildechat"; autojoin = "yes"; },
   { name = "#tw2002"; chatnet = "tildechat"; autojoin = "yes"; },
-  { name = "#southlondon"; chatnet = "tildechat"; }
+  { name = "#tildeverse"; chatnet = "tildechat"; autojoin = "yes"; }
 );
 settings = {
   core = { 
