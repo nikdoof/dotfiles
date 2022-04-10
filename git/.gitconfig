@@ -2,6 +2,7 @@
 	name = Andrew Williams
 	email = andy@tensixtyone.com
 	signingkey = 86DAB9F71FF20A3A
+
 [core]
 	editor = nano
 	excludesfile = ~/.gitignore_global
@@ -13,6 +14,7 @@
 
 [include]
     path = ~/.gitconfig-win
+	path = ~/.gitconfig-local
 
 [commit]
 	gpgsign = true
