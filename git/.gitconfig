@@ -1,7 +1,6 @@
 [user]
 	name = Andrew Williams
 	email = andy@tensixtyone.com
-	signingkey = 86DAB9F71FF20A3A
 
 [core]
 	editor = nano
