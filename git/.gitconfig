@@ -14,10 +14,8 @@
 
 [include]
     path = ~/.gitconfig-win
+	path = ~/.gitconfig-gpg
 	path = ~/.gitconfig-local
-
-[commit]
-	gpgsign = true
 
 [init]
 	defaultBranch = main
