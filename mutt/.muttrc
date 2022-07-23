@@ -20,7 +20,7 @@ set text_flowed
 unset mime_forward                   # forward attachments as part of body
 
 unmy_hdr *       # delete existing header-settings, if there are any.
-my_hdr X-PGP-Key: https://keybase.io/nikdoof/pgp_keys.asc
+my_hdr X-PGP-Key: https://nikdoof.com/pgp_keys.asc
 
 set record = "+.Sent"
 set postponed = "+.Drafts"
