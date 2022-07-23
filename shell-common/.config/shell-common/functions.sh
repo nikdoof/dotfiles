@@ -40,22 +40,3 @@ function demoprompt() {
         clear
     fi
 }
-
-function commit-pkm() {
-    if [ -d $HOME/Documents/pkm ]; then
-        prevdir=$PWD
-        cd ~/Documents/pkm
-        if [[ $(git status --porcelain) ]]; then
-            echo "Changes detected, commiting..."
-            git add -A && git commit -a -m 'Manual savepoint'
-        else
-            echo "No changes detected"
-        fi
-        git fetch
-        branch=$(git rev-parse --abbrev-ref HEAD)
-        if [ $(git rev-parse ${branch}) != $(git rev-parse refs/remotes/origin/${branch}) ]; then
-            git push origin ${branch}
-        fi
-        cd $PREVDIR
-    fi
-}
