@@ -23,6 +23,11 @@ if [ -z ${GOROOT+x} ] && [ -d /usr/local/go ]; then
     export PATH=$PATH:$GOROOT/bin:$HOME/go/bin
 fi
 
+# Rust stuff
+if [ -f $HOME/.cargo/env ]; then
+    source $HOME/.cargo/env
+fi
+
 # https://github.com/oz/tz
 if [ -f $HOME/go/bin/tz ]; then
     export TZ_LIST="America/New_York,America/Los_Angeles,Europe/Paris"
