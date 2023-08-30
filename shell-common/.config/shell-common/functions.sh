@@ -44,7 +44,7 @@ function demoprompt() {
 # Tag the file as OK to run
 function itsok() {
     if [[ $(uname) == "Darwin" ]]; then
-        xattr -r -d com.apple.quarantine $1
+        xattr -d com.apple.quarantine $1
     else
         echo 'This only works on macOS...'
     fi
