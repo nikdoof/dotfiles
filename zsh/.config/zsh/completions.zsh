@@ -9,10 +9,11 @@ function _add-sshkey() {
         return
     fi
     for id in $HOME/.ssh/id_ed25519_*; do
-        name=$(basename $id | cut -d'_' -f3 | cut -d'.' -f1)
+        name=$(basename $id | cut -d'_' -f3- | cut -d'.' -f1)
         [[ ${id:-3} != 'pub' ]] && identities+=$name
     done
 
     compadd $identities
 }
 compdef _add-sshkey add-sshkey
+
