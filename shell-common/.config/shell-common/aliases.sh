@@ -7,6 +7,11 @@ else
     alias ls="ls -F --color=auto"
 fi
 
+# NixOS aliases
+if [ -f "/etc/NIXOS" ]; then
+    alias nixos-rebuild="cd ~/nixos-config && make rebuild"
+fi
+
 alias t='(tmux has-session 2>/dev/null && tmux attach) || (tmux new-session)'
 alias tma="tmux attach"
 alias last="last | head"
