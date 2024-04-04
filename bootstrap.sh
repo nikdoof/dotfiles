@@ -11,7 +11,7 @@ git clone git@github.com:nikdoof/dotfiles.git $HOME/.dotfiles >/dev/null
 git clone git@github.com:nikdoof/dotfiles-private.git $HOME/.dotfiles-private >/dev/null
 
 # Stow the default public packages
-for package in bin shell-common bash zsh; do
+for package in bin shell-common bash zsh ssh; do
     echo "Stowing ${package}"
     $HOME/.dotfiles/bin/bin/stowage --clobber install $package
 done
