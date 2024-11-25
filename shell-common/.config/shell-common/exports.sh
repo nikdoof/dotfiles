@@ -33,7 +33,7 @@ if [ -f $HOME/go/bin/tz ]; then
     export TZ_LIST="America/New_York,America/Los_Angeles,Europe/Paris"
 fi
 
-# OSX Specific envs
+# macOS Specific envs
 if [[ $(uname) == "Darwin" ]]; then
     # M1 specific hacks
     if [[ $(uname -p) == "arm" ]]; then
