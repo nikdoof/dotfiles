@@ -20,3 +20,7 @@
 
 [pull]
 	ff = only
+
+
+[url "ssh://git@github.com/2315-Media"]
+	insteadOf = "https://github.com/2315-Media"
