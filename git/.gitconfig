@@ -8,6 +8,7 @@
 [alias]
 	prune = fetch --prune
 	co = checkout
+	rh = reset --hard
 	dist = "!git archive --format=tar -v --prefix=$(git describe HEAD)/ $(git describe HEAD) | gzip -9 > ../$(git describe HEAD).tar.gz"
 
 [include]
