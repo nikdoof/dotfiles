@@ -1,10 +1,14 @@
 # macOS aliases
 if [[ $(uname) == "Darwin" ]]; then
     alias ls="ls -FG"
-    alias code="code-insiders"
     alias flushdns="sudo dscacheutil -flushcache && sudo killall -HUP mDNSResponder"
 else
     alias ls="ls -F --color=auto"
+fi
+
+# Use code-insiders if installed
+if [ -x "$(command -v code-insiders)" ]; then
+    alias code="code-insiders"
 fi
 
 # NixOS aliases
