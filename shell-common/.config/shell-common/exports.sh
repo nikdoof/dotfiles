@@ -7,13 +7,14 @@ export TZ=GB
 export LANG=en_GB.UTF-8
 
 # Make a sensible editor choice
-if [ -x /usr/bin/nano ]; then
-    export EDITOR=nano
-    export VISUAL=nano
-else
-    export EDITOR=vi
-    export VISUAL=vi
-fi
+editor_preferences=(nano pico vim vi)
+for editor in "${editor_preferences[@]}"; do
+    if [ -x "$(which $editor)" ]; then
+        export EDITOR=$editor
+        export VISUAL=$editor
+        break
+    fi
+done
 
 # Go stuff
 export GOPATH=$HOME/go/
