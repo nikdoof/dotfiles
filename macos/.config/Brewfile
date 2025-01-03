@@ -1,15 +1,18 @@
-brew "go"
+tap "dart-lang/dart"
+tap "fluxcd/tap"
+tap "go-task/tap"
+tap "homebrew/bundle"
+tap "sass/sass"
 
-# K8s related
+brew "go"
+brew "hugo"
 brew "kubernetes-cli"
 brew "kubeseal"
+brew "smartmontools"
 brew "fluxcd/tap/flux"
-
-# Hugo
-brew "hugo"
+brew "go-task/tap/go-task"
 brew "sass/sass/sass"
 
-# Other apps
 cask "ghostty"
 cask "itsycal"
 cask "rectangle"
