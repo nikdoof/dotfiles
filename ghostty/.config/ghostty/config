@@ -1,3 +1,5 @@
 font-family = Input Mono
 cursor-style = underline
 theme = Snazzy Soft
+
+keybind = global:cmd+\=toggle_quick_terminal
