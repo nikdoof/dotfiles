@@ -16,3 +16,11 @@ brew "sass/sass/sass"
 cask "ghostty"
 cask "itsycal"
 cask "rectangle"
+
+mas "Hush", id: 1544743900
+mas "OTP Auth", id: 1471867429
+mas "Hidden Bar", id: 1452453066
+mas "Amphetamine", id: 937984704
+mas "Ivory", id: 6444602274
+mas "Telegram", id: 747648890
+mas "Tailscale", id: 1475387142
