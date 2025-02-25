@@ -20,7 +20,37 @@
 
 [pull]
 	ff = only
+	rebase = true
 
+[column]
+	ui = auto
+
+[branch]
+	sort = -committerdate
+
+[tag]
+	sort = version:refname
+
+[diff]
+	algorithm = histogram
+	colorMoved = plain
+	mnemonicPrefix = true
+	renames = true
+
+[push]
+	autoSetupRemote = true
+	followTags = true
+	default = simple
+
+[fetch]
+	prune = true
+	pruneTags = true
+	all = true
+
+[rebase]
+	autoSquash = true
+	autoStash = true
+	updateRefs = true
 
 [url "ssh://git@github.com/2315-Media"]
 	insteadOf = "https://github.com/2315-Media"
