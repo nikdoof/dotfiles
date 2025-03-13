@@ -24,6 +24,9 @@ if [ -z ${GOROOT+x} ] && [ -d /usr/local/go ]; then
     export PATH=$PATH:$GOROOT/bin:$HOME/go/bin
 fi
 
+# Python stuff
+export POETRY_VIRTUALENVS_IN_PROJECT=true
+
 # Rust stuff
 if [ -f $HOME/.cargo/env ]; then
     source $HOME/.cargo/env
