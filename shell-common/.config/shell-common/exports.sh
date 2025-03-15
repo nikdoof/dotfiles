@@ -39,9 +39,7 @@ fi
 
 # macOS Specific envs
 if [[ $(uname) == "Darwin" ]]; then
-    # Python user bin folder
-    [ -d $HOME/Library/Python/3.9/bin ] && export PATH=$PATH:$HOME/Library/Python/3.9/bin
-
     # Homebrew
+    export HOMEBREW_NO_ENV_HINTS=1
     [ -d /opt/homebrew ] && eval $(/opt/homebrew/bin/brew shellenv)
 fi

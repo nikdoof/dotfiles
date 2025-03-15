@@ -1,7 +1,7 @@
 # macOS aliases
 if [[ $(uname) == "Darwin" ]]; then
     alias ls="ls -FG"
-    alias flushdns="sudo dscacheutil -flushcache && sudo killall -HUP mDNSResponder"
+    alias flushdns="sudo dscacheutil -flushcache; sudo killall -HUP mDNSResponder"
 else
     alias ls="ls -F --color=auto"
 fi
@@ -16,7 +16,11 @@ if [ -f "/etc/NIXOS" ]; then
     alias nixos-rebuild="cd ~/nixos-config && make rebuild"
 fi
 
-alias t='(tmux has-session 2>/dev/null && tmux attach) || (tmux new-session)'
-alias tma="tmux attach"
+# Tmux
+if [ -x "$(command -v tmux)" ]; then
+    alias t='(tmux has-session 2>/dev/null && tmux attach) || (tmux new-session)'
+    alias tma="tmux attach"
+fi
+
 alias last="last | head"
 alias dp="demoprompt"
