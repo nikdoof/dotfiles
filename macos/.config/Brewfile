@@ -32,6 +32,7 @@ cask "balenaetcher"
 cask "orbstack"
 cask "caldigit-docking-utility"
 cask "caldigit-thunderbolt-charging"
+cask "viscosity"
 
 mas "Hush", id: 1544743900
 mas "OTP Auth", id: 1471867429
