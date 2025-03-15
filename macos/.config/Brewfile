@@ -13,6 +13,8 @@ brew "fluxcd/tap/flux"
 brew "go-task/tap/go-task"
 brew "sass/sass/sass"
 brew "poetry"
+brew "awscli"
+brew "terraform"
 
 cask "ghostty"
 cask "itsycal"
@@ -27,6 +29,8 @@ cask "vial"
 cask "vlc"
 cask "balenaetcher"
 cask "orbstack"
+cask "caldigit-docking-utility"
+cask "caldigit-thunderbolt-charging"
 
 mas "Hush", id: 1544743900
 mas "OTP Auth", id: 1471867429
@@ -39,3 +43,6 @@ mas "Home Assistant", id: 1099568401
 mas "Bitwarden", id: 1352778147
 mas "Windows App", id: 1295203466
 mas "Hush Nag Blocker", id: 1544743900
+mas "AmorphousDiskMark", id: 1168254295
+mas "Flighty – Live Flight Tracker", id: 1358823008
+mas "Discovery - DNS-SD Browser", id: 1381004916
