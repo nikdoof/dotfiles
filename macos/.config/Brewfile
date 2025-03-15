@@ -15,6 +15,7 @@ brew "sass/sass/sass"
 brew "poetry"
 brew "awscli"
 brew "terraform"
+brew "tz"
 
 cask "ghostty"
 cask "itsycal"
