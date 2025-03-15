@@ -9,7 +9,7 @@ export LANG=en_GB.UTF-8
 # Make a sensible editor choice
 editor_preferences=(nano pico vim vi)
 for editor in "${editor_preferences[@]}"; do
-    if [ -x "$(which $editor)" ]; then
+    if [ -x "$(command -v $editor)" ]; then
         export EDITOR=$editor
         export VISUAL=$editor
         break
@@ -33,8 +33,8 @@ if [ -f $HOME/.cargo/env ]; then
 fi
 
 # https://github.com/oz/tz
-if [ -f $HOME/go/bin/tz ]; then
-    export TZ_LIST="America/New_York,America/Los_Angeles,Europe/Paris"
+if [ -x "$(command -v tz)" ]; then
+    export TZ_LIST="America/New_York,WDW;America/Los_Angeles,DLR;Europe/Paris,DLP"
 fi
 
 # macOS Specific envs
