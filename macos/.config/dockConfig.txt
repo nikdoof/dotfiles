@@ -1,0 +1,10 @@
+Safari	file:///System/Volumes/Preboot/Cryptexes/App/System/Applications/Safari.app/	persistentApps	/Users/nikdoof/Library/Preferences/com.apple.dock.plist	com.apple.Safari
+Mail	file:///System/Applications/Mail.app/	persistentApps	/Users/nikdoof/Library/Preferences/com.apple.dock.plist	com.apple.mail
+Calendar	file:///System/Applications/Calendar.app/	persistentApps	/Users/nikdoof/Library/Preferences/com.apple.dock.plist	com.apple.iCal
+Reminders	file:///System/Applications/Reminders.app/	persistentApps	/Users/nikdoof/Library/Preferences/com.apple.dock.plist	com.apple.reminders
+Notes	file:///System/Applications/Notes.app/	persistentApps	/Users/nikdoof/Library/Preferences/com.apple.dock.plist	com.apple.Notes
+Ivory	file:///Applications/Ivory.app/	persistentApps	/Users/nikdoof/Library/Preferences/com.apple.dock.plist	com.tapbots.Ivory
+ReadKit	file:///Applications/ReadKit.app/	persistentApps	/Users/nikdoof/Library/Preferences/com.apple.dock.plist	app.readkit.universal
+Ghostty	file:///Applications/Ghostty.app/	persistentApps	/Users/nikdoof/Library/Preferences/com.apple.dock.plist	com.mitchellh.ghostty
+Visual Studio Code	file:///Applications/Visual Studio Code.app/	persistentApps	/Users/nikdoof/Library/Preferences/com.apple.dock.plist	com.microsoft.VSCode
+Downloads	file:///Users/nikdoof/Downloads/	persistentOthers	/Users/nikdoof/Library/Preferences/com.apple.dock.plist	
