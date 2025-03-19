@@ -6,7 +6,7 @@ function update-dock() {
         app_path=$(echo "$entry" | cut -d $'\t' -f 2)
         app_type=$(echo "$entry" | cut -d $'\t' -f 3)
         idx=$((idx+1))
-        dockutil --no-restart -a "$(urldecode "$app_path")" > /dev/null 2>&1
+        dockutil --no-restart -a "$app_path" > /dev/null 2>&1
         if [ "$app_type" = "persisentApps" ]; then
             dockutil --move "$app_name" -p $idx
         fi
