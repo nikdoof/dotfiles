@@ -17,6 +17,7 @@ brew "awscli"
 brew "terraform"
 brew "tz"
 brew "mas"
+brew "dockutil"
 
 cask "ghostty"
 cask "itsycal"
