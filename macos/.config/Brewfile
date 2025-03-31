@@ -4,51 +4,54 @@ tap "go-task/tap"
 tap "homebrew/bundle"
 tap "sass/sass"
 
-brew "go"
-brew "hugo"
-brew "kubernetes-cli"
-brew "kubeseal"
-brew "smartmontools"
-brew "fluxcd/tap/flux"
-brew "go-task/tap/go-task"
-brew "sass/sass/sass"
-brew "poetry"
 brew "awscli"
+brew "dockutil"
+brew "fluxcd/tap/flux"
+brew "go"
+brew "go-task/tap/go-task"
+brew "hugo"
+brew "k9s"
+brew "kubectl-cnpg"
+brew "kubeseal"
+brew "kubernetes-cli"
+brew "mas"
+brew "poetry"
+brew "sass/sass/sass"
+brew "smartmontools"
 brew "terraform"
 brew "tz"
-brew "mas"
-brew "dockutil"
 
-cask "ghostty"
-cask "itsycal"
-cask "rectangle"
-cask "clop"
-cask "lens"
-cask "visual-studio-code"
-cask "daisydisk"
 cask "appcleaner"
-cask "knockknock"
-cask "vial"
-cask "vlc"
 cask "balenaetcher"
-cask "orbstack"
 cask "caldigit-docking-utility"
 cask "caldigit-thunderbolt-charging"
+cask "clop"
+cask "daisydisk"
+cask "ghostty"
+cask "itsycal"
+cask "knockknock"
+cask "lens"
+cask "orbstack"
+cask "rectangle"
+cask "vial"
 cask "viscosity"
+cask "visual-studio-code"
+cask "vlc"
+cask "wireshark"
 
-mas "Hush", id: 1544743900
-mas "OTP Auth", id: 1471867429
-mas "Hidden Bar", id: 1452453066
-mas "Amphetamine", id: 937984704
-mas "Ivory", id: 6444602274
-mas "Telegram", id: 747648890
-mas "Tailscale", id: 1475387142
-mas "Home Assistant", id: 1099568401
-mas "Bitwarden", id: 1352778147
-mas "Windows App", id: 1295203466
-mas "Hush Nag Blocker", id: 1544743900
 mas "AmorphousDiskMark", id: 1168254295
-mas "Flighty – Live Flight Tracker", id: 1358823008
+mas "Amphetamine", id: 937984704
+mas "Bitwarden", id: 1352778147
 mas "Discovery - DNS-SD Browser", id: 1381004916
+mas "Flighty – Live Flight Tracker", id: 1358823008
 mas "Hand Mirror", id: 1502839586
+mas "Hidden Bar", id: 1452453066
+mas "Home Assistant", id: 1099568401
+mas "Hush", id: 1544743900
+mas "Hush Nag Blocker", id: 1544743900
+mas "Ivory", id: 6444602274
+mas "OTP Auth", id: 1471867429
+mas "Tailscale", id: 1475387142
+mas "Telegram", id: 747648890
 mas "The Unarchiver", id: 425424353
+mas "Windows App", id: 1295203466
