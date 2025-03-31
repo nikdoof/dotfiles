@@ -20,6 +20,7 @@ brew "sass/sass/sass"
 brew "smartmontools"
 brew "terraform"
 brew "tz"
+brew "uv"
 
 cask "appcleaner"
 cask "balenaetcher"
