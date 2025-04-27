@@ -4,5 +4,5 @@ clipboard-read = allow
 clipboard-write = allow
 window-new-tab-position = end
 theme = Snazzy Soft
-font-family = Input Mono
+font-family = Jetbrains Mono
 keybind = global:cmd+\=toggle_quick_terminal
