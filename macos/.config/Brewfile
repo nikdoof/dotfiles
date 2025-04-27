@@ -21,6 +21,7 @@ brew "smartmontools"
 brew "terraform"
 brew "tz"
 brew "uv"
+brew "yazi"
 
 cask "appcleaner"
 cask "balenaetcher"
@@ -39,6 +40,11 @@ cask "viscosity"
 cask "visual-studio-code"
 cask "vlc"
 cask "wireshark"
+
+cask "font-iosevka"
+cask "font-input"
+cask "font-inter"
+cask "font-jetbrains-mono"
 
 mas "AmorphousDiskMark", id: 1168254295
 mas "Amphetamine", id: 937984704
