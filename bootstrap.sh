@@ -1,26 +1,42 @@
 #!/usr/bin/env bash
+set -e
 
-which git >/dev/null 2>&1
-if [ $? -ne 0 ]; then
+# Check if git is installed
+if ! command -v git >/dev/null 2>&1; then
     echo "Git isn't installed."
-    exit
+    exit 1
 fi
 
+# Set environment, default to 'personal'
+ENVIRONMENT="${1:-personal}"
+echo "Bootstrapping dotfiles for environment: $ENVIRONMENT"
+
 # Clone dotfiles
-git clone git@github.com:nikdoof/dotfiles.git $HOME/.dotfiles >/dev/null
-git clone git@github.com:nikdoof/dotfiles-private.git $HOME/.dotfiles-private >/dev/null
+echo "Cloning main dotfiles repository..."
+git clone git@github.com:nikdoof/dotfiles.git "$HOME/.dotfiles" >/dev/null
 
-# Stow the default public packages
+# Clone private dotfiles based on environment
+case "$ENVIRONMENT" in
+personal)
+    echo "Cloning personal dotfiles..."
+    git clone git@github.com:nikdoof/dotfiles-private.git "$HOME/.dotfiles-private" >/dev/null
+    ;;
+work)
+    echo "Cloning work dotfiles..."
+    git clone git@github.com:nikdoof/dotfiles-work.git "$HOME/.dotfiles-work" >/dev/null
+    ;;
+*)
+    echo "Unknown environment: $ENVIRONMENT"
+    echo "Valid options are: personal, work"
+    exit 1
+    ;;
+esac
+
+# Add the default packages
 for package in bin shell-common bash zsh ssh; do
-    echo "Stowing ${package}"
-    $HOME/.dotfiles/bin/bin/stowage --clobber install $package
-done
-
-# Stow the default private packages
-for package in ssh; do
-    echo "Stowing ${package}"
-    $HOME/.dotfiles/bin/bin/stowage -r $HOME/.dotfiles-private --clobber install $package
+    echo "Stowing public package: $package"
+    "$HOME/.dotfiles/bin/bin/stowage" --clobber install "$package"
 done
 
 echo ""
-echo "Done, either source ~/.bash_profile / ~/.zshrc or restart your shell."
+echo "Done! Please either source ~/.bash_profile / ~/.zshrc or restart your shell."
