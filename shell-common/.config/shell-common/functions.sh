@@ -49,3 +49,86 @@ function itsok() {
         echo 'This only works on macOS...'
     fi
 }
+
+# easy access to SSH
+function awsssh() {
+    local profile=""
+    local region=""
+    local username="ec2-user"
+    local search=""
+
+    # Parse arguments
+    while [[ $# -gt 0 ]]; do
+        case "$1" in
+            --profile)
+                profile="$2"
+                shift 2
+                ;;
+            --region)
+                region="$2"
+                shift 2
+                ;;
+            *)
+                search="$1"
+                shift
+                ;;
+        esac
+    done
+
+    if [[ -z "$search" ]]; then
+        echo "Usage: awsssh [--profile prof] [--region reg] [user@]search-term"
+        return 1
+    fi
+
+    # Extract username if provided as user@search
+    if [[ "$search" == *@* ]]; then
+        username="${search%@*}"
+        search="${search#*@}"
+    fi
+
+    # Build AWS CLI options
+    local aws_opts=()
+    [[ -n "$profile" ]] && aws_opts+=(--profile "$profile")
+    [[ -n "$region" ]] && aws_opts+=(--region "$region")
+
+    # Get matching instances
+    local instances
+    instances=$(aws ec2 describe-instances \
+        --filters "Name=tag:Name,Values=*$search*" \
+        --query 'Reservations[].Instances[].{
+            Name: Tags[?Key==`Name`].Value | [0],
+            IP: PublicIpAddress,
+            InstanceId: InstanceId
+        }' \
+        --output json \
+        "${aws_opts[@]}")
+
+    if [[ $? -ne 0 || -z "$instances" || "$instances" == "[]" ]]; then
+        echo "Failed to retrieve instances or no match found."
+        return 2
+    fi
+
+    # Select instance using fzf
+    local selection
+    selection=$(echo "$instances" | jq -r '.[] | "\(.Name): \(.IP // "no-ip") (\(.InstanceId))"' |
+                fzf -1 -0 --header "Select an instance")
+
+    if [[ -z "$selection" ]]; then
+        echo "No valid instance selected."
+        return 3
+    fi
+
+    # Extract IP and InstanceId from selection
+    local ip instance_id
+    ip=$(echo "$selection" | sed -E 's/.*: (.*) \(.*/\1/')
+    instance_id=$(echo "$selection" | sed -E 's/.*\((i-[a-z0-9]+)\).*/\1/')
+
+    if [[ "$ip" != "no-ip" ]]; then
+        echo "Connecting to $username@$ip via SSH..."
+        ssh -o StrictHostKeyChecking=no -o ConnectTimeout=10 "${username}@${ip}"
+    else
+        echo "No public IP found. Falling back to AWS Session Manager..."
+        aws ssm start-session --target "$instance_id" "${aws_opts[@]}"
+    fi
+
+}
