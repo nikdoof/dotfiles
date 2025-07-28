@@ -39,10 +39,9 @@ def add(args):
     file_path = path.realpath(args.file)
     package = path.realpath(path.join(args.repository, args.packages[0]))
     if path.commonprefix([target, file_path]) != target:
-        print(f"error: '{args.add}' not under '{args.target}'",
-              file=sys.stderr)
+        print(f"error: '{args.add}' not under '{args.target}'", file=sys.stderr)
         sys.exit(1)
-    rest = file_path[len(target) + 1:]
+    rest = file_path[len(target) + 1 :]
     dest_path = path.join(package, rest)
     dest = path.dirname(dest_path)
     if not path.exists(dest):
@@ -69,7 +68,7 @@ def install(args, is_excluded):
             files = [filename for filename in files if not is_excluded(filename)]
             if len(files) == 0:
                 continue
-            rest = root[len(package_dir) + 1:]
+            rest = root[len(package_dir) + 1 :]
             dest = path.join(args.target, rest)
 
             # Create the directory path
@@ -120,11 +119,10 @@ def uninstall(args, is_excluded):
             print(f"no such package: {package}; skipping", file=sys.stderr)
             continue
         for root, _, files in os.walk(package_dir, followlinks=True):
-            files = [
-                filename for filename in files if not is_excluded(filename)]
+            files = [filename for filename in files if not is_excluded(filename)]
             if len(files) == 0:
                 continue
-            rest = root[len(package_dir) + 1:]
+            rest = root[len(package_dir) + 1 :]
             dest = path.join(args.target, rest)
             if rest != "":
                 dirs.append(dest)
@@ -155,20 +153,18 @@ def uninstall(args, is_excluded):
 
 def make_argparser():
     parser = argparse.ArgumentParser(description="A dotfile package manager.")
-    parser.add_argument("--verbose", "-v",
-                        action="store_true", help="Verbose output")
-    parser.add_argument("--dry-run", "-n",
-                        action="store_true", help="Dry run.")
+    parser.add_argument("--verbose", "-v", action="store_true", help="Verbose output")
+    parser.add_argument("--dry-run", "-n", action="store_true", help="Dry run.")
     parser.add_argument(
         "--target",
         "-t",
-        default=path.expanduser('~'),
+        default=path.expanduser("~"),
         help="Target directory in which to place symlinks",
     )
     parser.add_argument(
         "--repository",
         "-r",
-        default=path.expanduser('~/.dotfiles'),
+        default=path.expanduser("~/.dotfiles"),
         help="The location of the dotfile repository",
     )
     parser.add_argument(
@@ -185,25 +181,29 @@ def make_argparser():
         help="Replace files even if they exist.",
     )
 
-    subparsers = parser.add_subparsers(dest='command', help='sub-command help')
+    subparsers = parser.add_subparsers(dest="command", help="sub-command help")
 
     # List
-    parser_add = subparsers.add_parser('list', help='List packages in the repository')
+    parser_add = subparsers.add_parser("list", help="List packages in the repository")
 
     # Add
-    parser_add = subparsers.add_parser('add', help='Add a file to a package')
+    parser_add = subparsers.add_parser("add", help="Add a file to a package")
+    parser_add.add_argument("file", metavar="FILE", help="File to stow")
     parser_add.add_argument(
-        "file", metavar="FILE", help="File to stow"
+        "packages", metavar="PACKAGE", nargs="+", help="Packages to install"
     )
-    parser_add.add_argument("packages", metavar="PACKAGE", nargs="+", help="Packages to install")
 
     # Uninstall
-    parser_uninstall = subparsers.add_parser('uninstall', help='Remove a package')
-    parser_uninstall.add_argument("packages", metavar="PACKAGE", nargs="+", help="Packages to uninstall")
+    parser_uninstall = subparsers.add_parser("uninstall", help="Remove a package")
+    parser_uninstall.add_argument(
+        "packages", metavar="PACKAGE", nargs="+", help="Packages to uninstall"
+    )
 
     # Install
-    parser_install = subparsers.add_parser('install', help='Install packages')
-    parser_install.add_argument("packages", metavar="PACKAGE", nargs="+", help="Packages to install")
+    parser_install = subparsers.add_parser("install", help="Install packages")
+    parser_install.add_argument(
+        "packages", metavar="PACKAGE", nargs="+", help="Packages to install"
+    )
 
     return parser
 
@@ -213,26 +213,25 @@ def main():
     args = parser.parse_args()
     if args.dry_run:
         args.verbose = True
-    exclude = [re.compile(fnmatch.translate(pattern))
-               for pattern in args.exclude]
+    exclude = [re.compile(fnmatch.translate(pattern)) for pattern in args.exclude]
 
     def is_excluded(filename):
         return any(pattern.match(filename) for pattern in exclude)
 
-    if args.command == 'list':
+    if args.command == "list":
         for dir in os.listdir(args.repository):
-            if path.isdir(path.join(args.repository, dir)) and dir[0] != '.':
+            if path.isdir(path.join(args.repository, dir)) and dir[0] != ".":
                 print(dir)
-    elif args.command == 'add':
+    elif args.command == "add":
         if len(args.packages) > 1:
             parser.error("--add only works with a single package")
         args.file = path.normpath(path.join(args.target, args.file))
         if not path.isfile(args.file):
             parser.error(f"no such file: {args.file}")
         add(args)
-    elif args.command == 'install':
+    elif args.command == "install":
         install(args, is_excluded)
-    elif args.command == 'uninstall':
+    elif args.command == "uninstall":
         uninstall(args, is_excluded)
 
 
