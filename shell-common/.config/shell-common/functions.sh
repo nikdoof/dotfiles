@@ -130,5 +130,39 @@ function awsssh() {
         echo "No public IP found. Falling back to AWS Session Manager..."
         aws ssm start-session --target "$instance_id" "${aws_opts[@]}"
     fi
+}
 
+function instances() {
+    local profile=""
+    local region=""
+
+    # Parse optional arguments
+    while [[ $# -gt 0 ]]; do
+        case "$1" in
+            --profile)
+                profile="$2"
+                shift 2
+                ;;
+            --region)
+                region="$2"
+                shift 2
+                ;;
+            *)
+                echo "Unknown option: $1"
+                echo "Usage: list_ec2_instances [--profile prof] [--region region]"
+                return 1
+                ;;
+        esac
+    done
+
+    # Build AWS CLI options
+    local aws_opts=()
+    [[ -n "$profile" ]] && aws_opts+=(--profile "$profile")
+    [[ -n "$region" ]] && aws_opts+=(--region "$region")
+
+    # Query EC2 for names and instance IDs
+    aws ec2 describe-instances \
+        --query 'Reservations[].Instances[].{Name: Tags[?Key==`Name`].Value | [0], InstanceId: InstanceId}' \
+        --output table \
+        "${aws_opts[@]}"
 }
