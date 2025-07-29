@@ -50,6 +50,56 @@ function itsok() {
     fi
 }
 
+# login via SSO to AWS
+function awslogin() {
+    local profile=""
+    local region=""
+
+    # Parse optional arguments
+    while [[ $# -gt 0 ]]; do
+        case "$1" in
+            --profile)
+                profile="$2"
+                shift 2
+                ;;
+            --region)
+                region="$2"
+                shift 2
+                ;;
+            *)
+                echo "Unknown option: $1"
+                echo "Usage: awslogin --profile prof [--region region]"
+                return 1
+                ;;
+        esac
+    done
+
+    # Check if profile is provided
+    if [[ -z "$profile" ]]; then
+        echo "Error: --profile parameter is required."
+        echo "Usage: awslogin --profile prof [--region region]"
+        return 1
+    fi
+
+    # Build AWS CLI options
+    local aws_opts=()
+    [[ -n "$profile" ]] && aws_opts+=(--profile "$profile")
+    [[ -n "$region" ]] && aws_opts+=(--region "$region")
+
+    # Login via SSO
+    aws sso login "${aws_opts[@]}"
+
+    # Export AWS credentials
+    while IFS= read -r line; do
+        [[ -n "$line" ]] && eval "export $line"
+    done < <(aws configure export-credentials --format env "${aws_opts[@]}")
+    if [[ $? -ne 0 ]]; then
+        echo "Failed to export AWS credentials."
+        return 2
+    fi
+    echo "AWS login successful. Credentials exported."
+}
+
 # easy access to SSH
 function awsssh() {
     local profile=""
