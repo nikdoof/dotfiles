@@ -11,10 +11,6 @@
 	rh = reset --hard
 	dist = "!git archive --format=tar -v --prefix=$(git describe HEAD)/ $(git describe HEAD) | gzip -9 > ../$(git describe HEAD).tar.gz"
 
-[include]
-	path = ~/.gitconfig-gpg
-	path = ~/.gitconfig-local
-
 [init]
 	defaultBranch = main
 
@@ -52,3 +48,8 @@
 
 [url "ssh://git@github.com/2315-Media"]
 	insteadOf = "https://github.com/2315-Media"
+
+[include]
+	path = ~/.gitconfig-gpg
+	path = ~/.gitconfig-work
+	path = ~/.gitconfig-local
