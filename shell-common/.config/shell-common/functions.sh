@@ -98,13 +98,28 @@ function awslogin() {
         return 2
     fi
     echo "AWS login successful. Credentials exported."
+    export AWS_PROFILE_ACTIVE="$profile"
+    if [[ -n "$profile" ]]; then
+        export AWS_PROFILE_DISPLAY="[aws: $profile]"
+    else
+        export AWS_PROFILE_DISPLAY=""
+    fi
+}
+
+function awslogout() {
+    unset AWS_PROFILE_ACTIVE
+    unset AWS_ACCESS_KEY_ID
+    unset AWS_SECRET_ACCESS_KEY
+    unset AWS_SESSION_TOKEN
+    export AWS_PROFILE_DISPLAY=""
+    echo "AWS profile and credentials cleared."
 }
 
 # easy access to SSH
 function awsssh() {
     local profile=""
     local region=""
-    local username="ec2-user"
+    local username="ansible"
     local search=""
 
     # Parse arguments
