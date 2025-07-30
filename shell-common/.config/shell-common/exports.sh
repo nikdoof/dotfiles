@@ -34,7 +34,7 @@ fi
 
 # https://github.com/oz/tz
 if [ -x "$(command -v tz)" ]; then
-    export TZ_LIST="America/New_York,WDW;America/Los_Angeles,DLR;Europe/Paris,DLP"
+    export TZ_LIST="Europe/Dublin,Portwest HQ;America/New_York,WDW;America/Los_Angeles,DLR;Europe/Paris,DLP"
 fi
 
 # macOS Specific envs
