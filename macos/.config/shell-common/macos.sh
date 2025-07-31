@@ -1,4 +1,6 @@
-# Tag the file as OK to run
+# macOS tags downloads with "com.apple.quarantine" attribute to prevent execution of downloaded files until the user explicitly allows it.
+# This function removes that attribute, allowing the file to be opened without warning.
+# Usage: itsok <file_path>
 function itsok() {
     if [[ $(uname) == "Darwin" ]]; then
         xattr -d com.apple.quarantine $1
@@ -7,12 +9,17 @@ function itsok() {
     fi
 }
 
-# Updates Homebrew installation from the Brewfile
+# Runs a brew bundle check and installs missing packages
+# Usage: update-brewfile
 function update-brewfile() {
     brew bundle check --file "$HOME/.config/Brewfile" || brew bundle --cleanup -f --file "$HOME/.config/Brewfile"
 }
 
-# Updates the dock
+# Updates the macOS Dock based on a configuration file
+# The configuration file should be in the format:
+# app_name<TAB>app_path<TAB>app_type
+# where app_type can be "persisentApps" or "other"
+# Usage: update-dock
 function update-dock() {
     idx=1
     while read entry; do
