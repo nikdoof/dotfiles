@@ -41,5 +41,5 @@ fi
 if [[ $(uname) == "Darwin" ]]; then
     # Homebrew
     export HOMEBREW_NO_ENV_HINTS=1
-    [ -d /opt/homebrew ] && eval $(/opt/homebrew/bin/brew shellenv)
+    [ -d /opt/homebrew ] && eval "$(/opt/homebrew/bin/brew shellenv)"
 fi

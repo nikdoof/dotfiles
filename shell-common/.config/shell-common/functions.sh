@@ -10,7 +10,8 @@ function update-dotfiles() {
     cd "$prevdir"
 }
 
-# Wrapper around ssh-add to ease usage and also ensure basic timeouts
+# Wrapper around ssh-add to easily add SSH keys with a timeout
+# Usage: add-sshkey [key_name]
 function add-sshkey() {
     TIMEOUT="2h"
     NAME=$1
