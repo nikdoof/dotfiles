@@ -71,8 +71,34 @@ function awslogout() {
     unset AWS_ACCESS_KEY_ID
     unset AWS_SECRET_ACCESS_KEY
     unset AWS_SESSION_TOKEN
+    unset AWS_CREDENTIAL_EXPIRATION
     export AWS_PROFILE_DISPLAY=""
     echo "AWS profile and credentials cleared."
+}
+
+function check_aws_expiration() {
+    if [[ -n "$AWS_CREDENTIAL_EXPIRATION" ]]; then
+        local expiration_epoch
+        local current_epoch
+
+        # Convert expiration time to epoch (handles ISO 8601 format)
+        if command -v gdate &> /dev/null; then
+            # macOS with GNU coreutils installed
+            expiration_epoch=$(gdate -d "$AWS_CREDENTIAL_EXPIRATION" +%s 2>/dev/null)
+            current_epoch=$(gdate +%s)
+        else
+            # macOS with BSD date
+            expiration_epoch=$(date -j -f "%Y-%m-%dT%H:%M:%S%z" "$AWS_CREDENTIAL_EXPIRATION" +%s 2>/dev/null)
+            current_epoch=$(date +%s)
+        fi
+
+        if [[ $? -eq 0 && -n "$expiration_epoch" ]]; then
+            if [[ $current_epoch -ge $expiration_epoch ]]; then
+                echo "AWS credentials have expired. Logging out..."
+                awslogout
+            fi
+        fi
+    fi
 }
 
 # easy access to SSH
