@@ -76,7 +76,7 @@ function awslogout() {
     echo "AWS profile and credentials cleared."
 }
 
-function check_aws_expiration() {
+function _aws_creds_expiration_check() {
     if [[ -n "$AWS_CREDENTIAL_EXPIRATION" ]]; then
         local expiration_epoch
         local current_epoch
