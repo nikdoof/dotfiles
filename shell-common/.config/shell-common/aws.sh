@@ -1,4 +1,3 @@
-
 # Get the list of AWS profiles
 function awsprofiles() {
   profiles=$(aws --no-cli-pager configure list-profiles 2> /dev/null)
@@ -28,17 +27,45 @@ function awslogin() {
                 ;;
             *)
                 echo "Unknown option: $1"
-                echo "Usage: awslogin --profile prof [--region region]"
+                echo "Usage: awslogin [--profile prof] [--region region]"
                 return 1
                 ;;
         esac
     done
 
-    # Check if profile is provided
-    if [[ -z "$profile" ]]; then
-        echo "Error: --profile parameter is required."
-        echo "Usage: awslogin --profile prof [--region region]"
+    # Get available profiles
+    local available_profiles
+    available_profiles=$(aws --no-cli-pager configure list-profiles 2> /dev/null)
+    if [[ -z "$available_profiles" ]]; then
+        echo "No AWS profiles found in ~/.aws/config"
         return 1
+    fi
+
+    # If no profile provided, use fzf to select one
+    if [[ -z "$profile" ]]; then
+        profile=$(echo "$available_profiles" | fzf --header "Select AWS profile" --height 40%)
+        if [[ -z "$profile" ]]; then
+            echo "No profile selected."
+            return 1
+        fi
+    else
+        # Check if provided profile exists
+        if ! echo "$available_profiles" | grep -qx "$profile"; then
+            echo "Profile '$profile' not found. Searching for matches..."
+            local matched_profiles
+            matched_profiles=$(echo "$available_profiles" | grep -i "$profile")
+
+            if [[ -z "$matched_profiles" ]]; then
+                echo "No matching profiles found."
+                return 1
+            fi
+
+            profile=$(echo "$matched_profiles" | fzf --header "Select AWS profile" --height 40%)
+            if [[ -z "$profile" ]]; then
+                echo "No profile selected."
+                return 1
+            fi
+        fi
     fi
 
     # Build AWS CLI options
