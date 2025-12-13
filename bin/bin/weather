@@ -1,5 +1,26 @@
 #!/usr/bin/env bash
 
+set -euo pipefail
+
+show_help() {
+    cat << EOF
+Usage: $(basename "$0") [LOCATION]
+
+Fetch weather information from wttr.in for the specified location.
+
+Arguments:
+    LOCATION    Location to get weather for (default: St Helens)
+
+Options:
+    -h, --help  Show this help message
+
+Examples:
+    $(basename "$0")                  # Get weather for St Helens
+    $(basename "$0") "New York"       # Get weather for New York
+    $(basename "$0") "London,UK"      # Get weather for London, UK
+EOF
+}
+
 urlencode() {
     # urlencode <string>
     old_lc_collate=$LC_COLLATE
@@ -9,7 +30,7 @@ urlencode() {
     for ((i = 0; i < length; i++)); do
         local c="${1:i:1}"
         case $c in
-        [a-zA-Z0-9.~_-]) printf "$c" ;;
+        [a-zA-Z0-9.~_-]) printf "%s" "$c" ;;
         *) printf '%%%02X' "'$c" ;;
         esac
     done
@@ -17,5 +38,15 @@ urlencode() {
     LC_COLLATE=$old_lc_collate
 }
 
+# Handle help flag
+if [[ "${1:-}" == "-h" ]] || [[ "${1:-}" == "--help" ]]; then
+    show_help
+    exit 0
+fi
+
 location=$(urlencode "${1:-St Helens}")
-curl -s https://wttr.in/$location
+
+if ! curl -sf "https://wttr.in/$location"; then
+    echo "Error: Failed to fetch weather data. Please check your internet connection or location name." >&2
+    exit 1
+fi
