@@ -1,13 +1,27 @@
 # Git pulls latest dotfiles
 function update-dotfiles() {
-    prevdir=$PWD
-    for dir in "${HOME}/.dotfiles" "${HOME}/.dotfiles-private" "${HOME}/.dotfiles-work"; do
-        if [ -d "$dir" ]; then
-            cd "$dir"
-            git pull --rebase --autostash
+    local prevdir="$PWD"
+    local dotfiles_dirs=(".dotfiles" ".dotfiles-private" ".dotfiles-work")
+
+    for dir in "${dotfiles_dirs[@]}"; do
+        if [[ -d "${HOME}/$dir" ]]; then
+            if [[ ! -d "${HOME}/$dir/.git" ]]; then
+                echo "Warning: $dir exists but is not a git repository. Skipping..."
+                continue
+            fi
+
+            echo "Updating $dir..."
+            if cd "${HOME}/$dir" 2>/dev/null; then
+                if ! git pull --rebase --autostash; then
+                    echo "Error: Failed to update $dir"
+                fi
+            else
+                echo "Error: Cannot access directory $dir"
+            fi
         fi
     done
-    cd "$prevdir"
+
+    cd "$prevdir" || echo "Warning: Could not return to original directory $prevdir"
 }
 
 # Wrapper around ssh-add to easily add SSH keys with a timeout
