@@ -1,0 +1,36 @@
+#compdef awslogin
+
+_awslogin() {
+    local context state state_descr line
+    typeset -A opt_args
+
+    _arguments \
+        '--profile[AWS profile name]:profile:->profiles' \
+        '--region[AWS region]:region:->regions'
+
+    case $state in
+        profiles)
+            local profiles
+            profiles=(${(f)"$(aws --no-cli-pager configure list-profiles 2>/dev/null)"})
+            _describe 'AWS profiles' profiles
+            ;;
+        regions)
+            local regions
+            regions=(
+                'us-east-1:US East (N. Virginia)'
+                'us-east-2:US East (Ohio)'
+                'us-west-1:US West (N. California)'
+                'us-west-2:US West (Oregon)'
+                'eu-west-1:Europe (Ireland)'
+                'eu-west-2:Europe (London)'
+                'eu-central-1:Europe (Frankfurt)'
+                'ap-southeast-1:Asia Pacific (Singapore)'
+                'ap-southeast-2:Asia Pacific (Sydney)'
+                'ap-northeast-1:Asia Pacific (Tokyo)'
+            )
+            _describe 'AWS regions' regions
+            ;;
+    esac
+}
+
+_awslogin "$@"
