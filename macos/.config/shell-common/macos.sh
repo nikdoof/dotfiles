@@ -12,7 +12,7 @@ function itsok() {
 # Runs a brew bundle check and installs missing packages
 # Usage: update-brewfile
 function update-brewfile() {
-    brew bundle check --file "$HOME/.config/Brewfile" || brew bundle --cleanup -f --file "$HOME/.config/Brewfile"
+    brew bundle check --global || brew bundle --cleanup -f --global
 }
 
 # Updates the macOS Dock based on a configuration file
@@ -31,6 +31,6 @@ function update-dock() {
         if [ "$app_type" = "persisentApps" ]; then
             dockutil --move "$app_name" -p $idx
         fi
-    done < ~/.dotfiles/macos/.config/dockConfig.txt
+    done < ~/.dotfiles/macos/.config/dotfiles/dockConfig.txt
     killall Dock
 }

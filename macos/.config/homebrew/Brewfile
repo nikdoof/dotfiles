@@ -1,31 +1,33 @@
 tap "dart-lang/dart"
 tap "fluxcd/tap"
 tap "go-task/tap"
-tap "homebrew/bundle"
 tap "sass/sass"
 
 brew "awscli"
 brew "awslogs"
 brew "dockutil"
 brew "fluxcd/tap/flux"
-brew "go"
+brew "fzf"
 brew "go-task/tap/go-task"
+brew "go"
+brew "hashicorp/tap/terraform"
 brew "hugo"
+brew "jq"
 brew "k9s"
 brew "kubectl-cnpg"
-brew "kubeseal"
+brew "kubelogin"
 brew "kubernetes-cli"
+brew "kubeseal"
 brew "mas"
 brew "poetry"
+brew "python@3.14"
 brew "sass/sass/sass"
 brew "smartmontools"
-brew "hashicorp/tap/terraform"
+brew "terraform-docs"
 brew "terraform-local"
 brew "tz"
 brew "uv"
 brew "yazi"
-brew "jq"
-brew "fzf"
 
 cask "appcleaner"
 cask "balenaetcher"
@@ -43,11 +45,11 @@ cask "vial"
 cask "viscosity"
 cask "visual-studio-code"
 cask "vlc"
-cask "wireshark"
+cask "wireshark-app"
 
-cask "font-iosevka"
 cask "font-input"
 cask "font-inter"
+cask "font-iosevka"
 cask "font-jetbrains-mono"
 
 mas "AmorphousDiskMark", id: 1168254295
@@ -58,8 +60,8 @@ mas "Flighty – Live Flight Tracker", id: 1358823008
 mas "Hand Mirror", id: 1502839586
 mas "Hidden Bar", id: 1452453066
 mas "Home Assistant", id: 1099568401
-mas "Hush", id: 1544743900
 mas "Hush Nag Blocker", id: 1544743900
+mas "Hush", id: 1544743900
 mas "Ivory", id: 6444602274
 mas "OTP Auth", id: 1471867429
 mas "Tailscale", id: 1475387142
