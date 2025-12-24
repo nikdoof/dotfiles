@@ -1,3 +1,5 @@
+# shellcheck shell=bash
+
 # macOS aliases
 if [[ $(uname) == "Darwin" ]]; then
     alias ls="ls -FG"

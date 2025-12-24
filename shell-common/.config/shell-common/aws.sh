@@ -1,3 +1,5 @@
+# shellcheck shell=bash
+
 # Get the list of AWS profiles
 function awsprofiles() {
   profiles=$(aws --no-cli-pager configure list-profiles 2> /dev/null)

@@ -1,3 +1,4 @@
+# shellcheck shell=bash
 # User specific environment
 
 # XDG Base Directories

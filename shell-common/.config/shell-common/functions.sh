@@ -1,3 +1,5 @@
+# shellcheck shell=bash
+
 # Git pulls latest dotfiles
 function update-dotfiles() {
     local prevdir="$PWD"
