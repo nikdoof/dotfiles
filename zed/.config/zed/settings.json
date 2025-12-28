@@ -7,6 +7,12 @@
 // custom settings, run `zed: open default settings` from the
 // command palette (cmd-shift-p / ctrl-shift-p)
 {
+  "context_servers": {
+    "terraform-context-server": {
+      "enabled": true,
+      "settings": {}
+    }
+  },
   "calls": {
     "mute_on_join": true
   },
@@ -15,7 +21,7 @@
   },
   "ui_font_family": ".ZedSans",
   "buffer_line_height": "comfortable",
-  "icon_theme": "Material Icon Theme",
+  "icon_theme": "Zed (Default)",
   "terminal": {
     "font_size": 13.0
   },
@@ -32,6 +38,24 @@
     ],
     "rust": [
       "*.rs"
+    ],
+    "Ansible": [
+      "**.ansible.yml",
+      "**.ansible.yaml",
+      "**/defaults/*.yml",
+      "**/defaults/*.yaml",
+      "**/meta/*.yml",
+      "**/meta/*.yaml",
+      "**/tasks/*.yml",
+      "**/tasks/*.yaml",
+      "**/handlers/*.yml",
+      "**/handlers/*.yaml",
+      "**/group_vars/*.yml",
+      "**/group_vars/*.yaml",
+      "**/playbooks/*.yaml",
+      "**/playbooks/*.yml",
+      "**playbook*.yaml",
+      "**playbook*.yml"
     ]
   },
   "ui_font_size": 16,
