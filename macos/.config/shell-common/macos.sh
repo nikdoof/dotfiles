@@ -1,3 +1,22 @@
+# shellcheck shell=bash
+
+# Override XDG cache location for macOS to use the standard Library/Caches directory
+export XDG_CACHE_HOME="$HOME/Library/Caches"
+export XDG_RUNTIME_DIR="${TMPDIR}runtime-${UID}"
+
+# Configure Homebrew environment
+export HOMEBREW_NO_ENV_HINTS=1
+[ -d /opt/homebrew ] && eval "$(/opt/homebrew/bin/brew shellenv)"
+
+# Flushes the DNS cache on macOS
+function flushdns() {
+    if [[ $(uname) == "Darwin" ]]; then
+        sudo dscacheutil -flushcache; sudo killall -HUP mDNSResponder; echo 'DNS cache flushed.'
+    else
+        echo 'This only works on macOS...'
+    fi
+}
+
 # macOS tags downloads with "com.apple.quarantine" attribute to prevent execution of downloaded files until the user explicitly allows it.
 # This function removes that attribute, allowing the file to be opened without warning.
 # Usage: itsok <file_path>
@@ -35,6 +54,17 @@ function update-dock() {
     killall Dock
 }
 
-# Override XDG cache location for macOS to use the standard Library/Caches directory
-export XDG_CACHE_HOME="$HOME/Library/Caches"
-export XDG_RUNTIME_DIR="${TMPDIR}runtime-${UID}"
+# Fuzzy find and focus a window using aerospace and fzf
+if [ -x "$(command -v aerospace)" ] && [ -x "$(command -v fzf)" ]; then
+    function ff() {
+        aerospace list-windows --all | fzf --height 40% --layout=reverse --border --ansi | awk '{print $1}' | xargs -I {} aerospace focus --window-id {}
+    }
+fi
+
+alias ls="ls -FG"
+
+# Use Tailscale binary if installed via app
+if [ -d "/Applications/Tailscale.app" ]; then
+    alias tailscale="/Applications/Tailscale.app/Contents/MacOS/Tailscale"
+    alias ts="/Applications/Tailscale.app/Contents/MacOS/Tailscale"
+fi

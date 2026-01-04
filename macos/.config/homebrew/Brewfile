@@ -1,19 +1,24 @@
 cask_args appdir: "~/Applications"
 
 tap "dart-lang/dart"
+tap "felixkratz/formulae"
 tap "fluxcd/tap"
 tap "go-task/tap"
+tap "hashicorp/tap"
 tap "localstack/tap"
+tap "nikitabobko/tap"
 tap "sass/sass"
 
 brew "awscli"
 brew "awslogs"
 brew "coreutils"
 brew "dockutil"
+brew "felixkratz/formulae/borders"
 brew "fluxcd/tap/flux"
 brew "fzf"
 brew "go-task/tap/go-task"
 brew "go"
+brew "hashicorp/tap/packer"
 brew "hashicorp/tap/terraform"
 brew "helm"
 brew "hugo"
@@ -23,11 +28,9 @@ brew "kubectl-cnpg"
 brew "kubelogin"
 brew "kubernetes-cli"
 brew "kubeseal"
-brew "localstack-cli"
+brew "localstack/tap/localstack-cli"
 brew "mas"
-brew "packer"
 brew "poetry"
-brew "python@3.14"
 brew "sass/sass/sass"
 brew "shellcheck"
 brew "smartmontools"
@@ -38,6 +41,7 @@ brew "tz"
 brew "uv"
 brew "yazi"
 
+cask "aerospace"
 cask "appcleaner"
 cask "balenaetcher"
 cask "clop"
@@ -67,17 +71,14 @@ cask "font-jetbrains-mono"
 mas "AmorphousDiskMark", id: 1168254295
 mas "Amphetamine", id: 937984704
 mas "Bitwarden", id: 1352778147
-mas "Discovery - DNS-SD Browser", id: 1381004916
-mas "Flighty – Live Flight Tracker", id: 1358823008
+mas "Discovery", id: 1381004916
 mas "Hand Mirror", id: 1502839586
 mas "Hidden Bar", id: 1452453066
 mas "Home Assistant", id: 1099568401
-mas "Hush Nag Blocker", id: 1544743900
 mas "Hush", id: 1544743900
 mas "Ivory", id: 6444602274
 mas "MQTT Explorer", id: 1455214828
 mas "OTP Auth", id: 1471867429
-mas "ReadKit - Reading Hub", id: 1615798039
 mas "Tailscale", id: 1475387142
 mas "Telegram", id: 747648890
 mas "The Unarchiver", id: 425424353
