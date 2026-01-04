@@ -42,13 +42,6 @@ if [ -f $HOME/.cargo/env ]; then
     source $HOME/.cargo/env
 fi
 
-# macOS Specific envs
-if [[ $(uname) == "Darwin" ]]; then
-    # Homebrew
-    export HOMEBREW_NO_ENV_HINTS=1
-    [ -d /opt/homebrew ] && eval "$(/opt/homebrew/bin/brew shellenv)"
-fi
-
 # https://github.com/oz/tz
 if [ -x "$(command -v tz)" ]; then
     export TZ_LIST="Europe/Dublin,Portwest HQ;America/New_York,WDW;America/Los_Angeles,DLR;Europe/Paris,DLP"
