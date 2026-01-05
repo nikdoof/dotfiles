@@ -7,6 +7,7 @@ tap "go-task/tap"
 tap "hashicorp/tap"
 tap "localstack/tap"
 tap "nikitabobko/tap"
+tap "terraform-docs/tap"
 tap "sass/sass"
 
 brew "awscli"
@@ -62,24 +63,25 @@ cask "viscosity"
 cask "visual-studio-code"
 cask "vlc"
 cask "wireshark-app"
+cask "setchy/brews/atlassify"
 
 cask "font-input"
 cask "font-inter"
 cask "font-iosevka"
 cask "font-jetbrains-mono"
 
-mas "AmorphousDiskMark", id: 1168254295
-mas "Amphetamine", id: 937984704
-mas "Bitwarden", id: 1352778147
-mas "Discovery", id: 1381004916
-mas "Hand Mirror", id: 1502839586
-mas "Hidden Bar", id: 1452453066
-mas "Home Assistant", id: 1099568401
-mas "Hush", id: 1544743900
-mas "Ivory", id: 6444602274
-mas "MQTT Explorer", id: 1455214828
-mas "OTP Auth", id: 1471867429
-mas "Tailscale", id: 1475387142
-mas "Telegram", id: 747648890
-mas "The Unarchiver", id: 425424353
-mas "Windows App", id: 1295203466
+# mas "AmorphousDiskMark", id: 1168254295
+# mas "Amphetamine", id: 937984704
+# mas "Bitwarden", id: 1352778147
+# mas "Discovery", id: 1381004916
+# mas "Hand Mirror", id: 1502839586
+# mas "Hidden Bar", id: 1452453066
+# mas "Home Assistant", id: 1099568401
+# mas "Hush", id: 1544743900
+# mas "Ivory", id: 6444602274
+# mas "MQTT Explorer", id: 1455214828
+# mas "OTP Auth", id: 1471867429
+# mas "Tailscale", id: 1475387142
+# mas "Telegram", id: 747648890
+# mas "The Unarchiver", id: 425424353
+# mas "Windows App", id: 1295203466
