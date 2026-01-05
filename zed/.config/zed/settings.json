@@ -7,6 +7,11 @@
 // custom settings, run `zed: open default settings` from the
 // command palette (cmd-shift-p / ctrl-shift-p)
 {
+  "git": {
+    "inline_blame": {
+      "enabled": false
+    }
+  },
   "context_servers": {
     "terraform-context-server": {
       "enabled": true,
@@ -21,7 +26,11 @@
   },
   "ui_font_family": ".ZedSans",
   "buffer_line_height": "comfortable",
-  "icon_theme": "Zed (Default)",
+  "icon_theme": {
+    "mode": "system",
+    "light": "Zed (Default)",
+    "dark": "Zed (Default)"
+  },
   "terminal": {
     "font_size": 13.0
   },
