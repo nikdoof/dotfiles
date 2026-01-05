@@ -61,10 +61,16 @@ if [ -x "$(command -v aerospace)" ] && [ -x "$(command -v fzf)" ]; then
     }
 fi
 
-alias ls="ls -FG"
+# Alias for Zed editor if installed
+if [ -d "$HOME/Applications/Zed.app" ] || [ -d "/Applications/Zed.app" ]; then
+    alias zed="$HOME/Applications/Zed.app/Contents/MacOS/cli"
+fi
 
 # Use Tailscale binary if installed via app
 if [ -d "/Applications/Tailscale.app" ]; then
     alias tailscale="/Applications/Tailscale.app/Contents/MacOS/Tailscale"
     alias ts="/Applications/Tailscale.app/Contents/MacOS/Tailscale"
 fi
+
+# Standard QoL stuff
+alias ls="ls -FG"
