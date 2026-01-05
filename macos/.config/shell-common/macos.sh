@@ -61,10 +61,13 @@ if [ -x "$(command -v aerospace)" ] && [ -x "$(command -v fzf)" ]; then
     }
 fi
 
-# Alias for Zed editor if installed
-if [ -d "$HOME/Applications/Zed.app" ] || [ -d "/Applications/Zed.app" ]; then
-    alias zed="$HOME/Applications/Zed.app/Contents/MacOS/cli"
-fi
+# Detect Zed installation in common locations
+for zed_path in "$HOME/Applications/Zed.app" "/Applications/Zed.app"; do
+    if [ -d "$zed_path" ]; then
+        alias zed="$zed_path/Contents/MacOS/cli"
+        break
+    fi
+done
 
 # Use Tailscale binary if installed via app
 if [ -d "/Applications/Tailscale.app" ]; then
