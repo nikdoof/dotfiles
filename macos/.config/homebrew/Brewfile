@@ -41,6 +41,7 @@ brew "tflint"
 brew "tz"
 brew "uv"
 brew "yazi"
+brew "pre-commit"
 
 cask "aerospace"
 cask "appcleaner"
