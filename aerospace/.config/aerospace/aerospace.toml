@@ -8,7 +8,7 @@ config-version = 2
 # You can use it to add commands that run after AeroSpace startup.
 # Available commands : https://nikitabobko.github.io/AeroSpace/commands
 after-startup-command = [
-    'exec-and-forget borders active_color=0xffe1e3e4 inactive_color=0xff494d64 width=5.0'
+    'exec-and-forget borders active_color=0xffe1e3e4 inactive_color=0xff494d64 width=3.5 hidpi=on'
 ]
 
 # Start AeroSpace at login
@@ -218,30 +218,48 @@ on-mode-changed = []
     alt-shift-k = ['join-with up', 'mode main']
     alt-shift-l = ['join-with right', 'mode main']
 
+# Picture-in-picture windows float
+[[on-window-detected]]
+if.window-title-regex-substring = 'Picture-in-picture'
+run = 'layout floating'
+
+# Safari windows to workspace B
 [[on-window-detected]]
 if.app-id = 'com.apple.Safari'
 run = 'move-node-to-workspace B'
 
+# VSCode windows to workspace C
 [[on-window-detected]]
 if.app-id = 'com.microsoft.VSCode'
 run = 'move-node-to-workspace C'
 
+# Zed windows to workspace C
 [[on-window-detected]]
 if.app-id = 'dev.zed.Zed'
 run = 'move-node-to-workspace C'
 
+# Zed settings windows float
+[[on-window-detected]]
+if.window-title-regex-substring = '^Zed . Settings$'
+run = ['layout floating']
+check-further-callbacks = true
+
+# Ghostty terminal windows to workspace T
 [[on-window-detected]]
 if.app-id = 'com.mitchellh.ghostty'
 run = 'move-node-to-workspace T'
 
+# Finder windows to workspace F and float
 [[on-window-detected]]
 if.app-id = 'com.apple.finder'
-run = 'layout floating'
+run = ['move-node-to-workspace F', 'layout floating']
 
+# Telegram windows float
 [[on-window-detected]]
 if.app-name-regex-substring = 'telegram'
 run = 'layout floating'
 
+# Activity Monitor windows float
 [[on-window-detected]]
 if.app-id = 'com.apple.ActivityMonitor'
 run = 'layout floating'
@@ -250,10 +268,24 @@ run = 'layout floating'
 if.app-id = 'com.microsoft.Outlook'
 run = 'move-node-to-workspace W'
 
+# Teams main window to workspace W
 [[on-window-detected]]
 if.app-id = 'com.microsoft.teams2'
 run = 'move-node-to-workspace W'
 
+# Meeting windows automatically float
+[[on-window-detected]]
+if.app-id = 'com.microsoft.teams2'
+if.window-title-regex-substring = '(Meeting|Call|Screen Share|Share)'
+run = ['layout floating']
+
+# Dialog windows float
+[[on-window-detected]]
+if.app-id = 'com.microsoft.teams2'
+if.window-title-regex-substring = '(Settings|Options|Preferences|Join|Audio|Video)'
+run = ['layout floating']
+
+# Logseq to workspace Q
 [[on-window-detected]]
 if.app-id = 'com.electron.logseq'
 run = 'move-node-to-workspace Q'
