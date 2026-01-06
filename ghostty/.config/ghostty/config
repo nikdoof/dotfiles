@@ -2,7 +2,12 @@
 
 clipboard-read = allow
 clipboard-write = allow
+copy-on-select = true
+window-save-state = never
 window-new-tab-position = end
 theme = Snazzy Soft
 font-family = Jetbrains Mono
+auto-update = download
+auto-update-channel = stable
+
 keybind = global:cmd+\=toggle_quick_terminal
