@@ -54,21 +54,6 @@ function update-dock() {
     killall Dock
 }
 
-# Fuzzy find and focus a window using aerospace and fzf
-if [ -x "$(command -v aerospace)" ] && [ -x "$(command -v fzf)" ]; then
-    function ff() {
-        aerospace list-windows --all | fzf --height 40% --layout=reverse --border --ansi | awk '{print $1}' | xargs -I {} aerospace focus --window-id {}
-    }
-fi
-
-# Detect Zed installation in common locations
-for zed_path in "$HOME/Applications/Zed.app" "/Applications/Zed.app"; do
-    if [ -d "$zed_path" ]; then
-        alias zed="$zed_path/Contents/MacOS/cli"
-        break
-    fi
-done
-
 # Use Tailscale binary if installed via app
 if [ -d "/Applications/Tailscale.app" ]; then
     alias tailscale="/Applications/Tailscale.app/Contents/MacOS/Tailscale"
