@@ -35,7 +35,7 @@ esac
 # Add the default packages
 for package in bin shell-common bash zsh ssh; do
     echo "Stowing public package: $package"
-    "$HOME/.dotfiles/bin/bin/stowage" --clobber install "$package"
+    "$HOME/.dotfiles/bin/.local/bin/stowage" --clobber install "$package"
 done
 
 echo ""
