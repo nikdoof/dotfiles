@@ -9,45 +9,41 @@
 {
   "git": {
     "inline_blame": {
-      "enabled": false
-    }
+      "enabled": false,
+    },
   },
   "context_servers": {
     "terraform-context-server": {
       "enabled": true,
-      "settings": {}
-    }
+      "settings": {},
+    },
   },
   "calls": {
-    "mute_on_join": true
+    "mute_on_join": true,
   },
   "features": {
-    "edit_prediction_provider": "copilot"
+    "edit_prediction_provider": "copilot",
   },
-  "ui_font_family": ".ZedSans",
+  "ui_font_family": ".SystemUIFont",
   "buffer_line_height": "comfortable",
   "icon_theme": {
     "mode": "system",
-    "light": "Zed (Default)",
-    "dark": "Zed (Default)"
+    "light": "Catppuccin Frappé",
+    "dark": "Catppuccin Frappé",
   },
   "terminal": {
-    "font_size": 13.0
+    "font_size": 13.0,
   },
   "base_keymap": "VSCode",
   "agent": {
     "enabled": false,
     "button": false,
-    "model_parameters": []
+    "model_parameters": [],
   },
-  "buffer_font_family": "Jetbrains Mono",
+  "buffer_font_family": "JetBrains Mono",
   "file_types": {
-    "yaml": [
-      "services"
-    ],
-    "rust": [
-      "*.rs"
-    ],
+    "yaml": ["services"],
+    "rust": ["*.rs"],
     "Ansible": [
       "**.ansible.yml",
       "**.ansible.yaml",
@@ -64,14 +60,14 @@
       "**/playbooks/*.yaml",
       "**/playbooks/*.yml",
       "**playbook*.yaml",
-      "**playbook*.yml"
-    ]
+      "**playbook*.yml",
+    ],
   },
-  "ui_font_size": 16,
+  "ui_font_size": 16.0,
   "buffer_font_size": 13.0,
   "theme": {
     "mode": "dark",
     "light": "One Light",
-    "dark": "One Dark"
-  }
+    "dark": "One Dark",
+  },
 }
