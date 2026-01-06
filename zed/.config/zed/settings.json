@@ -70,4 +70,26 @@
     "light": "One Light",
     "dark": "One Dark",
   },
+  "languages": {
+    "Python": {
+      "language_servers": ["ty", "ruff"],
+    },
+  },
+  "auto_install_extensions": {
+    "docker-compose": true,
+    "dockerfile": true,
+    "html": true,
+    "http": true,
+    "make": true,
+    "markdown-oxide": true,
+    "nginx": true,
+    "php": true,
+    "scss": true,
+    "sql": true,
+    "terraform": true,
+    "toml": true,
+    "catppuccin-icons": true,
+    "ansible": true,
+    "terraform-context-server": true,
+  },
 }
