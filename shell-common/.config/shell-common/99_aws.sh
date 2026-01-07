@@ -2,42 +2,53 @@
 
 # Get the list of AWS profiles
 function awsprofiles() {
-  profiles=$(aws --no-cli-pager configure list-profiles 2> /dev/null)
-  if [[ -z "$profiles" ]]; then
-    echo "No AWS profiles found in '$HOME/.aws/config, check if ~/.aws/config exists and properly configured.'"
-    return 1
-  else
-    echo $profiles
-  fi
+    if ! [ -x $(command -v aws) ]; then
+        echo "AWS CLI not installed."
+        return 1
+    fi
+    profiles=$(aws --no-cli-pager configure list-profiles 2>/dev/null)
+    if [[ -z "$profiles" ]]; then
+        echo "No AWS profiles found in '$HOME/.aws/config, check if ~/.aws/config exists and properly configured.'"
+        return 1
+    else
+        echo $profiles
+    fi
 }
 
 # login via SSO to AWS
 function awslogin() {
+    for cmd in "aws" "fzf"; do
+        if ! [ -x "$(command -v $cmd)" ]; then
+            echo "$cmd is not installed. Please install it to use awslogin."
+            return 1
+        fi
+    done
+
     local profile=""
     local region=""
 
     # Parse optional arguments
     while [[ $# -gt 0 ]]; do
         case "$1" in
-            --profile)
-                profile="$2"
-                shift 2
-                ;;
-            --region)
-                region="$2"
-                shift 2
-                ;;
-            *)
-                echo "Unknown option: $1"
-                echo "Usage: awslogin [--profile prof] [--region region]"
-                return 1
-                ;;
+        --profile)
+            profile="$2"
+            shift 2
+            ;;
+        --region)
+            region="$2"
+            shift 2
+            ;;
+        *)
+            echo "Unknown option: $1"
+            echo "Usage: awslogin [--profile prof] [--region region]"
+            return 1
+            ;;
         esac
     done
 
     # Get available profiles
     local available_profiles
-    available_profiles=$(aws --no-cli-pager configure list-profiles 2> /dev/null)
+    available_profiles=$(aws --no-cli-pager configure list-profiles 2>/dev/null)
     if [[ -z "$available_profiles" ]]; then
         echo "No AWS profiles found in ~/.aws/config"
         return 1
@@ -92,7 +103,11 @@ function awslogin() {
 
 # Clear AWS credentials from environment
 function awslogout() {
-    aws sso logout --profile "${AWS_PROFILE:-default}" 2> /dev/null
+    if ! [ -x "$(command -v aws)" ]; then
+        echo "AWS CLI not installed."
+        return 1
+    fi
+    aws sso logout --profile "${AWS_PROFILE:-default}" 2>/dev/null
     unset AWS_PROFILE AWS_PROFILE_ACTIVE AWS_ACCESS_KEY_ID AWS_SECRET_ACCESS_KEY AWS_SESSION_TOKEN AWS_CREDENTIAL_EXPIRATION
     echo "AWS profile and credentials cleared."
 }

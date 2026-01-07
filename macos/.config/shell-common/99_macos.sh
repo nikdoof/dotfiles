@@ -1,17 +1,17 @@
 # shellcheck shell=bash
 
-# Override XDG cache location for macOS to use the standard Library/Caches directory
-export XDG_CACHE_HOME="$HOME/Library/Caches"
-export XDG_RUNTIME_DIR="${TMPDIR}runtime-${UID}"
-
 # Configure Homebrew environment
-export HOMEBREW_NO_ENV_HINTS=1
-[ -d /opt/homebrew ] && eval "$(/opt/homebrew/bin/brew shellenv)"
+if [ -d /opt/homebrew ]; then
+    export HOMEBREW_NO_ENV_HINTS=1
+    eval "$(/opt/homebrew/bin/brew shellenv)"
+fi
 
 # Flushes the DNS cache on macOS
 function flushdns() {
     if [[ $(uname) == "Darwin" ]]; then
-        sudo dscacheutil -flushcache; sudo killall -HUP mDNSResponder; echo 'DNS cache flushed.'
+        sudo dscacheutil -flushcache
+        sudo killall -HUP mDNSResponder
+        echo 'DNS cache flushed.'
     else
         echo 'This only works on macOS...'
     fi
@@ -31,6 +31,10 @@ function itsok() {
 # Runs a brew bundle check and installs missing packages
 # Usage: update-brewfile
 function update-brewfile() {
+    if ! [ -x $(command -v brew) ]; then
+        echo "Homebrew is not installed. Please install it first."
+        return 1
+    fi
     brew bundle check --global || brew bundle --cleanup -f --global
 }
 
@@ -39,18 +43,23 @@ function update-brewfile() {
 # app_name<TAB>app_path<TAB>app_type
 # where app_type can be "persisentApps" or "other"
 # Usage: update-dock
+
 function update-dock() {
+    if ! [ -x $(command -v dockutil) ]; then
+        echo "dockutil is not installed. Please install it via Homebrew: brew install dockutil"
+        return 1
+    fi
     idx=1
     while read entry; do
         app_name=$(echo "$entry" | cut -d $'\t' -f 1)
         app_path=$(echo "$entry" | cut -d $'\t' -f 2)
         app_type=$(echo "$entry" | cut -d $'\t' -f 3)
-        idx=$((idx+1))
-        dockutil --no-restart -a "$app_path" > /dev/null 2>&1
+        idx=$((idx + 1))
+        dockutil --no-restart -a "$app_path" >/dev/null 2>&1
         if [ "$app_type" = "persisentApps" ]; then
             dockutil --move "$app_name" -p $idx
         fi
-    done < ~/.dotfiles/macos/.config/dotfiles/dockConfig.txt
+    done <~/.dotfiles/macos/.config/dotfiles/dockConfig.txt
     killall Dock
 }
 
