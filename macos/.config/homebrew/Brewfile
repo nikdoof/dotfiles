@@ -9,6 +9,7 @@ tap "localstack/tap"
 tap "nikitabobko/tap"
 tap "terraform-docs/tap"
 tap "sass/sass"
+tap "setchy/brews"
 
 brew "awscli"
 brew "awslogs"
