@@ -57,6 +57,69 @@ function update-dock() {
     killall Dock
 }
 
+# Function to switch the macOS desktop wallpaper from the CLI, using fzf.
+function set_wallpaper() {
+    local wallpaper_dir="$HOME/.config/wallpaper"
+    local wallpaper_path=""
+
+    # If no argument provided, use fzf to select from wallpaper directory
+    if [ $# -eq 0 ]; then
+        if ! [ -x $(command -v fzf) ]; then
+            echo "fzf is not installed"
+            return 1
+        fi
+
+        if [ ! -d "$wallpaper_dir" ]; then
+            echo "Wallpaper directory not found: $wallpaper_dir"
+            return 1
+        fi
+
+        wallpaper_path=$(find "$wallpaper_dir" \( -iname "*.jpg" -o -iname "*.jpeg" -o -iname "*.png" \) | fzf --preview 'fzf-preview.sh {}' --height 40%)
+
+        if [ -z "$wallpaper_path" ]; then
+            echo "No wallpaper selected."
+            return 1
+        fi
+    else
+        # Check if argument is a full path or relative filename
+        if [[ "$1" == /* ]]; then
+            # Full path provided
+            wallpaper_path="$1"
+        else
+            # Relative filename, assume it's in wallpaper directory
+            wallpaper_path="$wallpaper_dir/$1"
+        fi
+    fi
+
+    # Validate file exists
+    if [ ! -f "$wallpaper_path" ]; then
+        echo "File not found: $wallpaper_path"
+        return 1
+    fi
+
+    # Check if file is a valid image format (PNG or JPEG)
+    local file_type=$(file -b --mime-type "$wallpaper_path")
+    if [[ "$file_type" != "image/png" && "$file_type" != "image/jpeg" ]]; then
+        echo "Unsupported file type: $file_type. Only PNG and JPEG are supported."
+        return 1
+    fi
+
+    if [ $(uname) == 'Darwin']; then
+        # Set the wallpaper using AppleScript
+        osascript -e "tell application \"Finder\" to set desktop picture to POSIX file \"$wallpaper_path\""
+
+        if [ $? -eq 0 ]; then
+            echo "Wallpaper set successfully: $wallpaper_path"
+        else
+            echo "Failed to set wallpaper: $wallpaper_path"
+            return 1
+        fi
+    else
+        echo "This function only works on macOS at the moment."
+        return 1
+    fi
+}
+
 # Use Tailscale binary if installed via app
 if [ -d "/Applications/Tailscale.app" ]; then
     alias tailscale="/Applications/Tailscale.app/Contents/MacOS/Tailscale"
