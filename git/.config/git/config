@@ -3,7 +3,7 @@
 	email = andy@tensixtyone.com
 
 [core]
-	excludesfile = ~/.gitignore_global
+	excludesfile = ~/.config/git/gitignore_global
 
 [alias]
 	prune = fetch --prune
