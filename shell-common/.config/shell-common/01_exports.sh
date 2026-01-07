@@ -1,7 +1,7 @@
 # shellcheck shell=bash
-# User specific environment
 
 # XDG Base Directories
+# Empty variables would be set to defaults, but we define them explicitly
 export XDG_BIN_HOME="$HOME/.local/bin"
 export XDG_CACHE_HOME="$HOME/.cache"
 export XDG_CONFIG_HOME="$HOME/.config"
@@ -25,22 +25,6 @@ for editor in "${editor_preferences[@]}"; do
         break
     fi
 done
-
-# Go stuff
-export GOPATH=$XDG_DATA_HOME/go/
-export PATH=${GOPATH}bin:$PATH
-if [ -z ${GOROOT+x} ] && [ -d /usr/local/go ]; then
-    export GOROOT=/usr/local/go/
-    export PATH=$PATH:$GOROOT/bin
-fi
-
-# Python stuff
-export POETRY_VIRTUALENVS_IN_PROJECT=true
-
-# Rust stuff
-if [ -f $HOME/.cargo/env ]; then
-    source $HOME/.cargo/env
-fi
 
 # https://github.com/oz/tz
 if [ -x "$(command -v tz)" ]; then
