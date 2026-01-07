@@ -7,8 +7,12 @@
 // custom settings, run `zed: open default settings` from the
 // command palette (cmd-shift-p / ctrl-shift-p)
 {
+  "collaboration_panel": {
+    "button": false,
+  },
+  "disable_ai": false,
   "git_panel": {
-    "dock": "right"
+    "dock": "right",
   },
   "git": {
     "inline_blame": {
@@ -39,8 +43,13 @@
   },
   "base_keymap": "VSCode",
   "agent": {
-    "enabled": false,
-    "button": false,
+    "default_model": {
+      "provider": "copilot_chat",
+      "model": "claude-sonnet-4",
+    },
+    "always_allow_tool_actions": false,
+    "enabled": true,
+    "button": true,
     "model_parameters": [],
   },
   "buffer_font_family": "JetBrains Mono",
