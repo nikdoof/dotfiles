@@ -1,5 +1,6 @@
 # History
-HISTFILE=${ZDOTDIR:-$HOME}/.zsh_history
+mkdir -p "${XDG_STATE_HOME}/zsh"
+HISTFILE="${XDG_STATE_HOME}/zsh/history"
 HISTSIZE=2000
 SAVEHIST=1000
 
