@@ -17,5 +17,12 @@ if [ -x "$(command -v tmux)" ]; then
     alias tma="tmux attach"
 fi
 
+# Eza
+if [ -x "$(command -v eza)" ]; then
+    alias ls="eza"
+    alias ll="eza -l --icons"
+    alias lla="eza -la --icons"
+fi
+
 alias last="last | head"
 alias dp="demoprompt"

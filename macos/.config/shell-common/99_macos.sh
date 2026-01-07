@@ -125,6 +125,3 @@ if [ -d "/Applications/Tailscale.app" ]; then
     alias tailscale="/Applications/Tailscale.app/Contents/MacOS/Tailscale"
     alias ts="/Applications/Tailscale.app/Contents/MacOS/Tailscale"
 fi
-
-# Standard QoL stuff
-alias ls="ls -FG"
