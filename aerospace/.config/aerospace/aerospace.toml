@@ -240,7 +240,7 @@ run = 'move-node-to-workspace C'
 # Zed settings windows float
 [[on-window-detected]]
 if.app-id = 'dev.zed.Zed'
-if.window-title-regex-substring = '^Zed . Settings$'
+if.window-title-regex-substring = '(Zed . Settings|Rules Library)'
 run = 'layout floating'
 check-further-callbacks = false
 
