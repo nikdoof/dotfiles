@@ -68,6 +68,7 @@ cask "viscosity"
 cask "visual-studio-code"
 cask "vlc"
 cask "wireshark-app"
+cask "zed"
 
 cask "font-input"
 cask "font-inter"
