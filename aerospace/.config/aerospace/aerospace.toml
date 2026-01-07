@@ -217,6 +217,11 @@ on-mode-changed = []
     alt-shift-k = ['join-with up', 'mode main']
     alt-shift-l = ['join-with right', 'mode main']
 
+# Tips for configuration:
+# - Order matters (callbacks are ran in order of declaration)
+# - You can use multiple 'run' commands by specifying an array
+# - You can stop further callback checks by setting 'check-further-callbacks = false
+
 # Picture-in-picture windows float
 [[on-window-detected]]
 if.window-title-regex-substring = 'Picture-in-picture'
@@ -232,16 +237,17 @@ run = 'move-node-to-workspace B'
 if.app-id = 'com.microsoft.VSCode'
 run = 'move-node-to-workspace C'
 
+# Zed settings windows float
+[[on-window-detected]]
+if.app-id = 'dev.zed.Zed'
+if.window-title-regex-substring = '^Zed . Settings$'
+run = 'layout floating'
+check-further-callbacks = false
+
 # Zed windows to workspace C
 [[on-window-detected]]
 if.app-id = 'dev.zed.Zed'
 run = 'move-node-to-workspace C'
-
-# Zed settings windows float
-[[on-window-detected]]
-if.window-title-regex-substring = '^Zed . Settings$'
-run = ['layout floating']
-check-further-callbacks = true
 
 # Ghostty terminal windows to workspace T
 [[on-window-detected]]
@@ -267,22 +273,24 @@ run = 'layout floating'
 if.app-id = 'com.microsoft.Outlook'
 run = 'move-node-to-workspace W'
 
-# Teams main window to workspace W
-[[on-window-detected]]
-if.app-id = 'com.microsoft.teams2'
-run = 'move-node-to-workspace W'
-
 # Meeting windows automatically float
 [[on-window-detected]]
 if.app-id = 'com.microsoft.teams2'
 if.window-title-regex-substring = '(Meeting|Call|Screen Share|Share)'
 run = ['layout floating']
+check-further-callbacks = false
 
 # Dialog windows float
 [[on-window-detected]]
 if.app-id = 'com.microsoft.teams2'
 if.window-title-regex-substring = '(Settings|Options|Preferences|Join|Audio|Video)'
 run = ['layout floating']
+check-further-callbacks = false
+
+# Teams main window to workspace W
+[[on-window-detected]]
+if.app-id = 'com.microsoft.teams2'
+run = 'move-node-to-workspace W'
 
 # Logseq to workspace Q
 [[on-window-detected]]
@@ -292,4 +300,14 @@ run = 'move-node-to-workspace Q'
 # Float Facetime windows
 [[on-window-detected]]
 if.app-id = 'com.apple.FaceTime'
+run = 'layout floating'
+
+# Float Logi Options+
+[[on-window-detected]]
+if.app-id = 'com.logi.cp-dev-mgr'
+run = 'layout floating'
+
+# Float CoconutBattery
+[[on-window-detected]]
+if.app-id = 'com.coconut-flavour.coconutBattery'
 run = 'layout floating'

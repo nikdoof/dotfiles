@@ -7,7 +7,9 @@ window-save-state = never
 window-new-tab-position = end
 theme = Snazzy Soft
 font-family = Jetbrains Mono
-auto-update = download
+
+# Handled via Brew
+auto-update = off
 auto-update-channel = stable
 
 keybind = global:cmd+\=toggle_quick_terminal
