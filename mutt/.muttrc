@@ -1,4 +1,4 @@
-set signature="~/.mutt/signature"
+set signature="~/.config/mutt/signature"
 set editor="nano -r 72 -b"
 
 set from = "nikdoof@dimension.sh"
