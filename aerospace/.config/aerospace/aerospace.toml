@@ -227,6 +227,13 @@ on-mode-changed = []
 if.window-title-regex-substring = 'Picture-in-picture'
 run = 'layout floating'
 
+# Float Bitwarden Safari windows (Passkey selection)
+[[on-window-detected]]
+if.app-id = 'com.apple.Safari'
+if.window-title-regex-substring = 'Bitwarden'
+run = 'layout floating'
+check-further-callbacks = false
+
 # Safari windows to workspace B
 [[on-window-detected]]
 if.app-id = 'com.apple.Safari'
