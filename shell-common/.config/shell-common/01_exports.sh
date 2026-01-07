@@ -27,11 +27,11 @@ for editor in "${editor_preferences[@]}"; do
 done
 
 # Go stuff
-export GOPATH=$HOME/go/
+export GOPATH=$XDG_DATA_HOME/go/
 export PATH=${GOPATH}bin:$PATH
 if [ -z ${GOROOT+x} ] && [ -d /usr/local/go ]; then
     export GOROOT=/usr/local/go/
-    export PATH=$PATH:$GOROOT/bin:$HOME/go/bin
+    export PATH=$PATH:$GOROOT/bin
 fi
 
 # Python stuff
