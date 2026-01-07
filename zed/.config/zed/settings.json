@@ -54,7 +54,6 @@
   },
   "buffer_font_family": "JetBrains Mono",
   "file_types": {
-    "yaml": ["services"],
     "rust": ["*.rs"],
     "Ansible": [
       "**.ansible.yml",
@@ -84,6 +83,7 @@
   },
   "languages": {
     "Python": {
+      "tab_size": 4,
       "language_servers": ["ty", "ruff", "!basedpyright"],
     },
     "Shell Script": {
@@ -123,4 +123,30 @@
       },
     },
   },
+  "file_scan_exclusions": [
+    "**/.git",
+    "**/.svn",
+    "**/.hg",
+    "**/.jj",
+    "**/CVS",
+    "**/.coverage",
+    "**/.DS_Store",
+    "**/Thumbs.db",
+    "**/.classpath",
+    "**/.settings",
+    "**/.idea",
+    "**/.vscode",
+    "**/.nuxt",
+    "**/.output",
+    "**/node_modules",
+    "**/dist",
+    "**/.mypy_cache",
+    "**/.ropeproject",
+    "**/.ruff_cache",
+    "**/.pytest_cache",
+    "**/*.egg-info",
+    "**/.venv",
+    "**/venv",
+    "**/.venv*",
+  ],
 }
