@@ -74,7 +74,7 @@ function set_wallpaper() {
             return 1
         fi
 
-        wallpaper_path=$(find "$wallpaper_dir" \( -iname "*.jpg" -o -iname "*.jpeg" -o -iname "*.png" \) | fzf --preview 'fzf-preview.sh {}' --height 40%)
+        wallpaper_path=$(find "$wallpaper_dir" \( -iname "*.jpg" -o -iname "*.jpeg" -o -iname "*.png" -o -iname "*.heic" \) | fzf --preview 'fzf-preview.sh {}' --height 40%)
 
         if [ -z "$wallpaper_path" ]; then
             echo "No wallpaper selected."
@@ -97,14 +97,14 @@ function set_wallpaper() {
         return 1
     fi
 
-    # Check if file is a valid image format (PNG or JPEG)
+    # Check if file is a valid image format (PNG, JPEG, or HEIC)
     local file_type=$(file -b --mime-type "$wallpaper_path")
-    if [[ "$file_type" != "image/png" && "$file_type" != "image/jpeg" ]]; then
-        echo "Unsupported file type: $file_type. Only PNG and JPEG are supported."
+    if [[ "$file_type" != "image/png" && "$file_type" != "image/jpeg" && "$file_type" != "image/heic" ]]; then
+        echo "Unsupported file type: $file_type. Only PNG, JPEG, and HEIC are supported."
         return 1
     fi
 
-    if [ $(uname) == 'Darwin']; then
+    if [[ $(uname) == 'Darwin' ]]; then
         # Set the wallpaper using AppleScript
         osascript -e "tell application \"Finder\" to set desktop picture to POSIX file \"$wallpaper_path\""
 
