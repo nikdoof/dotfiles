@@ -56,6 +56,6 @@
 	insteadOf = "https://github.com/2315-Media"
 
 [include]
-	path = ~/.gitconfig-gpg
-	path = ~/.gitconfig-work
-	path = ~/.gitconfig-local
+	path = ~/.config/git/config.d/gpg
+	path = ~/.config/git/config.d/work
+	path = ~/.config/git/config.d/local
