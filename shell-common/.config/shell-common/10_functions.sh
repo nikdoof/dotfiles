@@ -29,7 +29,7 @@ function update-dotfiles() {
 # Wrapper around ssh-add to easily add SSH keys with a timeout
 # Usage: add-sshkey [key_name]
 function add-sshkey() {
-    TIMEOUT="2h"
+    TIMEOUT="8h"
     NAME=$1
 
     if [ -z "$NAME" ]; then
