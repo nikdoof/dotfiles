@@ -261,10 +261,10 @@ run = 'move-node-to-workspace C'
 if.app-id = 'com.mitchellh.ghostty'
 run = 'move-node-to-workspace T'
 
-# Finder windows to workspace F and float
+# Finder windows float
 [[on-window-detected]]
 if.app-id = 'com.apple.finder'
-run = ['move-node-to-workspace F', 'layout floating']
+run = ['layout floating']
 
 # Telegram windows float
 [[on-window-detected]]
