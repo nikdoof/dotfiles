@@ -125,3 +125,15 @@ if [ -d "/Applications/Tailscale.app" ]; then
     alias tailscale="/Applications/Tailscale.app/Contents/MacOS/Tailscale"
     alias ts="/Applications/Tailscale.app/Contents/MacOS/Tailscale"
 fi
+
+# Open the finder to a specified path or to current directory.
+# https://natelandau.com/my-mac-os-zsh-profile/
+f() {
+    open -a "Finder" "${1:-.}"
+}
+
+# Search for a file using macOS Spotlight
+# https://natelandau.com/my-mac-os-zsh-profile/
+spotlight() {
+    mdfind "kMDItemDisplayName == '${1}'wc"
+}
