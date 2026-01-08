@@ -13,6 +13,7 @@ tap "setchy/brews"
 
 brew "awscli"
 brew "awslogs"
+brew "bat"
 brew "coreutils"
 brew "dockutil"
 brew "eza"

@@ -24,5 +24,11 @@ if [ -x "$(command -v eza)" ]; then
     alias lla="eza -la --icons"
 fi
 
+# Bat
+if [ -x "$(command -v bat)" ]; then
+    alias cat="bat"
+fi
+
 alias last="last | head"
 alias dp="demoprompt"
+alias stow="stowage"
