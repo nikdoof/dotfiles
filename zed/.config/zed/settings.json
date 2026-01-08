@@ -79,7 +79,7 @@
   "theme": {
     "mode": "dark",
     "light": "One Light",
-    "dark": "One Dark",
+    "dark": "Snazzy Theme",
   },
   "languages": {
     "Python": {
@@ -113,6 +113,7 @@
     "catppuccin-icons": true,
     "ansible": true,
     "terraform-context-server": true,
+    "snazzy": true,
   },
   "lsp": {
     "yaml-language-server": {
