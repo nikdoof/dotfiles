@@ -49,7 +49,7 @@ brew "tz"
 brew "uv"
 brew "yazi"
 
-cask "aerospace"
+cask "nikitabobko/tap/aerospace"
 cask "appcleaner"
 cask "balenaetcher"
 cask "clop"
