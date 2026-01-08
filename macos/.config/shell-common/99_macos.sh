@@ -106,7 +106,7 @@ function set_wallpaper() {
 
     if [[ $(uname) == 'Darwin' ]]; then
         # Set the wallpaper using AppleScript
-        osascript -e "tell application \"Finder\" to set desktop picture to POSIX file \"$wallpaper_path\""
+        osascript -e "tell application \"System Events\" to set picture of every desktop to POSIX file \"$wallpaper_path\""
 
         if [ $? -eq 0 ]; then
             echo "Wallpaper set successfully: $wallpaper_path"
