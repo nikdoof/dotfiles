@@ -34,96 +34,50 @@ import shutil
 import sys
 from collections.abc import Callable
 from pathlib import Path
-from typing import IO, List
+from typing import List
+
+from _colorize import ANSIColors, can_colorize  # ty: ignore[unresolved-import]
 
 logger = logging.getLogger(__name__)
 
 
-class Colours(object):
-    """ANSI color codes for terminal output"""
-
-    # Reset
-    RESET = "\033[0m"
-
-    # Regular colors
-    BLACK = "\033[30m"
-    RED = "\033[31m"
-    GREEN = "\033[32m"
-    YELLOW = "\033[33m"
-    BLUE = "\033[34m"
-    MAGENTA = "\033[35m"
-    CYAN = "\033[36m"
-    WHITE = "\033[37m"
-
-    # Copied from _colorize in Python stdlib
-    def can_colorize(*, file: IO[str] | IO[bytes] | None = None) -> bool:
-        def _safe_getenv(k: str, fallback: str | None = None) -> str | None:
-            try:
-                return os.environ.get(k, fallback)
-            except Exception:
-                return fallback
-
-        if file is None:
-            file = sys.stdout
-
-        if not sys.flags.ignore_environment:
-            if _safe_getenv("PYTHON_COLORS") == "0":
-                return False
-            if _safe_getenv("PYTHON_COLORS") == "1":
-                return True
-        if _safe_getenv("NO_COLOR"):
-            return False
-        if _safe_getenv("FORCE_COLOR"):
-            return True
-        if _safe_getenv("TERM") == "dumb":
-            return False
-
-        if not hasattr(file, "fileno"):
-            return False
-
-        if sys.platform == "win32":
-            try:
-                import nt
-
-                if not nt._supports_virtual_terminal():
-                    return False
-            except (ImportError, AttributeError):
-                return False
-
-        try:
-            return os.isatty(file.fileno())
-        except OSError:
-            return hasattr(file, "isatty") and file.isatty()
-
-    @staticmethod
-    def by_name(name):
-        if not Colours.can_colorize():
-            return ""
-        return getattr(Colours, name.upper(), "")
+# Make use of Python internal _colorize module for ANSI colors
+# this will break, but we want keep to zero depdencies for the script.
+def get_color(name: str):
+    """Get a color code by name from the Python stdlib."""
+    if not can_colorize():
+        return ""
+    return getattr(ANSIColors, name.replace(" ", "_").upper(), "")
 
 
 # Colours to use for each action
-ACTION_COLOURS = {
+ACTION_COLORS = {
     "LINK": "GREEN",
     "UNLINK": "RED",
     "DIR": "GREEN",
     "RMDIR": "RED",
-    "SKIP": "YELLOW",
+    "SKIP": "INTENSE_BLACK",
 }
 
 
 def print_action(action: str, msg: str) -> None:
     """Print an action message."""
-    colour = ""
-    if action in ACTION_COLOURS:
-        colour = Colours.by_name(ACTION_COLOURS[action])
-    print(f"{colour}{action}{Colours.by_name('RESET')} {msg}")
+    colour, reset = "", ""
+    if action in ACTION_COLORS:
+        colour = get_color(ACTION_COLORS[action])
+        reset = get_color("RESET")
+    print(f"{colour}{action}{reset} {msg}")
 
 
 def add_file_to_package(
     file_path: Path, package_name: str, args: argparse.Namespace
 ) -> bool:
     """Add a file to a package by moving it and creating a symlink."""
+
+    if package_name not in get_packages(args.repository):
+        logger.error("no such package: %s", package_name)
+        return False
+
     target = args.target.resolve()
     package = Path(args.repository, package_name).resolve()
 
@@ -168,12 +122,13 @@ def install_package(
     package: str, args: argparse.Namespace, is_excluded: Callable[[str], bool]
 ) -> bool:
     """Install a package by creating symlinks from repository to target."""
-    package_dir = args.repository / package
-    if not package_dir.is_dir():
-        logger.warning("no such package: %s; skipping", package)
+
+    if package not in get_packages(args.repository):
+        logger.error("no such package: %s", package)
         return False
 
     # Walk the package
+    package_dir = args.repository / package
     for root, _, files in os.walk(package_dir, followlinks=True):
         root_path = Path(root)
         files = [filename for filename in files if not is_excluded(filename)]
@@ -229,6 +184,10 @@ def uninstall_package(
 ) -> bool:
     """Uninstalls a package by removing symlinks."""
     dirs: List[Path] = []
+
+    if package not in get_packages(args.repository):
+        logger.error("no such package: %s", package)
+        return False
 
     package_dir = args.repository / package
     if not package_dir.is_dir():
@@ -322,6 +281,10 @@ def cleanup_package(package: str, args: argparse.Namespace) -> None:
     - discover the directories used in the package
     - iterate the directories and remove any broken symlinks that point back to the package
     """
+    if package not in get_packages(args.repository):
+        logger.error("no such package: %s", package)
+        return
+
     package_dir = args.repository / package
     if not package_dir.is_dir():
         return
@@ -461,9 +424,7 @@ def main() -> None:
         if len(packages):
             print(f"Packages in repository: {repo_path}")
             for package in packages:
-                print(
-                    f"{Colours.by_name('GREEN')}-{Colours.by_name('RESET')} {package}"
-                )
+                print(f"{get_color('GREEN')}-{get_color('RESET')} {package}")
 
         else:
             logger.info("no packages found in repository")
