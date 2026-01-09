@@ -1,11 +1,4 @@
-// Zed settings
-//
-// For information on how to configure Zed, see the Zed
-// documentation: https://zed.dev/docs/configuring-zed
-//
-// To see all of Zed's default settings without changing your
-// custom settings, run `zed: open default settings` from the
-// command palette (cmd-shift-p / ctrl-shift-p)
+// Zed Config
 {
   "collaboration_panel": {
     "button": false,
@@ -27,6 +20,7 @@
   },
   "calls": {
     "mute_on_join": true,
+    "share_on_join": false,
   },
   "features": {
     "edit_prediction_provider": "copilot",
@@ -40,6 +34,7 @@
   },
   "terminal": {
     "font_size": 13.0,
+    "font_family": "JetBrainsMono Nerd Font",
   },
   "base_keymap": "VSCode",
   "agent": {
@@ -52,7 +47,7 @@
     "button": true,
     "model_parameters": [],
   },
-  "buffer_font_family": "JetBrains Mono",
+  "buffer_font_family": "JetBrainsMono Nerd Font",
   "file_types": {
     "rust": ["*.rs"],
     "Ansible": [
@@ -150,4 +145,25 @@
     "**/venv",
     "**/.venv*",
   ],
+
+  "project_panel": {
+    "entry_spacing": "standard",
+  },
+  "toolbar": {
+    "breadcrumbs": false,
+    "quick_actions": false,
+  },
+  "tabs": {
+    "file_icons": true,
+    "close_position": "left",
+  },
+  "current_line_highlight": "gutter",
+
+  "tab_size": 2,
+  "hard_tabs": false,
+  "cursor_shape": "bar",
+  "telemetry": {
+    "diagnostics": false,
+    "metrics": false,
+  },
 }
