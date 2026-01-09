@@ -214,7 +214,7 @@ def install_package(
                     dest_path.unlink()
 
             # Link the file
-            print_action("LINK", f"%{src_path} -> %{dest_path}")
+            print_action("LINK", f"{src_path} -> {dest_path}")
             if not args.dry_run:
                 try:
                     dest_path.symlink_to(src_path)
