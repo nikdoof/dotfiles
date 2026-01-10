@@ -76,6 +76,9 @@ function set_wallpaper() {
 
         wallpaper_path=$(find "$wallpaper_dir" \( -iname "*.jpg" -o -iname "*.jpeg" -o -iname "*.png" -o -iname "*.heic" \) | fzf --preview 'fzf-preview.sh {}' --height 40%)
 
+        # Clear fzf preview from the terminal
+        printf "\x1b_Ga=d,d=A\x1b\\"
+
         if [ -z "$wallpaper_path" ]; then
             echo "No wallpaper selected."
             return 1
