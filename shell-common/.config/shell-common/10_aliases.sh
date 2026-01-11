@@ -1,5 +1,8 @@
 # shellcheck shell=bash
 alias ls="ls -F --color=auto"
+alias la="ls -a"
+alias ll="ls -l"
+alias lla="ls -la"
 
 # Use code-insiders if installed
 if [ -x "$(command -v code-insiders)" ]; then
@@ -20,8 +23,6 @@ fi
 # Eza
 if [ -x "$(command -v eza)" ]; then
     alias ls="eza"
-    alias ll="eza -l --icons"
-    alias lla="eza -la --icons"
 fi
 
 # Bat
