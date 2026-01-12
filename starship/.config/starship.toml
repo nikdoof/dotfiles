@@ -6,16 +6,22 @@ format = """
 [](nord10)\
 $os\
 $username[@](bg:nord10 fg:nord0)$hostname\
-[](bg:nord9 fg:nord10)\
+[](bg:nord9 fg:nord10)\
 $directory\
-[](bg:nord8 fg:nord9)\
-$git_branch$git_commit$git_state$git_metrics$git_status\
-[](bg:nord7 fg:nord8)\
-$package$c$cmake$cobol$daml$dart$deno$dotnet$elixir$elm$erlang$fennel$gleam\
-$golang$guix_shell$haskell$haxe$helm$java$julia$kotlin$gradle$lua$nim$nodejs\
-$ocaml$opa$perl$php$pulumi$purescript$python$quarto$raku$rlang$red$ruby$rust\
-$scala$solidity$swift$terraform$typst$vlang$vagrant$zig$aws\
-[](bg:bg fg:nord7)\
+[](bg:nord8 fg:nord9)\
+$git_branch$git_commit\
+[](bg:nord7 fg:nord8)\
+$package\
+$golang\
+$nodejs\
+$php\
+$python\
+$rust\
+$terraform\
+$aws\
+[](bg:nord4 fg:nord7)\
+$cmd_duration\
+[](fg:#d9dee9)\
 $line_break\
 $character
 """
@@ -81,6 +87,7 @@ disabled = true
 [package]
 format = "[ 󰏗 $version ]($style)"
 style = "fg:nord0 bg:nord7"
+disabled = true
 
 # Languages
 
@@ -105,8 +112,9 @@ format = "[ $symbol($version )]($style)"
 style = "fg:nord0 bg:nord7"
 disabled = false
 
-# MISC
-# ====
+[cmd_duration]
+format = "[ 󰔚 $duration ]($style)"
+style = "fg:#2e3440 bg:#d9dee9"
 
 [hostname]
 ssh_only = false
