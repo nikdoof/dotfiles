@@ -34,7 +34,7 @@
   },
   "terminal": {
     "font_size": 13.0,
-    "font_family": "JetBrainsMono Nerd Font",
+    "font_family": "JetBrainsMono Nerd Font Mono",
   },
   "base_keymap": "VSCode",
   "agent": {
@@ -47,7 +47,7 @@
     "button": true,
     "model_parameters": [],
   },
-  "buffer_font_family": "JetBrainsMono Nerd Font",
+  "buffer_font_family": "JetBrainsMono Nerd Font Mono",
   "file_types": {
     "rust": ["*.rs"],
     "Ansible": [
