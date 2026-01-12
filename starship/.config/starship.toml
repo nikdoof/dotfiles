@@ -1,0 +1,134 @@
+"$schema" = 'https://starship.rs/config-schema.json'
+
+palette = 'nord'
+
+format = """
+[](nord10)\
+$os\
+$username[@](bg:nord10 fg:nord0)$hostname\
+[](bg:nord9 fg:nord10)\
+$directory\
+[](bg:nord8 fg:nord9)\
+$git_branch$git_commit$git_state$git_metrics$git_status\
+[](bg:nord7 fg:nord8)\
+$package$c$cmake$cobol$daml$dart$deno$dotnet$elixir$elm$erlang$fennel$gleam\
+$golang$guix_shell$haskell$haxe$helm$java$julia$kotlin$gradle$lua$nim$nodejs\
+$ocaml$opa$perl$php$pulumi$purescript$python$quarto$raku$rlang$red$ruby$rust\
+$scala$solidity$swift$terraform$typst$vlang$vagrant$zig$aws\
+[](bg:bg fg:nord7)\
+$line_break\
+$character
+"""
+
+[os]
+disabled = false
+format = "[$symbol ]($style)"
+style = "fg:nord0 bg:nord10"
+
+[os.symbols]
+Windows = ""
+Ubuntu = "󰕈"
+SUSE = ""
+Raspbian = "󰐿"
+Mint = "󰣭"
+Macos = "󰀵"
+Manjaro = ""
+Linux = "󰌽"
+Gentoo = "󰣨"
+Fedora = "󰣛"
+Alpine = ""
+Amazon = ""
+Android = ""
+AOSC = ""
+Arch = "󰣇"
+Artix = "󰣇"
+CentOS = ""
+Debian = "󰣚"
+Redhat = "󱄛"
+RedHatEnterprise = "󱄛"
+
+[palettes.nord]
+nord0 = '#2E3440'
+nord1 = '#3B4252'
+nord2 = '#434C5E'
+nord3 = '#4C566A'
+nord4 = '#D8DEE9'
+nord5 = '#E5E9F0'
+nord6 = '#ECEFF4'
+nord7 = '#8FBCBB'
+nord8 = '#88C0D0'
+nord9 = '#81A1C1'
+nord10 = '#5E81AC'
+nord11 = '#BF616A'
+nord12 = '#D08770'
+nord13 = '#EBCB8B'
+nord14 = '#A3BE8C'
+nord15 = '#B48EAD'
+
+[aws]
+format = '[ $symbol($profile )(\($region\) )]($style)'
+style = "fg:nord0 bg:nord7"
+symbol = '🅰 '
+
+[git_branch]
+format = "[ $symbol$branch(:$remote_branch) ]($style)"
+symbol = "󰘬 "
+style = "fg:nord0 bg:nord8"
+
+[git_status]
+disabled = true
+
+[package]
+format = "[ 󰏗 $version ]($style)"
+style = "fg:nord0 bg:nord7"
+
+# Languages
+
+[python]
+symbol = '󰌠 '
+format = "[ $symbol($version )]($style)"
+style = "fg:nord0 bg:nord7"
+
+[rust]
+symbol = ' '
+format = "[ $symbol($version )]($style)"
+style = "fg:nord0 bg:nord7"
+
+[golang]
+symbol = 'go'
+format = "[ $symbol($version )]($style)"
+style = "fg:nord0 bg:nord7"
+
+[terraform]
+symbol = '󰘦 '
+format = "[ $symbol($version )]($style)"
+style = "fg:nord0 bg:nord7"
+disabled = false
+
+# MISC
+# ====
+
+[hostname]
+ssh_only = false
+style = "fg:nord0 bg:nord10"
+format = "[$ssh_symbol$hostname ]($style)"
+ssh_symbol = " "
+
+[shell]
+disabled = false
+
+[username]
+show_always = true
+format = '[$user]($style)'
+style_user = "fg:nord0 bg:nord10"
+
+[directory]
+style = "fg:nord0 bg:nord9"
+read_only = " "
+format = "[ 󰉋 $path ]($style)[$read_only]($read_only_style)"
+read_only_style = "fg:nord0 bold bg:nord9"
+
+[character]
+success_symbol = "[ >](bold green)"
+error_symbol = "[ >](bold red)"
+vimcmd_symbol = "[  >](bold green)"
