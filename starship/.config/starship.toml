@@ -106,6 +106,16 @@ symbol = 'go'
 format = "[ $symbol($version )]($style)"
 style = "fg:nord0 bg:nord7"
 
+[nodejs]
+symbol = '󰌞 '
+format = "[ $symbol($version )]($style)"
+style = "fg:nord0 bg:nord7"
+
+[php]
+symbol = ' '
+format = "[ $symbol($version )]($style)"
+style = "fg:nord0 bg:nord7"
+
 [terraform]
 symbol = '󰘦 '
 format = "[ $symbol($version )]($style)"
