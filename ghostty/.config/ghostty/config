@@ -7,6 +7,7 @@ window-save-state = never
 window-new-tab-position = end
 theme = Nord
 font-family = JetBrainsMono Nerd Font
+background-opacity = 0.95
 
 # Handled via Brew
 auto-update = off

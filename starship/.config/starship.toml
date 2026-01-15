@@ -22,6 +22,8 @@ $aws\
 [](bg:nord4 fg:nord7)\
 $cmd_duration\
 [](fg:#d9dee9)\
+$time\
+[](fg:nord0)\
 $line_break\
 $character
 """
@@ -150,3 +152,9 @@ read_only_style = "fg:nord0 bold bg:nord9"
 success_symbol = "[ »](bold green)"
 error_symbol = "[ »](bold red)"
 vimcmd_symbol = "[  >](bold green)"
+
+[time]
+disabled = false
+format = " [$time]($style) "
+style = "bold fg:nord2"
+time_format = "%R"

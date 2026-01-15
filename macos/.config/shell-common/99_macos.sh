@@ -138,5 +138,5 @@ f() {
 # Search for a file using macOS Spotlight
 # https://natelandau.com/my-mac-os-zsh-profile/
 spotlight() {
-    mdfind "kMDItemDisplayName == '${1}'wc"
+    mdfind "kMDItemDisplayName == '${1}'wc" | fzf --preview 'fzf-preview.sh {}' --height 40%
 }
