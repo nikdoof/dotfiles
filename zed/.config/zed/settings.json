@@ -148,7 +148,7 @@
 
   "project_panel": {
     "entry_spacing": "standard",
-    "hide_root": true,
+    "hide_root": false,
     "default_width": 400,
   },
   "toolbar": {
