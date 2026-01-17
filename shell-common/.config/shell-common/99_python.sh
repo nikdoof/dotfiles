@@ -1,2 +1,4 @@
+# shellcheck shell=bash
 # Python stuff
+
 export POETRY_VIRTUALENVS_IN_PROJECT=true

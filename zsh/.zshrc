@@ -1,3 +1,4 @@
+# shellcheck shell=zsh
 # Source shell common
 for f in ~/.config/shell-common/*.sh; do
     source $f

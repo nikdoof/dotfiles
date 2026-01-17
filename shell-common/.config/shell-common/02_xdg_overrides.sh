@@ -1,3 +1,4 @@
+# shellcheck shell=bash
 # Override application locations to fix XDG
 export ANSIBLE_HOME="$XDG_DATA_HOME"/ansible
 export LESSHISTFILE="$XDG_STATE_HOME"/less/history

@@ -1,4 +1,5 @@
 # shellcheck shell=bash
+# AWS functions
 
 # Get the list of AWS profiles
 function awsprofiles() {

@@ -1,3 +1,4 @@
+# shellcheck shell=zsh
 # History
 mkdir -p "${XDG_STATE_HOME}/zsh"
 HISTFILE="${XDG_STATE_HOME}/zsh/history"

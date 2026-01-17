@@ -1,3 +1,4 @@
+# shellcheck shell=zsh
 # Zsh specific aliases
 # Mostly suffix and global aliases
 
