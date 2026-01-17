@@ -316,3 +316,15 @@ run = 'layout floating'
 [[on-window-detected]]
 if.app-id = 'com.coconut-flavour.coconutBattery'
 run = 'layout floating'
+
+# Float the main window of Windows App
+[[on-window-detected]]
+if.app-id = 'com.microsoft.rdc.macos'
+if.window-title-regex-substring = 'Devices'
+run = ['move-node-to-workspace R', 'layout floating']
+check-further-callbacks = false
+
+# Accordian the connection windows
+[[on-window-detected]]
+if.app-id = 'com.microsoft.rdc.macos'
+run = ['move-node-to-workspace W', 'layout v_accordion']
