@@ -322,4 +322,4 @@ check-further-callbacks = false
 # Accordian the connection windows
 [[on-window-detected]]
 if.app-id = 'com.microsoft.rdc.macos'
-run = ['move-node-to-workspace W', 'layout v_accordion']
+run = ['move-node-to-workspace R', 'layout v_accordion']
