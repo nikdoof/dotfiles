@@ -323,3 +323,13 @@ check-further-callbacks = false
 [[on-window-detected]]
 if.app-id = 'com.microsoft.rdc.macos'
 run = ['move-node-to-workspace R', 'layout v_accordion']
+
+# Float DaisyDisk windows
+[[on-window-detected]]
+if.app-id = 'com.daisydiskapp.DaisyDiskStandAlone'
+run = ['layout floating']
+
+# Float Compressor windows
+[[on-window-detected]]
+if.app-id = 'com.apple.CompressorApp'
+run = ['layout floating']
