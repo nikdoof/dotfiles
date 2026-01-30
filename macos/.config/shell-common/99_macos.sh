@@ -140,3 +140,8 @@ f() {
 spotlight() {
     mdfind "kMDItemDisplayName == '${1}'wc" | fzf --preview 'fzf-preview.sh {}' --height 40%
 }
+
+# Provide default args to LSQ
+if [ -x "$(command -v lsq)" ]; then
+    alias lsq='lsq -d $HOME/Documents/Logseq/PKM/'
+fi
