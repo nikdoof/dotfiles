@@ -59,7 +59,7 @@ function update-dock() {
 
 # Function to switch the macOS desktop wallpaper from the CLI, using fzf.
 function set_wallpaper() {
-    local wallpaper_dir="$HOME/.config/wallpaper"
+    local wallpaper_dir="$HOME/.dotfiles/wallpaper/.config/wallpaper"
     local wallpaper_path=""
 
     # If no argument provided, use fzf to select from wallpaper directory
