@@ -4,11 +4,6 @@ alias la="ls -a"
 alias ll="ls -l"
 alias lla="ls -la"
 
-# Use code-insiders if installed
-if [ -x "$(command -v code-insiders)" ]; then
-    alias code="code-insiders"
-fi
-
 # NixOS aliases
 if [ -f "/etc/NIXOS" ]; then
     alias nixos-rebuild="cd ~/nixos-config && make rebuild"
