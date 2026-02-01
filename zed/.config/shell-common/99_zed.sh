@@ -12,3 +12,6 @@ function zed() {
     echo "Zed application not found in common locations."
     return 1
 }
+
+# Set Zed as the default visual, with wait flag
+export VISUAL="zed -w"
