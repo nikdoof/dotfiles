@@ -6,7 +6,7 @@ modified by Andrew Williams <https://github.com/nikdoof/>
 A dotfile package manager
 
 Copyright (c) Keith Gaughan, 2017.
-Copyright (c) Andrew Williams, 2021-2025.
+Copyright (c) Andrew Williams, 2021-2026.
 
 Permission is hereby granted, free of charge, to any person obtaining a copy of
 this software and associated documentation files (the "Software"), to deal in
@@ -28,22 +28,23 @@ SOFTWARE.
 import argparse
 import fnmatch
 import logging
-import os
 import re
 import shutil
 import sys
 from collections.abc import Callable
-from pathlib import Path
+from pathlib import Path as BasePath
 from typing import List
 
 from _colorize import ANSIColors, can_colorize  # ty: ignore[unresolved-import]
+
+__version__ = "0.1.0"
 
 logger = logging.getLogger(__name__)
 
 
 # Make use of Python internal _colorize module for ANSI colors
-# this will break, but we want keep to zero depdencies for the script.
-def get_color(name: str):
+# this will break, but we want keep to zero dependencies for the script.
+def get_color(name: str) -> str:
     """Get a color code by name from the Python stdlib."""
     if not can_colorize():
         return ""
@@ -58,6 +59,40 @@ ACTION_COLORS = {
     "RMDIR": "RED",
     "SKIP": "INTENSE_BLACK",
 }
+
+
+class Path(BasePath):
+    """A Path object with some helper functions"""
+
+    def is_dir_empty(self: "Path") -> bool:
+        """Check if a directory is empty."""
+        # Check if iter returns any items
+        if not self.is_dir():
+            raise ValueError(f"Path {self} is not a directory")
+        return next(self.iterdir(), None) is not None
+
+    def is_package_file(self: "Path", package: str, repo_path: "Path") -> bool:
+        """
+        Check if a file is part of a package.
+
+        This makes a few assumptions:
+            - The file is a symlink
+            - The symlink points inside the repository
+            - Only a single repository is used to link files from
+        """
+        # Is the file a symlink?
+        if not self.is_symlink():
+            return False
+        # Does the symlink point inside the repository?
+        try:
+            target_path = self.resolve()
+        except OSError:
+            return False
+        return target_path.is_relative_to(repo_path / package)
+
+    def is_broken_symlink(self: "Path") -> bool:
+        """Check if a path is a broken symlink."""
+        return self.is_symlink() and not self.exists()
 
 
 def print_action(action: str, msg: str) -> None:
@@ -129,13 +164,12 @@ def install_package(
 
     # Walk the package
     package_dir = args.repository / package
-    for root, _, files in os.walk(package_dir, followlinks=True):
-        root_path = Path(root)
+    for root, _, files in package_dir.walk(follow_symlinks=True):
         files = [filename for filename in files if not is_excluded(filename)]
         if not files:
             continue
 
-        rest = root_path.relative_to(package_dir)
+        rest = root.relative_to(package_dir)
         dest = args.target / rest
 
         # Create the directory path
@@ -154,12 +188,12 @@ def install_package(
 
         # Process files
         for filename in files:
-            src_path = (root_path / filename).resolve()
+            src_path = (root / filename).resolve()
             dest_path = dest / filename
 
             # Skip if the file exists and we're not clobbering
             if dest_path.exists() and not args.clobber:
-                print_action("SKIP", dest_path)
+                print_action("SKIP", f"{dest_path} (already linked)")
                 continue
 
             # Does the file already exist?
@@ -194,13 +228,12 @@ def uninstall_package(
         logger.warning("no such package: %s; skipping", package)
         return False
 
-    for root, _, files in os.walk(package_dir, followlinks=True):
-        root_path = Path(root)
+    for root, _, files in package_dir.walk(follow_symlinks=True):
         files = [filename for filename in files if not is_excluded(filename)]
         if not files:
             continue
 
-        rest = root_path.relative_to(package_dir)
+        rest = root.relative_to(package_dir)
         dest = args.target / rest
 
         if rest != Path("."):
@@ -209,18 +242,20 @@ def uninstall_package(
         for filename in files:
             dest_path = dest / filename
             if not dest_path.exists():
-                logger.debug("does not exist: %s", dest_path)
+                print_action("SKIP", dest_path)
                 continue
 
             if dest_path.is_symlink():
-                src_path = (root_path / filename).resolve()
+                src_path = (root / filename).resolve()
                 try:
                     if dest_path.resolve() == src_path:
                         print_action("UNLINK", dest_path)
                         if not args.dry_run:
                             dest_path.unlink()
                     else:
-                        print_action("SKIP", f"{dest_path} (points elsewhere)")
+                        print_action(
+                            "SKIP", f"{dest_path} (symlink doesn't point to package)"
+                        )
                 except (OSError, RuntimeError) as e:
                     logger.warning("error checking symlink %s: %s", dest_path, e)
             else:
@@ -228,7 +263,13 @@ def uninstall_package(
 
     # Delete the directories if empty.
     for dir_path in sorted(dirs, key=lambda p: len(str(p)), reverse=True):
+        # Skip if it doesn't exist
         if not dir_path.exists():
+            continue
+
+        # Check if the directory is empty
+        if dir_path.is_dir_empty():
+            print_action("SKIP", f"{dir_path} (not empty)")
             continue
         try:
             print_action("RMDIR", str(dir_path))
@@ -250,31 +291,6 @@ def get_packages(repo_path: Path) -> List[str]:
     return sorted(packages)
 
 
-def is_package_file(path: Path, package: str, repo_path: Path) -> bool:
-    """
-    Check if a file is part of a package.
-
-    This makes a few assumptions:
-        - The file is a symlink
-        - The symlink points inside the repository
-        - Only a single repository is used to link files from
-    """
-    # Is the file a symlink?
-    if not path.is_symlink():
-        return False
-    # Does the symlink point inside the repository?
-    try:
-        target_path = path.resolve()
-    except OSError:
-        return False
-    return target_path.is_relative_to(repo_path / package)
-
-
-def is_broken_symlink(path: Path) -> bool:
-    """Check if a path is a broken symlink."""
-    return path.is_symlink() and not path.exists()
-
-
 def cleanup_package(package: str, args: argparse.Namespace) -> None:
     """Cleanup any broken symlinks from a installed package.
 
@@ -285,28 +301,26 @@ def cleanup_package(package: str, args: argparse.Namespace) -> None:
         logger.error("no such package: %s", package)
         return
 
-    package_dir = args.repository / package
-    if not package_dir.is_dir():
-        return
+    # Safe to assume this path exists after using get_packages
+    package_dir: Path = args.repository / package
 
     # Walk the source package folder for its structure
-    for root, _, _ in os.walk(package_dir, followlinks=True):
-        root_path = Path(root)
-
+    for root, _, _ in package_dir.walk(follow_symlinks=True):
         # Calculate the path in the target folder
-        rest = root_path.relative_to(package_dir)
-        dest = args.target / rest
+        rest: Path = root.relative_to(package_dir)
+        dest: Path = args.target / rest
 
         # If the folder doesn't exist in the target, skip it
         if not dest.exists():
             continue
 
         # Iterate the files in the target folder
-        for file in os.listdir(dest):
+        for file in dest.iterdir():
             src_path = dest / file
-            if is_package_file(
-                src_path, package, args.repository
-            ) and is_broken_symlink(src_path):
+            if (
+                src_path.is_package_file(package, args.repository)
+                and src_path.is_broken_symlink()
+            ):
                 print_action("UNLINK", src_path)
                 if not args.dry_run:
                     src_path.unlink()
@@ -314,7 +328,17 @@ def cleanup_package(package: str, args: argparse.Namespace) -> None:
 
 def make_argparser() -> argparse.ArgumentParser:
     """Create and configure the argument parser."""
-    parser = argparse.ArgumentParser(description="A dotfile package manager.")
+    parser = argparse.ArgumentParser(
+        prog="stowage", description="A dotfile package manager."
+    )
+    parser.add_argument(
+        "--version",
+        "-V",
+        action="version",
+        help="Show version and exit",
+        version=f"%(prog)s {__version__}",
+    )
+    parser.add_argument("--debug", "-d", action="store_true", help="Debug output")
     parser.add_argument("--verbose", "-v", action="store_true", help="Verbose output")
     parser.add_argument("--dry-run", "-n", action="store_true", help="Dry run.")
     parser.add_argument(
@@ -386,7 +410,13 @@ def main() -> None:
     args = parser.parse_args()
 
     # Configure logging
-    log_level = logging.INFO if args.verbose or args.dry_run else logging.WARNING
+    log_level = (
+        logging.DEBUG
+        if args.debug
+        else logging.INFO
+        if args.verbose or args.dry_run
+        else logging.WARNING
+    )
     logging.basicConfig(level=log_level, format="%(message)s", stream=sys.stdout)
 
     # Validate repository exists
