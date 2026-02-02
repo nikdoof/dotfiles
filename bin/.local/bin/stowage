@@ -29,11 +29,9 @@ import argparse
 import fnmatch
 import logging
 import re
-import shutil
 import sys
 from collections.abc import Callable
 from pathlib import Path as BasePath
-from typing import List
 
 from _colorize import ANSIColors, can_colorize  # ty: ignore[unresolved-import]
 
@@ -52,7 +50,7 @@ def get_color(name: str) -> str:
 
 
 # Colours to use for each action
-ACTION_COLORS = {
+ACTION_COLORS: dict[str, str] = {
     "LINK": "GREEN",
     "UNLINK": "RED",
     "DIR": "GREEN",
@@ -138,14 +136,14 @@ def add_file_to_package(
 
     print_action("SWAP", f"{dest_path} <-> {file_path}")
     if not args.dry_run:
-        shutil.move(str(file_path), str(dest_path))
+        file_path.move(dest_path)
         try:
             file_path.symlink_to(dest_path)
         except OSError as e:
             logger.error("failed to create symlink: %s", e)
             # Attempt to restore the file if symlink creation fails
             try:
-                shutil.move(str(dest_path), str(file_path))
+                dest_path.move(file_path)
             except Exception as restore_error:
                 logger.error("failed to restore file: %s", restore_error)
             return False
@@ -217,7 +215,7 @@ def uninstall_package(
     package: str, args: argparse.Namespace, is_excluded: Callable[[str], bool]
 ) -> bool:
     """Uninstalls a package by removing symlinks."""
-    dirs: List[Path] = []
+    dirs: list[Path] = []
 
     if package not in get_packages(args.repository):
         logger.error("no such package: %s", package)
@@ -282,7 +280,7 @@ def uninstall_package(
     return True
 
 
-def get_packages(repo_path: Path) -> List[str]:
+def get_packages(repo_path: Path) -> list[str]:
     """Get a list of packages in the repository."""
     packages = []
     for entry in repo_path.iterdir():
