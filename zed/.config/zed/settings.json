@@ -13,6 +13,13 @@
     },
   },
   "context_servers": {
+    "mcp-server-context7": {
+      "enabled": true,
+      "remote": false,
+      "settings": {
+        "context7_api_key": "",
+      },
+    },
     "terraform-context-server": {
       "enabled": true,
       "settings": {},
