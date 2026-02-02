@@ -161,7 +161,7 @@ def install_package(
         return False
 
     # Walk the package
-    package_dir = args.repository / package
+    package_dir: Path = args.repository / package
     for root, _, files in package_dir.walk(follow_symlinks=True):
         files = [filename for filename in files if not is_excluded(filename)]
         if not files:
@@ -172,8 +172,8 @@ def install_package(
 
         # Create the directory path
         if rest != Path("."):
-            # If a non-directory exists with the same name and clobber is enabled, get rid of it.
-            if dest.exists() and not dest.is_dir() and args.clobber:
+            # If a non-directory exists with the same name and force is enabled, get rid of it.
+            if dest.exists() and not dest.is_dir() and args.force:
                 print_action("UNLINK", dest)
                 if not args.dry_run:
                     dest.unlink()
@@ -186,15 +186,20 @@ def install_package(
 
         # Process files
         for filename in files:
-            src_path = (root / filename).resolve()
-            dest_path = dest / filename
+            src_path: Path = (root / filename).resolve()
+            dest_path: Path = dest / filename
 
-            # Skip if the file exists and we're not clobbering
-            if dest_path.exists() and not args.clobber:
+            # Does the symlink already exist and point to the correct location?
+            if dest_path.is_symlink() and dest_path.resolve() == src_path:
                 print_action("SKIP", f"{dest_path} (already linked)")
                 continue
 
-            # Does the file already exist?
+            # Skip if the file exists and we're not forcing
+            if dest_path.exists() and not args.force:
+                print_action("SKIP", f"{dest_path} (existing file)")
+                continue
+
+            # Does the file already exist? If so remove it.
             if dest_path.is_file() or dest_path.is_symlink():
                 print_action("UNLINK", dest_path)
                 if not args.dry_run:
@@ -227,7 +232,9 @@ def uninstall_package(
         return False
 
     for root, _, files in package_dir.walk(follow_symlinks=True):
+        # Filter out excluded files
         files = [filename for filename in files if not is_excluded(filename)]
+
         if not files:
             continue
 
@@ -362,7 +369,7 @@ def make_argparser() -> argparse.ArgumentParser:
         help="Glob pattern of files to exclude",
     )
     parser.add_argument(
-        "--clobber",
+        "--force",
         action="store_true",
         help="Replace files even if they exist.",
     )
