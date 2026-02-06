@@ -1,5 +1,8 @@
 // Zed Config
 {
+  "edit_predictions": {
+    "provider": "copilot"
+  },
   "collaboration_panel": {
     "button": false,
   },
@@ -28,9 +31,6 @@
   "calls": {
     "mute_on_join": true,
     "share_on_join": false,
-  },
-  "features": {
-    "edit_prediction_provider": "copilot",
   },
   "ui_font_family": ".SystemUIFont",
   "buffer_line_height": "comfortable",
