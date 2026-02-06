@@ -6,13 +6,7 @@ alias lla="ls -la"
 
 # NixOS aliases
 if [ -f "/etc/NIXOS" ]; then
-    alias nixos-rebuild="cd ~/nixos-config && make rebuild"
-fi
-
-# Tmux
-if [ -x "$(command -v tmux)" ]; then
-    alias t='(tmux has-session 2>/dev/null && tmux attach) || (tmux new-session)'
-    alias tma="tmux attach"
+    alias nrs="sudo nixos-rebuild switch --refresh --flake github:nikdoof/nixos-config#$(hostname)"
 fi
 
 # Eza
