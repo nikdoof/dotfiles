@@ -1,3 +1,5 @@
+# shellcheck shell=bash
+
 # Set themes for various CLI apps to match our terminal settings
 # Theme flavour of the month: Nord
 
