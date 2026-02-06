@@ -46,11 +46,11 @@ work)
 esac
 
 # Add the default packages
-$STOWAGE --clobber install bin shell-common bash zsh ssh
+$STOWAGE --force install bin shell-common bash zsh ssh
 
 # If we're on macOS, add macos-specific packages
 if [[ "$(uname)" == "Darwin" ]]; then
-    $STOWAGE --clobber install macos
+    $STOWAGE --force install macos
 fi
 
 echo ""
