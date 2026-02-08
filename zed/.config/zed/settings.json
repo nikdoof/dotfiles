@@ -1,7 +1,7 @@
 // Zed Config
 {
   "edit_predictions": {
-    "provider": "copilot"
+    "provider": "copilot",
   },
   "collaboration_panel": {
     "button": false,
@@ -95,6 +95,14 @@
           "command": "shfmt",
           // Change `--indent 2` to match your preferred tab_size
           "arguments": ["--filename", "{buffer_path}", "--indent", "4"],
+        },
+      },
+    },
+    "Nix": {
+      "formatter": {
+        "external": {
+          "command": "nixfmt", // or "nixfmt"
+          "arguments": ["--quiet", "--"],
         },
       },
     },
