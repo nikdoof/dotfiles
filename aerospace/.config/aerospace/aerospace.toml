@@ -301,6 +301,7 @@ run = 'move-node-to-workspace Q'
 [[on-window-detected]]
 if.app-id = 'com.apple.FaceTime'
 run = 'layout floating'
+check-further-callbacks = false
 
 # Float Logi Options+
 [[on-window-detected]]
