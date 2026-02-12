@@ -1,7 +1,11 @@
 // Zed Config
 {
   "edit_predictions": {
-    "provider": "copilot",
+    "copilot": {
+      "enable_next_edit_suggestions": false
+    },
+    "mode": "subtle",
+    "provider": "zed",
   },
   "collaboration_panel": {
     "button": false,
@@ -45,6 +49,7 @@
   },
   "base_keymap": "VSCode",
   "agent": {
+    "show_turn_stats": true,
     "default_model": {
       "provider": "copilot_chat",
       "model": "claude-sonnet-4.5",
