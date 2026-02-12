@@ -9,7 +9,7 @@ if [ -x "$(command -v bat)" ]; then
 fi
 
 # Fzf
-if [ -x "$(command -v bat)" ]; then
+if [ -x "$(command -v fzf)" ]; then
     export FZF_DEFAULT_OPTS='
         --color=fg:#e5e9f0,bg:#2E3440,hl:#81a1c1
         --color=fg+:#e5e9f0,bg+:#2E3440,hl+:#81a1c1
