@@ -1,10 +1,29 @@
 #!/bin/bash
 # shellcheck shell=bash
-for zed_path in "$HOME/Applications/Zed.app" "/Applications/Zed.app"; do
-    if [ -d "$zed_path" ]; then
-        "$zed_path/Contents/MacOS/cli" "$@"
-        return
-    fi
-done
+
+# macOS specific
+if [ "$(uname -s)" == "Darwin" ];
+  for zed_path in "$HOME/Applications/Zed.app" "/Applications/Zed.app"; do
+      if [ -d "$zed_path" ]; then
+          "$zed_path/Contents/MacOS/cli" "$@"
+          return
+      fi
+  done
+else
+  # Check if 'zed' is in PATH
+  if command -v zed &> /dev/null; then
+      zed "$@"
+      return
+  fi
+
+  # Check other locations that may not be in the path, mentioned in the documentation - https://zed.dev/docs/linux
+  for zed_path in "$HOME/.local/bin/zed" "$HOME/.local/zed.app/zed" "$HOME/.local/zed.app/bin.zed"; do
+      if [ -x "$zed_path" ]; then
+          "$zed_path" "$@"
+          return
+      fi
+  done
+fi
+
 echo "Zed application not found in common locations." >&2
 return 1
