@@ -1,7 +1,5 @@
-"$schema" = 'https://starship.rs/config-schema.json'
-
-palette = 'nord'
-
+"$schema" = "https://starship.rs/config-schema.json"
+palette = "nord"
 format = """
 [](nord10)\
 $os\
@@ -54,27 +52,27 @@ Redhat = "󱄛"
 RedHatEnterprise = "󱄛"
 
 [palettes.nord]
-nord0 = '#2E3440'
-nord1 = '#3B4252'
-nord2 = '#434C5E'
-nord3 = '#4C566A'
-nord4 = '#D8DEE9'
-nord5 = '#E5E9F0'
-nord6 = '#ECEFF4'
-nord7 = '#8FBCBB'
-nord8 = '#88C0D0'
-nord9 = '#81A1C1'
-nord10 = '#5E81AC'
-nord11 = '#BF616A'
-nord12 = '#D08770'
-nord13 = '#EBCB8B'
-nord14 = '#A3BE8C'
-nord15 = '#B48EAD'
+nord0 = "#2E3440"
+nord1 = "#3B4252"
+nord2 = "#434C5E"
+nord3 = "#4C566A"
+nord4 = "#D8DEE9"
+nord5 = "#E5E9F0"
+nord6 = "#ECEFF4"
+nord7 = "#8FBCBB"
+nord8 = "#88C0D0"
+nord9 = "#81A1C1"
+nord10 = "#5E81AC"
+nord11 = "#BF616A"
+nord12 = "#D08770"
+nord13 = "#EBCB8B"
+nord14 = "#A3BE8C"
+nord15 = "#B48EAD"
 
 [aws]
 format = '[ $symbol($profile )(\($region\) )]($style)'
 style = "fg:nord0 bg:nord7"
-symbol = '🅰 '
+symbol = "🅰 "
 
 [git_branch]
 format = "[ $symbol$branch(:$remote_branch) ]($style)"
@@ -92,32 +90,32 @@ disabled = true
 # Languages
 
 [python]
-symbol = '󰌠 '
+symbol = "󰌠 "
 format = "[ $symbol($version )]($style)"
 style = "fg:nord0 bg:nord7"
 
 [rust]
-symbol = ' '
+symbol = " "
 format = "[ $symbol($version )]($style)"
 style = "fg:nord0 bg:nord7"
 
 [golang]
-symbol = 'go'
+symbol = "go"
 format = "[ $symbol($version )]($style)"
 style = "fg:nord0 bg:nord7"
 
 [nodejs]
-symbol = '󰌞 '
+symbol = "󰌞 "
 format = "[ $symbol($version )]($style)"
 style = "fg:nord0 bg:nord7"
 
 [php]
-symbol = ' '
+symbol = " "
 format = "[ $symbol($version )]($style)"
 style = "fg:nord0 bg:nord7"
 
 [terraform]
-symbol = '󰘦 '
+symbol = "󰘦 "
 format = "[ $symbol($version )]($style)"
 style = "fg:nord0 bg:nord7"
 disabled = false
@@ -137,7 +135,7 @@ disabled = false
 
 [username]
 show_always = true
-format = '[$user]($style)'
+format = "[$user]($style)"
 style_user = "fg:nord0 bg:nord10"
 
 [directory]
