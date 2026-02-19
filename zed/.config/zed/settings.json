@@ -1,5 +1,16 @@
 // Zed Config
 {
+  "audio": {
+    "experimental.legacy_audio_compatible": true,
+  },
+  "active_pane_modifiers": {
+    "inactive_opacity": 1.0,
+  },
+  "use_system_window_tabs": false,
+  "bottom_dock_layout": "contained",
+  "tab_bar": {
+    "show_pinned_tabs_in_separate_row": false,
+  },
   "edit_predictions": {
     "copilot": {
       "enable_next_edit_suggestions": false,
@@ -44,6 +55,9 @@
     "dark": "Catppuccin Frappé",
   },
   "terminal": {
+    "toolbar": {
+      "breadcrumbs": false,
+    },
     "font_size": 13.0,
     "font_family": "JetBrainsMono Nerd Font Mono",
   },
@@ -168,6 +182,7 @@
   ],
 
   "project_panel": {
+    "bold_folder_labels": false,
     "entry_spacing": "standard",
     "hide_root": false,
     "default_width": 400,
@@ -177,6 +192,8 @@
     "quick_actions": false,
   },
   "tabs": {
+    "show_close_button": "always",
+    "git_status": false,
     "file_icons": true,
     "close_position": "left",
   },
@@ -190,6 +207,7 @@
     "metrics": false,
   },
   "title_bar": {
+    "show_menus": false,
     "show_onboarding_banner": false,
     "show_user_picture": false,
     "show_branch_icon": true,
