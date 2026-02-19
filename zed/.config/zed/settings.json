@@ -2,7 +2,7 @@
 {
   "edit_predictions": {
     "copilot": {
-      "enable_next_edit_suggestions": false
+      "enable_next_edit_suggestions": false,
     },
     "mode": "subtle",
     "provider": "zed",
@@ -129,6 +129,7 @@
     "ansible": true,
     "terraform-context-server": true,
     "nord": true,
+    "nix": true,
   },
   "lsp": {
     "yaml-language-server": {
