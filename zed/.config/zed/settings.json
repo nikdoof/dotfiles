@@ -35,7 +35,7 @@
       "enabled": true,
       "remote": false,
       "settings": {
-        "context7_api_key": "",
+        "context7_api_key": "ctx7sk-df931273-0316-4a2f-876e-8d4d55e926a0",
       },
     },
     "terraform-context-server": {
@@ -68,7 +68,6 @@
       "provider": "copilot_chat",
       "model": "claude-sonnet-4.5",
     },
-    "always_allow_tool_actions": true,
     "enabled": true,
     "button": true,
     "model_parameters": [],
@@ -185,7 +184,6 @@
     "bold_folder_labels": false,
     "entry_spacing": "standard",
     "hide_root": false,
-    "default_width": 400,
   },
   "toolbar": {
     "breadcrumbs": false,
