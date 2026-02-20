@@ -35,7 +35,7 @@
       "enabled": true,
       "remote": false,
       "settings": {
-        "context7_api_key": "ctx7sk-df931273-0316-4a2f-876e-8d4d55e926a0",
+        "context7_api_key": "",
       },
     },
     "terraform-context-server": {
