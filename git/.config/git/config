@@ -10,6 +10,7 @@
 	co = checkout
 	rh = reset --hard
 	dist = "!git archive --format=tar -v --prefix=$(git describe HEAD)/ $(git describe HEAD) | gzip -9 > ../$(git describe HEAD).tar.gz"
+	lint = "!git branch --merged ${1-} | grep -v -E -e '^[*]?[ ]*(main|master|develop|[0-9]+[.]([0-9]+|x)-stable)$' -e '^[*][ ]+' | xargs -r -n 1 git branch --delete"
 
 [init]
 	defaultBranch = main
