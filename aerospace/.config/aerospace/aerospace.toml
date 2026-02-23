@@ -111,6 +111,8 @@ alt-shift-y = "move-node-to-workspace Y"
 alt-shift-z = "move-node-to-workspace Z"
 alt-shift-tab = "move-workspace-to-monitor --wrap-around next"
 alt-shift-semicolon = "mode service"
+cmd-h = [] # Disable "hide application"
+cmd-alt-h = [] # Disable "hide others"
 
 # 'service' binding mode declaration.
 # See: https://nikitabobko.github.io/AeroSpace/guide#binding-modes
@@ -137,6 +139,8 @@ alt-shift-l = ["join-with right", "mode main"]
 C = 1
 # Work always on the right
 W = 2
+# Youtube on the right
+Y = 2
 
 # Picture-in-picture windows float
 [[on-window-detected]]
@@ -185,7 +189,7 @@ run = ["move-node-to-workspace F"]
 # Telegram windows float
 [[on-window-detected]]
 if.app-name-regex-substring = "telegram"
-run = ["move-node-to-workspace S", "layout v_accordion"]
+run = ["move-node-to-workspace S"]
 
 # Activity Monitor windows float
 [[on-window-detected]]
@@ -256,4 +260,9 @@ run = ["layout floating"]
 # Float Compressor windows
 [[on-window-detected]]
 if.app-id = "com.apple.CompressorApp"
+run = ["layout floating"]
+
+# OpenTTD
+[[on-window-detected]]
+if.app-id = "org.openttd.openttd"
 run = ["layout floating"]
