@@ -63,6 +63,37 @@
   },
   "base_keymap": "VSCode",
   "agent": {
+    "tool_permissions": {
+      "tools": {
+        "fetch": {
+          "always_allow": [
+            {
+              "pattern": "^https?://cloud\\.laravel\\.com"
+            }
+          ]
+        },
+        "terminal": {
+          "default": "allow",
+          "always_allow": [
+            {
+              "pattern": "^find\\b"
+            },
+            {
+              "pattern": "^go\\b"
+            },
+            {
+              "pattern": "^make\\b"
+            },
+            {
+              "pattern": "^wc\\b"
+            },
+            {
+              "pattern": "^sed\\b"
+            }
+          ]
+        }
+      }
+    },
     "show_turn_stats": true,
     "default_model": {
       "provider": "copilot_chat",
