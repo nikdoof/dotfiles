@@ -64,10 +64,9 @@ class Path(BasePath):
 
     def is_dir_empty(self: "Path") -> bool:
         """Check if a directory is empty."""
-        # Check if iter returns any items
         if not self.is_dir():
             raise ValueError(f"Path {self} is not a directory")
-        return next(self.iterdir(), None) is not None
+        return next(self.iterdir(), None) is None
 
     def is_package_file(self: "Path", package: str, repo_path: "Path") -> bool:
         """
@@ -273,7 +272,7 @@ def uninstall_package(
             continue
 
         # Check if the directory is empty
-        if dir_path.is_dir_empty():
+        if not dir_path.is_dir_empty():
             print_action("SKIP", f"{dir_path} (not empty)")
             continue
         try:
