@@ -2,8 +2,8 @@
 {
   "agent_servers": {
     "claude-acp": {
-      "type": "registry"
-    }
+      "type": "registry",
+    },
   },
   "audio": {
     "experimental.legacy_audio_compatible": true,
@@ -18,7 +18,7 @@
   },
   "edit_predictions": {
     "mode": "subtle",
-    "provider": "none",
+    "provider": "zed",
   },
   "collaboration_panel": {
     "button": false,
@@ -36,9 +36,7 @@
     "mcp-server-context7": {
       "enabled": true,
       "remote": false,
-      "settings": {
-        "context7_api_key": "",
-      },
+      "settings": {}
     },
     "terraform-context-server": {
       "enabled": true,
