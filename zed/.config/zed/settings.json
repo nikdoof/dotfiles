@@ -1,12 +1,14 @@
 // Zed Config
 {
+  "proxy": "",
+  "cli_default_open_behavior": "new_window",
+  "outline_panel": {
+    "dock": "left",
+  },
   "agent_servers": {
     "claude-acp": {
       "type": "registry",
     },
-  },
-  "audio": {
-    "experimental.legacy_audio_compatible": true,
   },
   "active_pane_modifiers": {
     "inactive_opacity": 1.0,
@@ -36,7 +38,7 @@
     "mcp-server-context7": {
       "enabled": true,
       "remote": false,
-      "settings": {}
+      "settings": {},
     },
     "terraform-context-server": {
       "enabled": true,
@@ -63,6 +65,15 @@
   },
   "base_keymap": "VSCode",
   "agent": {
+    "sidebar_side": "right",
+    "favorite_models": [
+      {
+        "provider": "openrouter",
+        "model": "qwen/qwen3.5-27b",
+        "enable_thinking": true,
+      },
+    ],
+    "dock": "right",
     "default_profile": "write",
     "tool_permissions": {
       "tools": {
@@ -90,10 +101,9 @@
     },
     "show_turn_stats": true,
     "default_model": {
-      "effort": "high",
       "enable_thinking": true,
-      "provider": "zed.dev",
-      "model": "claude-sonnet-4-6",
+      "provider": "openrouter",
+      "model": "qwen/qwen3.5-27b",
     },
     "enabled": true,
     "button": true,
@@ -208,6 +218,7 @@
   ],
 
   "project_panel": {
+    "dock": "left",
     "bold_folder_labels": false,
     "entry_spacing": "standard",
     "hide_root": false,
@@ -232,10 +243,10 @@
     "metrics": false,
   },
   "title_bar": {
+    "show_branch_status_icon": true,
     "show_menus": false,
     "show_onboarding_banner": false,
     "show_user_picture": false,
-    "show_branch_icon": true,
   },
   "file_finder": {
     "modal_max_width": "medium",
