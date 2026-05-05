@@ -1,5 +1,6 @@
 // Zed Config
 {
+  "format_on_save": "on",
   "proxy": "",
   "cli_default_open_behavior": "new_window",
   "outline_panel": {
@@ -35,6 +36,11 @@
     },
   },
   "context_servers": {
+    "mcp-server-github": {
+      "enabled": true,
+      "remote": false,
+      "settings": {},
+    },
     "mcp-server-context7": {
       "enabled": true,
       "remote": false,
@@ -72,30 +78,73 @@
         "model": "qwen/qwen3.5-27b",
         "enable_thinking": true,
       },
+      {
+        "provider": "openrouter",
+        "model": "qwen/qwen3.6-27b",
+        "enable_thinking": true,
+      },
     ],
     "dock": "right",
     "default_profile": "write",
     "tool_permissions": {
       "tools": {
-        "terminal": {
+        "create_directory": {
           "default": "allow",
+        },
+        "terminal": {
           "always_allow": [
             {
-              "pattern": "^find\\b",
+              "pattern": "^cat\\b",
             },
             {
-              "pattern": "^go\\b",
+              "pattern": "^sed\\b",
             },
             {
-              "pattern": "^make\\b",
+              "pattern": "^tail\\b",
+            },
+            {
+              "pattern": "^python\\s+manage\\.py(\\s|$)",
+            },
+            {
+              "pattern": "^git\\s+diff(\\s|$)",
             },
             {
               "pattern": "^wc\\b",
             },
             {
-              "pattern": "^sed\\b",
+              "pattern": "^grep\\b",
+            },
+            {
+              "pattern": "^uv\\s+run(\\s|$)",
+            },
+            {
+              "pattern": "^head\\b",
+            },
+            {
+              "pattern": "^npm\\s+run(\\s|$)",
             },
           ],
+        },
+        "mcp:mcp-server-github:search_repositories": {
+          "default": "allow",
+        },
+        "mcp:mcp-server-github:create_or_update_file": {
+          "default": "allow",
+        },
+        "mcp:mcp-server-github:add_issue_comment": {
+          "default": "allow",
+        },
+        "mcp:mcp-server-github:issue_write": {
+          "default": "allow",
+        },
+        "mcp:mcp-server-github:list_issues": {
+          "default": "allow",
+        },
+        "mcp:mcp-server-github:issue_read": {
+          "default": "allow",
+        },
+        "mcp:mcp-server-github:search_issues": {
+          "default": "allow",
         },
       },
     },
@@ -103,7 +152,7 @@
     "default_model": {
       "enable_thinking": true,
       "provider": "openrouter",
-      "model": "qwen/qwen3.5-27b",
+      "model": "qwen/qwen3.6-27b",
     },
     "enabled": true,
     "button": true,
@@ -130,6 +179,7 @@
       "**playbook*.yaml",
       "**playbook*.yml",
     ],
+    "Django": ["**/templates/**/*.html"],
   },
   "ui_font_size": 14.0,
   "buffer_font_size": 13.0,
@@ -180,6 +230,7 @@
     "terraform-context-server": true,
     "nord": true,
     "nix": true,
+    "django": true,
   },
   "lsp": {
     "yaml-language-server": {
