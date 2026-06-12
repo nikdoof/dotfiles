@@ -89,6 +89,7 @@
     ],
     "dock": "right",
     "default_profile": "write",
+    "inline_assistant_use_streaming_tools": false,
     "tool_permissions": {
       "tools": {
         "create_directory": {
