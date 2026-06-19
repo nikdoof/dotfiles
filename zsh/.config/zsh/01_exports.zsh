@@ -8,7 +8,7 @@ setopt EXTENDED_HISTORY
 
 # Prompt
 # Use starship if installed, otherwise use a simple prompt
-if [ -x $(command -v starship) ]; then
+    if [ -x "$(command -v starship)" ]; then
     eval "$(starship init zsh)"
     export STARSHIP_CACHE="${XDG_CACHE_HOME}"/starship
 else

@@ -3,7 +3,7 @@
 
 # Get the list of AWS profiles
 function awsprofiles() {
-    if ! [ -x $(command -v aws) ]; then
+    if ! [ -x "$(command -v aws)" ]; then
         echo "AWS CLI not installed."
         return 1
     fi
@@ -12,14 +12,14 @@ function awsprofiles() {
         echo "No AWS profiles found in '$HOME/.aws/config, check if ~/.aws/config exists and properly configured.'"
         return 1
     else
-        echo $profiles
+        echo "$profiles"
     fi
 }
 
 # login via SSO to AWS
 function awslogin() {
     for cmd in "aws" "fzf"; do
-        if ! [ -x "$(command -v $cmd)" ]; then
+        if ! [ -x "$(command -v "$cmd")" ]; then
             echo "$cmd is not installed. Please install it to use awslogin."
             return 1
         fi
@@ -118,19 +118,20 @@ function _aws_creds_expiration_check() {
     if [[ -n "$AWS_CREDENTIAL_EXPIRATION" ]]; then
         local expiration_epoch
         local current_epoch
+        local date_ok=0
 
         # Convert expiration time to epoch (handles ISO 8601 format)
-        if [[ -x $(command -v gdate) ]]; then
+        if [[ -x "$(command -v gdate)" ]]; then
             # macOS with GNU coreutils installed
-            expiration_epoch=$(gdate -d "$AWS_CREDENTIAL_EXPIRATION" +%s 2>/dev/null)
+            expiration_epoch=$(gdate -d "$AWS_CREDENTIAL_EXPIRATION" +%s 2>/dev/null) || date_ok=1
             current_epoch=$(gdate +%s)
         else
             # macOS with BSD date
-            expiration_epoch=$(date -j -f "%Y-%m-%dT%H:%M:%S%z" "$AWS_CREDENTIAL_EXPIRATION" +%s 2>/dev/null)
+            expiration_epoch=$(date -j -f "%Y-%m-%dT%H:%M:%S%z" "$AWS_CREDENTIAL_EXPIRATION" +%s 2>/dev/null) || date_ok=1
             current_epoch=$(date +%s)
         fi
 
-        if [[ $? -eq 0 && -n "$expiration_epoch" ]]; then
+        if [[ $date_ok -eq 0 && -n "$expiration_epoch" ]]; then
             if [[ $current_epoch -ge $expiration_epoch ]]; then
                 echo "AWS credentials have expired. Logging out..."
                 awslogout

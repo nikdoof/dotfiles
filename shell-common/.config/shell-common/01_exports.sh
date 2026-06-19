@@ -19,7 +19,7 @@ export LANG=en_GB.UTF-8
 # Make a sensible editor choice
 editor_preferences=(nano pico vim vi)
 for editor in "${editor_preferences[@]}"; do
-    if [ -x "$(command -v $editor)" ]; then
+    if [ -x "$(command -v "$editor")" ]; then
         export EDITOR=$editor
         export VISUAL=$editor
         break
@@ -30,3 +30,6 @@ done
 if [ -x "$(command -v tz)" ]; then
     export TZ_LIST="Europe/Dublin,Portwest HQ;America/New_York,WDW;America/Los_Angeles,DLR;Europe/Paris,DLP"
 fi
+
+# https://github.com/nikdoof/nikdoof-lsq
+export LSQ_DIR="${LSQ_DIR:-$HOME/Documents/Logseq/PKM}"

@@ -1,10 +1,10 @@
 # shellcheck shell=zsh
 # Source shell common
-for f in ~/.config/shell-common/*.sh; do
-    source $f
+for f in ~/.config/shell-common/*.sh(.N); do
+    source "$f"
 done
 
 # Source zsh specific files
-for f in ~/.config/zsh/*.zsh; do
-    source $f
+for f in ~/.config/zsh/*.zsh(.N); do
+    source "$f"
 done

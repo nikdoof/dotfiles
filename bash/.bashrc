@@ -7,11 +7,13 @@ if [ -f /etc/bashrc ]; then
 fi
 
 # Source shell common
+shopt -s nullglob
 for f in ~/.config/shell-common/*.sh; do
-    source $f
+    source "$f"
 done
 
 # Source bash specific files
 for f in ~/.config/bash/*.bash; do
-    source $f
+    source "$f"
 done
+shopt -u nullglob
