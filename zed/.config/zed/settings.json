@@ -193,6 +193,9 @@
     "dark": "Nord Dark",
   },
   "languages": {
+    "PHP": {
+      "format_on_save": "off"
+    },
     "Python": {
       "tab_size": 4,
       "language_servers": ["ty", "ruff", "!basedpyright"],
