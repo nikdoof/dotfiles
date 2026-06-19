@@ -5,6 +5,7 @@ HISTFILE="${XDG_STATE_HOME}/zsh/history"
 HISTSIZE=1000000
 SAVEHIST=$HISTSIZE
 setopt EXTENDED_HISTORY
+setopt HIST_IGNORE_ALL_DUPS HIST_SAVE_NO_DUPS
 
 # Prompt
 # Use starship if installed, otherwise use a simple prompt
