@@ -30,7 +30,8 @@ if [ -d "${HOME}/.dotfiles" ]; then
     echo "Main dotfiles already present, skipping clone."
 else
     echo "Cloning main dotfiles repository..."
-    git clone git@github.com:nikdoof/dotfiles.git "${HOME}/.dotfiles"
+    git clone git@github.com:nikdoof/dotfiles.git "${HOME}/.dotfiles" \
+        || git clone https://github.com/nikdoof/dotfiles.git "${HOME}/.dotfiles"
 fi
 
 # stowage lives inside the bin package — use it directly
@@ -57,7 +58,8 @@ if [ -d "${PRIVATE_DIR}" ]; then
     echo "Private dotfiles already present, skipping clone."
 else
     echo "Cloning private dotfiles (${ENVIRONMENT})..."
-    git clone "${PRIVATE_REPO}" "${PRIVATE_DIR}"
+    git clone "${PRIVATE_REPO}" "${PRIVATE_DIR}" \
+        || echo "SSH clone failed. You may need to configure SSH keys or clone the private repo manually."
 fi
 
 # Install common packages from main repo
