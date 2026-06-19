@@ -2,7 +2,6 @@
 
 # Git pulls latest dotfiles
 function update-dotfiles() {
-    local prevdir="$PWD"
     local dotfiles_dirs=(".dotfiles" ".dotfiles-private" ".dotfiles-work")
 
     for dir in "${dotfiles_dirs[@]}"; do
@@ -13,17 +12,11 @@ function update-dotfiles() {
             fi
 
             echo "Updating $dir..."
-            if cd "${HOME}/$dir" 2>/dev/null; then
-                if ! git pull --rebase --autostash; then
-                    echo "Error: Failed to update $dir"
-                fi
-            else
-                echo "Error: Cannot access directory $dir"
+            if ! (cd "${HOME}/$dir" && git pull --rebase --autostash); then
+                echo "Error: Failed to update $dir"
             fi
         fi
     done
-
-    cd "$prevdir" || echo "Warning: Could not return to original directory $prevdir"
 }
 
 # Wrapper around ssh-add to easily add SSH keys with a timeout
