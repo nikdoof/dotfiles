@@ -16,7 +16,7 @@ function flushdns() {
 # Usage: itsok <file_path>
 function itsok() {
     if [[ $(uname) == "Darwin" ]]; then
-        xattr -d com.apple.quarantine $1
+        xattr -d com.apple.quarantine "$1"
     else
         echo 'This only works on macOS...'
     fi
@@ -25,7 +25,7 @@ function itsok() {
 # Runs a brew bundle check and installs missing packages
 # Usage: update-brewfile
 function update-brewfile() {
-    if ! [ -x $(command -v brew) ]; then
+    if ! [ -x "$(command -v brew)" ]; then
         echo "Homebrew is not installed. Please install it first."
         return 1
     fi
@@ -39,7 +39,7 @@ function update-brewfile() {
 # Usage: update-dock
 
 function update-dock() {
-    if ! [ -x $(command -v dockutil) ]; then
+    if ! [ -x "$(command -v dockutil)" ]; then
         echo "dockutil is not installed. Please install it via Homebrew: brew install dockutil"
         return 1
     fi
@@ -64,7 +64,7 @@ function set_wallpaper() {
 
     # If no argument provided, use fzf to select from wallpaper directory
     if [ $# -eq 0 ]; then
-        if ! [ -x $(command -v fzf) ]; then
+        if ! [ -x "$(command -v fzf)" ]; then
             echo "fzf is not installed"
             return 1
         fi
@@ -77,7 +77,7 @@ function set_wallpaper() {
         wallpaper_path=$(find "$wallpaper_dir" \( -iname "*.jpg" -o -iname "*.jpeg" -o -iname "*.png" -o -iname "*.heic" \) | fzf --preview 'fzf-preview.sh {}' --height 40%)
 
         # Clear fzf preview from the terminal
-        printf "\x1b_Ga=d,d=A\x1b\\"
+        clear
 
         if [ -z "$wallpaper_path" ]; then
             echo "No wallpaper selected."
@@ -143,5 +143,5 @@ spotlight() {
 
 # Provide default args to LSQ
 if [ -x "$(command -v lsq)" ]; then
-    alias lsq='lsq -d $HOME/Documents/Logseq/PKM/'
+    alias lsq='lsq -d "$LSQ_DIR"'
 fi
