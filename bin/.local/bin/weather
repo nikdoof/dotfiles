@@ -9,7 +9,7 @@ Usage: $(basename "$0") [LOCATION]
 Fetch weather information from wttr.in for the specified location.
 
 Arguments:
-    LOCATION    Location to get weather for (default: St Helens)
+    LOCATION    Location to get weather for (default: St Helens, or \$WEATHER_LOCATION)
 
 Options:
     -h, --help  Show this help message
@@ -44,7 +44,7 @@ if [[ "${1:-}" == "-h" ]] || [[ "${1:-}" == "--help" ]]; then
     exit 0
 fi
 
-location=$(urlencode "${1:-St Helens}")
+location=$(urlencode "${1:-${WEATHER_LOCATION:-St Helens}}")
 
 if ! curl -sf "https://wttr.in/$location"; then
     echo "Error: Failed to fetch weather data. Please check your internet connection or location name." >&2
