@@ -4,7 +4,7 @@ mkdir -p "${XDG_STATE_HOME}"/bash
 export HISTFILE="${XDG_STATE_HOME}"/bash/history
 
 # Prompt
-if [ -x $(command -v starship) ]; then
+if [ -x "$(command -v starship)" ]; then
     eval "$(starship init bash)"
     export STARSHIP_CACHE="${XDG_CACHE_HOME}"/starship
 else

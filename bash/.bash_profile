@@ -1,5 +1,5 @@
 # shellcheck shell=bash
 # Get the aliases and functions
-if [ -f $HOME/.bashrc ]; then
-	source $HOME/.bashrc
+if [ -f "$HOME/.bashrc" ]; then
+	source "$HOME/.bashrc"
 fi
