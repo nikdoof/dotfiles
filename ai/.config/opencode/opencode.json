@@ -3,11 +3,7 @@
   "small_model": "invalid/invalid",
   "provider": {
     "openrouter": {
-      "models": {
-        "tencent/hy3-preview:free": {
-          "name": "Hy3 Preview (free)"
-        }
-      }
+      "models": {}
     }
   }
 }
