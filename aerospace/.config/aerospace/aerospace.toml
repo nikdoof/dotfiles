@@ -39,6 +39,7 @@ on-mode-changed = []
 [key-mapping]
 preset = "qwerty"
 
+# Outer gaps: left/right (15) > top/bottom (10) to compensate for monitor bezels
 [gaps]
 inner.horizontal = 10
 inner.vertical = 10
@@ -84,6 +85,7 @@ alt-w = "workspace W"
 alt-x = "workspace X"
 alt-y = "workspace Y"
 alt-z = "workspace Z"
+# H, J, K, L omitted (Vim navigation binds); P intentionally free
 # See: https://nikitabobko.github.io/AeroSpace/commands#move-node-to-workspace
 alt-shift-1 = "move-node-to-workspace 1"
 alt-shift-2 = "move-node-to-workspace 2"
@@ -130,8 +132,8 @@ alt-shift-j = ["join-with down", "mode main"]
 alt-shift-k = ["join-with up", "mode main"]
 alt-shift-l = ["join-with right", "mode main"]
 
+# Pinning workspace 3 to monitor 3 — on a 2-monitor setup the assignment is silently ignored
 [workspace-to-monitor-force-assignment]
-# Workspace 1-3 is for the moniors
 1 = 1
 2 = 2
 3 = 3
@@ -142,127 +144,130 @@ W = 2
 # Youtube on the right
 Y = 2
 
+# --- Automatically float specific windows ---
+
 # Picture-in-picture windows float
 [[on-window-detected]]
 if.window-title-regex-substring = "Picture-in-picture"
 run = "layout floating"
 
-# Float Bitwarden Safari windows (Passkey selection)
-[[on-window-detected]]
-if.app-id = "com.apple.Safari"
-if.window-title-regex-substring = "Bitwarden"
-run = "layout floating"
-check-further-callbacks = false
-
-# Safari windows to workspace B
-[[on-window-detected]]
-if.app-id = "com.apple.Safari"
-run = "move-node-to-workspace B"
-
-# VSCode windows to workspace C
-[[on-window-detected]]
-if.app-id = "com.microsoft.VSCode"
-run = ["move-node-to-workspace C", "layout v_accordion"]
-
-# Zed settings windows float
-[[on-window-detected]]
-if.app-id = "dev.zed.Zed"
-if.window-title-regex-substring = "(Zed . Settings|Rules Library)"
-run = "layout floating"
-check-further-callbacks = false
-
-# Zed windows to workspace C
-[[on-window-detected]]
-if.app-id = "dev.zed.Zed"
-run = ["move-node-to-workspace C", "layout v_accordion"]
-
-# Ghostty terminal windows to workspace T
-[[on-window-detected]]
-if.app-id = "com.mitchellh.ghostty"
-run = "move-node-to-workspace T"
-
-# Finder windows float
-[[on-window-detected]]
-if.app-id = "com.apple.finder"
-run = ["move-node-to-workspace F"]
-
-# Telegram windows float
-[[on-window-detected]]
-if.app-name-regex-substring = "telegram"
-run = ["move-node-to-workspace S"]
-
-# Activity Monitor windows float
+# Activity Monitor
 [[on-window-detected]]
 if.app-id = "com.apple.ActivityMonitor"
 run = "layout floating"
 
+# CoconutBattery
 [[on-window-detected]]
-if.app-id = "com.microsoft.Outlook"
-run = "move-node-to-workspace W"
+if.app-id = "com.coconut-flavour.coconutBattery"
+run = "layout floating"
 
-# Meeting windows automatically float
+# Compressor
 [[on-window-detected]]
-if.app-id = "com.microsoft.teams2"
-if.window-title-regex-substring = "(Meeting|Call|Screen Share|Share)"
+if.app-id = "com.apple.CompressorApp"
 run = ["layout floating"]
+
+# DaisyDisk
+[[on-window-detected]]
+if.app-id = "com.daisydiskapp.DaisyDiskStandAlone"
+run = ["layout floating"]
+
+# FaceTime
+[[on-window-detected]]
+if.app-id = "com.apple.FaceTime"
+run = "layout floating"
 check-further-callbacks = false
 
-# Dialog windows float
+# Finder to workspace F
 [[on-window-detected]]
-if.app-id = "com.microsoft.teams2"
-if.window-title-regex-substring = "(Settings|Options|Preferences|Join|Audio|Video)"
-run = ["layout floating"]
-check-further-callbacks = false
+if.app-id = "com.apple.finder"
+run = ["move-node-to-workspace F"]
 
-# Teams main window to workspace W
+# Ghostty terminal to workspace T
 [[on-window-detected]]
-if.app-id = "com.microsoft.teams2"
-run = "move-node-to-workspace W"
+if.app-id = "com.mitchellh.ghostty"
+run = "move-node-to-workspace T"
+
+# Logi Options+
+[[on-window-detected]]
+if.app-id = "com.logi.cp-dev-mgr"
+run = "layout floating"
 
 # Logseq to workspace Q
 [[on-window-detected]]
 if.app-id = "com.electron.logseq"
 run = "move-node-to-workspace Q"
 
-# Float Facetime windows
+# OpenTTD
 [[on-window-detected]]
-if.app-id = "com.apple.FaceTime"
-run = "layout floating"
-check-further-callbacks = false
+if.app-id = "org.openttd.openttd"
+run = ["layout floating"]
 
-# Float Logi Options+
+# Outlook to workspace W
 [[on-window-detected]]
-if.app-id = "com.logi.cp-dev-mgr"
-run = "layout floating"
+if.app-id = "com.microsoft.Outlook"
+run = "move-node-to-workspace W"
 
-# Float CoconutBattery
-[[on-window-detected]]
-if.app-id = "com.coconut-flavour.coconutBattery"
-run = "layout floating"
-
-# Float the main window of Windows App
+# Microsoft Remote Desktop (Windows App) — device list floats
 [[on-window-detected]]
 if.app-id = "com.microsoft.rdc.macos"
 if.window-title-regex-substring = "Devices"
 run = ["move-node-to-workspace R", "layout floating"]
 check-further-callbacks = false
 
-# Accordian the connection windows
+# Microsoft Remote Desktop — connections in accordion layout
 [[on-window-detected]]
 if.app-id = "com.microsoft.rdc.macos"
 run = ["move-node-to-workspace R", "layout v_accordion"]
 
-# Float DaisyDisk windows
+# Safari — float Bitwarden passkey dialogs
 [[on-window-detected]]
-if.app-id = "com.daisydiskapp.DaisyDiskStandAlone"
-run = ["layout floating"]
+if.app-id = "com.apple.Safari"
+if.window-title-regex-substring = "Bitwarden"
+run = "layout floating"
+check-further-callbacks = false
 
-# Float Compressor windows
+# Safari to workspace B
 [[on-window-detected]]
-if.app-id = "com.apple.CompressorApp"
-run = ["layout floating"]
+if.app-id = "com.apple.Safari"
+run = "move-node-to-workspace B"
 
-# OpenTTD
+# Telegram to workspace S
 [[on-window-detected]]
-if.app-id = "org.openttd.openttd"
+if.app-name-regex-substring = "telegram"
+run = ["move-node-to-workspace S"]
+
+# Microsoft Teams — float meeting/call windows
+[[on-window-detected]]
+if.app-id = "com.microsoft.teams2"
+if.window-title-regex-substring = "(Meeting|Call|Screen.?Share)"
 run = ["layout floating"]
+check-further-callbacks = false
+
+# Microsoft Teams — float settings/dialog windows
+[[on-window-detected]]
+if.app-id = "com.microsoft.teams2"
+if.window-title-regex-substring = "(Settings|Options|Preferences|Join|Audio|Video)"
+run = ["layout floating"]
+check-further-callbacks = false
+
+# Microsoft Teams to workspace W
+[[on-window-detected]]
+if.app-id = "com.microsoft.teams2"
+run = "move-node-to-workspace W"
+
+# VSCode to workspace C
+[[on-window-detected]]
+if.app-id = "com.microsoft.VSCode"
+run = ["move-node-to-workspace C", "layout v_accordion"]
+
+# Zed — float settings/rules windows
+[[on-window-detected]]
+if.app-id = "dev.zed.Zed"
+if.window-title-regex-substring = "(Zed . Settings|Rules Library)"
+run = "layout floating"
+check-further-callbacks = false
+
+# Zed to workspace C
+[[on-window-detected]]
+if.app-id = "dev.zed.Zed"
+run = ["move-node-to-workspace C", "layout v_accordion"]
