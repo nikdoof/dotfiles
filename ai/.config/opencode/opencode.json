@@ -2,6 +2,22 @@
   "$schema": "https://opencode.ai/config.json",
   "small_model": "invalid/invalid",
   "provider": {
+    "llama.cpp": {
+      "npm": "@ai-sdk/openai-compatible",
+      "name": "llama.cpp",
+      "options": {
+        "baseURL": "http://127.0.0.1:8080/v1"
+      },
+      "models": {
+        "default": {
+          "name": "Default Local LLM",
+          "limit": {
+            "context": 128000,
+            "output": 65536
+          }
+        }
+      }
+    },
     "openrouter": {
       "models": {}
     }
