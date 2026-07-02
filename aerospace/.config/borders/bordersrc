@@ -6,6 +6,7 @@ options=(
     width=4
     hidpi=on
     order=above
-  )
+    blacklist="Safari,App Store"
+)
 
 borders "${options[@]}"
