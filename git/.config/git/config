@@ -2,6 +2,9 @@
 	name = Andrew Williams
 	email = andy@tensixtyone.com
 
+[core]
+	excludesfile = ~/.config/git/ignore
+
 [alias]
 	prune = fetch --prune
 	co = checkout
