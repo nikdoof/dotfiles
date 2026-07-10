@@ -19,7 +19,16 @@
       }
     },
     "openrouter": {
-      "models": {}
+      "models": {
+        "deepseek/deepseek-v4-flash": {
+          "options": {
+            "provider": {
+              "order": ["baidu/fp8", "alibaba"],
+              "allow_fallbacks": false
+            }
+          }
+        }
+      }
     }
   }
 }

@@ -1,0 +1,17 @@
+{
+  "lastChangelogVersion": "0.80.3",
+  "theme": "nord",
+  "defaultProvider": "openrouter",
+  "defaultModel": "deepseek/deepseek-v4-flash",
+  "defaultThinkingLevel": "high",
+  "skills": [
+    "~/.config/opencode/skills"
+  ],
+  "packages": [
+    "npm:@hypabolic/pi-hypa",
+    "npm:@ifi/oh-pi-themes"
+  ],
+  "compaction": {
+    "enabled": true
+  }
+}
