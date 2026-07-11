@@ -8,6 +8,9 @@
   },
   "agent_servers": {
     "opencode": {
+      "default_config_options": {
+        "model": "opencode/deepseek-v4-flash-free"
+      },
       "type": "registry"
     },
     "claude-acp": {
