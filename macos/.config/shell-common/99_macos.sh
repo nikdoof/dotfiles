@@ -29,32 +29,8 @@ function update-brewfile() {
         echo "Homebrew is not installed. Please install it first."
         return 1
     fi
-    brew bundle check --global || brew bundle --cleanup -f --global
-}
-
-# Updates the macOS Dock based on a configuration file
-# The configuration file should be in the format:
-# app_name<TAB>app_path<TAB>app_type
-# where app_type can be "persisentApps" or "other"
-# Usage: update-dock
-
-function update-dock() {
-    if ! [ -x "$(command -v dockutil)" ]; then
-        echo "dockutil is not installed. Please install it via Homebrew: brew install dockutil"
-        return 1
-    fi
-    idx=1
-    while read entry; do
-        app_name=$(echo "$entry" | cut -d $'\t' -f 1)
-        app_path=$(echo "$entry" | cut -d $'\t' -f 2)
-        app_type=$(echo "$entry" | cut -d $'\t' -f 3)
-        idx=$((idx + 1))
-        dockutil --no-restart -a "$app_path" >/dev/null 2>&1
-        if [ "$app_type" = "persisentApps" ]; then
-            dockutil --move "$app_name" -p $idx
-        fi
-    done <~/.dotfiles/macos/.config/dotfiles/dockConfig.txt
-    killall Dock
+    brew bundle check --global
+    brew bundle --cleanup -f --global
 }
 
 # Function to switch the macOS desktop wallpaper from the CLI, using fzf.
