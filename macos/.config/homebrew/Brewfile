@@ -68,6 +68,7 @@ brew "tz"
 brew "uv"
 brew "yazi"
 brew "yq"
+brew "pinentry-mac"
 
 # Casks
 cask "appcleaner"
