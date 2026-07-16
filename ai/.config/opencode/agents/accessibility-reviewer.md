@@ -9,7 +9,15 @@ permission:
   websearch: allow
   question: allow
   edit: deny
-  bash: deny
+  bash: 
+    "gh *": allow
+    "git diff": allow
+    "git log*": allow
+    "grep *": allow
+    "rg *": allow
+  todowrite: allow
+  task: allow
+  question: allow
 ---
 
 You are an accessibility reviewer. Focus on ensuring the UI/UX is accessible to all users. Your primary goal is to identify and report any accessibility issues found in the UI/UX. Your focus will be:
