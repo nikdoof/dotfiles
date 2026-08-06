@@ -23,12 +23,13 @@
         "deepseek/deepseek-v4-flash": {
           "options": {
             "provider": {
-              "order": ["baidu/fp8", "alibaba"],
+              "order": ["deepinfra/fp4"],
               "allow_fallbacks": false
             }
           }
         }
       }
     }
-  }
+  },
+  "shell": "zsh"
 }
