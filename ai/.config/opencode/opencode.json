@@ -20,14 +20,6 @@
     },
     "openrouter": {
       "models": {
-        "deepseek/deepseek-v4-flash": {
-          "options": {
-            "provider": {
-              "order": ["deepinfra/fp4"],
-              "allow_fallbacks": false
-            }
-          }
-        }
       }
     }
   },
