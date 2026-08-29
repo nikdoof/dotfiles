@@ -77,6 +77,14 @@
   },
   "base_keymap": "VSCode",
   "agent": {
+    "sandbox_permissions": {
+      "network_hosts": [
+        "*.githubusercontent.com",
+        "github.com",
+        "*.pythonhosted.org",
+        "pypi.org"
+      ]
+    },
     "sidebar_side": "right",
     "favorite_models": [
       {
@@ -159,7 +167,7 @@
     "default_model": {
       "enable_thinking": true,
       "provider": "openrouter",
-      "model": "qwen/qwen3.6-27b",
+      "model": "google/gemini-3.7-flash",
     },
     "enabled": true,
     "button": true,
