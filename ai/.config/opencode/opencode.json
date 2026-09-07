@@ -19,9 +19,15 @@
       }
     },
     "openrouter": {
-      "models": {
-      }
+      "models": {}
     }
   },
-  "shell": "zsh"
+  "shell": "zsh",
+  "mcp": {
+    "reflect": {
+      "type": "remote",
+      "url": "http://127.0.0.1:7676/mcp",
+      "enabled": true
+    }
+  }
 }
