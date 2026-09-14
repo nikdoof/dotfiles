@@ -30,7 +30,7 @@ function update-brewfile() {
         return 1
     fi
     brew bundle check --global
-    brew bundle --cleanup -f --global
+    brew bundle install --global
 }
 
 # Function to switch the macOS desktop wallpaper from the CLI, using fzf.
