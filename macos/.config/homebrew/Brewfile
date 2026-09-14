@@ -3,7 +3,6 @@ cask_args appdir: "~/Applications"
 tap "dart-lang/dart", trusted: true
 tap "felixkratz/formulae", trusted: true
 tap "fluxcd/tap", trusted: true
-tap "go-task/tap", trusted: true
 tap "hashicorp/tap", trusted: true
 tap "localstack/tap", trusted: true
 tap "nikitabobko/tap", trusted: true
@@ -29,7 +28,6 @@ brew "gh"
 brew "gitleaks"
 brew "gnupg"
 brew "go"
-brew "go-task/tap/go-task"
 brew "hashicorp/tap/packer"
 brew "hashicorp/tap/terraform"
 brew "helm"
