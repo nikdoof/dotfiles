@@ -71,14 +71,22 @@ nord14 = "#A3BE8C"
 nord15 = "#B48EAD"
 
 [aws]
-format = '[ $symbol($profile )(\($region\) )]($style)'
+format = '[ $symbol ($profile )(\($region\) )]($style)'
 style = "fg:nord0 bg:nord7"
 symbol = " "
+
+[aws.region_aliases]
+eu-west-1 = 'ie'
+eu-west-2 = 'uk'
+
+[aws.profile_aliases]
+portwest-management-admin = "portwest-org"
 
 [git_branch]
 format = "[ $symbol$branch(:$remote_branch) ]($style)"
 symbol = "󰘬 "
 style = "fg:nord0 bg:nord8"
+ignore_bare_repo = true
 
 [git_status]
 disabled = true
@@ -101,7 +109,7 @@ format = "[ $symbol($version )]($style)"
 style = "fg:nord0 bg:nord7"
 
 [golang]
-symbol = "go"
+symbol = " "
 format = "[ $symbol($version )]($style)"
 style = "fg:nord0 bg:nord7"
 
@@ -116,7 +124,7 @@ format = "[ $symbol($version )]($style)"
 style = "fg:nord0 bg:nord7"
 
 [terraform]
-symbol = "󰘦 "
+symbol = " "
 format = "[ $symbol($version )]($style)"
 style = "fg:nord0 bg:nord7"
 disabled = false
@@ -130,6 +138,7 @@ ssh_only = false
 style = "fg:nord0 bg:nord10"
 format = "[$ssh_symbol$hostname ]($style)"
 ssh_symbol = " "
+aliases = { "Andrew-Williams-MacBook-Pro" = "work-laptop" }
 
 [shell]
 disabled = false
