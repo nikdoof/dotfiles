@@ -25,10 +25,12 @@
   "lsp": true,
   "shell": "zsh",
   "mcp": {
-    // "reflect": {
-    //   "type": "remote",
-    //   "url": "http://127.0.0.1:7676/mcp",
-    //   "enabled": true
-    // }
+    "obsidian": {
+      "type": "remote",
+      "url": "http://127.0.0.1:27123/mcp/",
+      "headers": {
+        "Authorization": "Bearer obsidian"
+      }
+    }
   }
 }
