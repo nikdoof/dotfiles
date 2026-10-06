@@ -116,140 +116,140 @@ W = 2
 # Youtube on the right
 Y = 2
 
-# --- Automatically float specific windows ---
+# --- Window-specific layout rules ---
 
 # Picture-in-picture windows float
 [[on-window-detected]]
-if.window-title-regex-substring = "Picture-in-picture"
+if = 'test %{window-title} ~= "Picture-in-picture"'
 run = "layout floating"
+
+# Illustrator document windows tile; dialog titles don't include the zoom percentage
+[[on-window-detected]]
+if = 'test %{app-bundle-id} = com.adobe.illustrator && test %{window-title} ~= "@ *[0-9]+([.][0-9]+)? *%"'
+run = "layout tiling"
 
 # Activity Monitor
 [[on-window-detected]]
-if.app-id = "com.apple.ActivityMonitor"
+if = 'test %{app-bundle-id} = com.apple.ActivityMonitor'
 run = "layout floating"
 
 # CoconutBattery
 [[on-window-detected]]
-if.app-id = "com.coconut-flavour.coconutBattery"
+if = 'test %{app-bundle-id} = com.coconut-flavour.coconutBattery'
 run = "layout floating"
 
 # Compressor
 [[on-window-detected]]
-if.app-id = "com.apple.CompressorApp"
+if = 'test %{app-bundle-id} = com.apple.CompressorApp'
 run = ["layout floating"]
 
 # DaisyDisk
 [[on-window-detected]]
-if.app-id = "com.daisydiskapp.DaisyDiskStandAlone"
+if = 'test %{app-bundle-id} = com.daisydiskapp.DaisyDiskStandAlone'
 run = ["layout floating"]
 
 # FaceTime
 [[on-window-detected]]
-if.app-id = "com.apple.FaceTime"
+if = 'test %{app-bundle-id} = com.apple.FaceTime'
 run = "layout floating"
 check-further-callbacks = false
 
 # Finder to workspace F
 [[on-window-detected]]
-if.app-id = "com.apple.finder"
+if = 'test %{app-bundle-id} = com.apple.finder'
 run = ["move-node-to-workspace F"]
 
 # Ghostty terminal to workspace T
 [[on-window-detected]]
-if.app-id = "com.mitchellh.ghostty"
+if = 'test %{app-bundle-id} = com.mitchellh.ghostty'
 run = "move-node-to-workspace T"
 
 # Logi Options+
 [[on-window-detected]]
-if.app-id = "com.logi.cp-dev-mgr"
+if = 'test %{app-bundle-id} = com.logi.cp-dev-mgr'
 run = "layout floating"
 
 # Logseq to workspace Q
 [[on-window-detected]]
-if.app-id = "com.electron.logseq"
+if = 'test %{app-bundle-id} = com.electron.logseq'
 run = "move-node-to-workspace Q"
 
 # Obsidian to workspace Q
 [[on-window-detected]]
-if.app-id = "md.obsidian"
+if = 'test %{app-bundle-id} = md.obsidian'
 run = "move-node-to-workspace Q"
 
 # OpenTTD
 [[on-window-detected]]
-if.app-id = "org.openttd.openttd"
+if = 'test %{app-bundle-id} = org.openttd.openttd'
 run = ["layout floating"]
 
 # Outlook to workspace W
 [[on-window-detected]]
-if.app-id = "com.microsoft.Outlook"
+if = 'test %{app-bundle-id} = com.microsoft.Outlook'
 run = "move-node-to-workspace W"
 
 # Microsoft Remote Desktop (Windows App) — device list floats
 [[on-window-detected]]
-if.app-id = "com.microsoft.rdc.macos"
-if.window-title-regex-substring = "Devices"
+if = 'test %{app-bundle-id} = com.microsoft.rdc.macos && test %{window-title} ~= Devices'
 run = ["move-node-to-workspace R", "layout floating"]
 check-further-callbacks = false
 
 # Microsoft Remote Desktop — connections in accordion layout
 [[on-window-detected]]
-if.app-id = "com.microsoft.rdc.macos"
+if = 'test %{app-bundle-id} = com.microsoft.rdc.macos'
 run = ["move-node-to-workspace R", "layout v_accordion"]
 
 # Safari — float Bitwarden passkey dialogs
 [[on-window-detected]]
-if.app-id = "com.apple.Safari"
-if.window-title-regex-substring = "Bitwarden"
+if = 'test %{app-bundle-id} = com.apple.Safari && test %{window-title} ~= Bitwarden'
 run = "layout floating"
 check-further-callbacks = false
 
 # Safari to workspace B
 [[on-window-detected]]
-if.app-id = "com.apple.Safari"
+if = 'test %{app-bundle-id} = com.apple.Safari'
 run = "move-node-to-workspace B"
 
 # Vivaldi to B
 [[on-window-detected]]
-if.app-id = "com.vivaldi.Vivaldi"
+if = 'test %{app-bundle-id} = com.vivaldi.Vivaldi'
 run = "move-node-to-workspace B"
 
 # Telegram to workspace S
 [[on-window-detected]]
-if.app-name-regex-substring = "telegram"
+if = 'test %{app-name} ~= telegram'
 run = ["move-node-to-workspace S"]
 
 # Microsoft Teams — float meeting/call windows
 [[on-window-detected]]
-if.app-id = "com.microsoft.teams2"
-if.window-title-regex-substring = "(Meeting|Call|Screen.?Share)"
+if = 'test %{app-bundle-id} = com.microsoft.teams2 && test %{window-title} ~= "(Meeting|Call|Screen.?Share)"'
 run = ["layout floating"]
 check-further-callbacks = false
 
 # Microsoft Teams — float settings/dialog windows
 [[on-window-detected]]
-if.app-id = "com.microsoft.teams2"
-if.window-title-regex-substring = "(Settings|Options|Preferences|Join|Audio|Video)"
+if = 'test %{app-bundle-id} = com.microsoft.teams2 && test %{window-title} ~= "(Settings|Options|Preferences|Join|Audio|Video)"'
 run = ["layout floating"]
 check-further-callbacks = false
 
 # Microsoft Teams to workspace W
 [[on-window-detected]]
-if.app-id = "com.microsoft.teams2"
+if = 'test %{app-bundle-id} = com.microsoft.teams2'
 run = "move-node-to-workspace W"
 
 # VSCode to workspace C
 [[on-window-detected]]
-if.app-id = "com.microsoft.VSCode"
+if = 'test %{app-bundle-id} = com.microsoft.VSCode'
 run = ["move-node-to-workspace C", "layout v_accordion"]
 
 # Zed — float settings/rules windows
 [[on-window-detected]]
-if.app-id = "dev.zed.Zed"
-if.window-title-regex-substring = "(Zed . Settings|Rules Library)"
+if = 'test %{app-bundle-id} = dev.zed.Zed && test %{window-title} ~= "(Zed . Settings|Rules Library)"'
 run = "layout floating"
 check-further-callbacks = false
 
 # Zed to workspace C
 [[on-window-detected]]
-if.app-id = "dev.zed.Zed"
+if = 'test %{app-bundle-id} = dev.zed.Zed'
 run = ["move-node-to-workspace C", "layout v_accordion"]
