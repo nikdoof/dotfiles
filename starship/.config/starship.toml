@@ -138,7 +138,7 @@ ssh_only = false
 style = "fg:nord0 bg:nord10"
 format = "[$ssh_symbol$hostname ]($style)"
 ssh_symbol = " "
-aliases = { "Andrew-Williams-MacBook-Pro" = "work-laptop" }
+aliases = { "Andrew-Williams-MacBook-Pro" = "work-laptop", "andrewwliamsmbp" = "work-laptop" }
 
 [shell]
 disabled = false
