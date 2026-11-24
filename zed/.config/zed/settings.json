@@ -9,11 +9,14 @@
   "agent_servers": {
     "opencode": {
       "default_config_options": {
-        "model": "opencode/deepseek-v4-flash-free"
+        "model": "openrouter/openai/gpt-6-luna"
       },
       "type": "registry"
     },
     "claude-acp": {
+      "default_config_options": {
+        "ultracode": false
+      },
       "type": "registry",
     },
   },
@@ -42,6 +45,13 @@
     },
   },
   "context_servers": {
+    "obsidian": {
+      "headers": {
+        "Authorization": "Bearer obsidian"
+      },
+      "enabled": true,
+      "url": "http://127.0.0.1:27123/mcp/"
+    },
     "mcp-server-github": {
       "enabled": true,
       "remote": false,
@@ -77,15 +87,20 @@
   },
   "base_keymap": "VSCode",
   "agent": {
+    "threads_sidebar": {
+      "position": "right"
+    },
     "sandbox_permissions": {
+      "allow_unsandboxed": true,
       "network_hosts": [
         "*.githubusercontent.com",
         "github.com",
         "*.pythonhosted.org",
-        "pypi.org"
+        "pypi.org",
+        "learn.microsoft.com",
+        "grafana.com"
       ]
     },
-    "sidebar_side": "right",
     "favorite_models": [
       {
         "provider": "openrouter",
@@ -103,41 +118,96 @@
     "inline_assistant_use_streaming_tools": false,
     "tool_permissions": {
       "tools": {
+        "mcp:terraform-context-server:get_provider_details": {
+          "default": "allow"
+        },
+        "mcp:mcp-server-context7:resolve-library-id": {
+          "default": "allow"
+        },
+        "mcp:mcp-server-context7:query-docs": {
+          "default": "allow"
+        },
+        "fetch": {
+          "always_allow": [
+            {
+              "pattern": "^https?://learn\\.microsoft\\.com"
+            },
+            {
+              "pattern": "^https?://grafana\\.com"
+            },
+            {
+              "pattern": "^https?://raw\\.githubusercontent\\.com"
+            },
+            {
+              "pattern": "^https?://aws\\.amazon\\.com"
+            }
+          ]
+        },
         "create_directory": {
           "default": "allow",
         },
         "terminal": {
           "always_allow": [
             {
-              "pattern": "^cat\\b",
+              "pattern": "^cat\\b"
             },
             {
-              "pattern": "^sed\\b",
+              "pattern": "^sed\\b"
             },
             {
-              "pattern": "^tail\\b",
+              "pattern": "^tail\\b"
             },
             {
-              "pattern": "^python\\s+manage\\.py(\\s|$)",
+              "pattern": "^python\\s+manage\\.py(\\s|$)"
             },
             {
-              "pattern": "^git\\s+diff(\\s|$)",
+              "pattern": "^git\\s+diff(\\s|$)"
             },
             {
-              "pattern": "^wc\\b",
+              "pattern": "^wc\\b"
             },
             {
-              "pattern": "^grep\\b",
+              "pattern": "^grep\\b"
             },
             {
-              "pattern": "^uv\\s+run(\\s|$)",
+              "pattern": "^uv\\s+run(\\s|$)"
             },
             {
-              "pattern": "^head\\b",
+              "pattern": "^head\\b"
             },
             {
-              "pattern": "^npm\\s+run(\\s|$)",
+              "pattern": "^npm\\s+run(\\s|$)"
             },
+            {
+              "pattern": "^git\\b"
+            },
+            {
+              "pattern": "^python3\\b"
+            },
+            {
+              "pattern": "^UV_CACHE_DIR=\\.uv-cache\\s+uv\\s+run(\\s|$)"
+            },
+            {
+              "pattern": "^curl\\b"
+            },
+            {
+              "pattern": "^terraform\\s+fmt(\\s|$)"
+            },
+            {
+              "pattern": "^terraform\\s+validate(\\s|$)"
+            },
+            {
+              "pattern": "^terraform\\s+version(\\s|$)"
+            },
+            {
+              "pattern": "^tflint\\b"
+            },
+            {
+              "pattern": "^make\\s+lint(\\s|$)"
+            },
+            {
+              "pattern": "^terraform\\s+test(\\s|$)"
+            }
           ],
         },
         "mcp:mcp-server-github:search_repositories": {
@@ -165,9 +235,10 @@
     },
     "show_turn_stats": true,
     "default_model": {
+      "effort": "medium",
       "enable_thinking": true,
       "provider": "openrouter",
-      "model": "google/gemini-3.7-flash",
+      "model": "~openai/gpt-luna-latest",
     },
     "enabled": true,
     "button": true,
@@ -204,6 +275,9 @@
     "dark": "Nord Dark",
   },
   "languages": {
+    "Dockerfile": {
+      "format_on_save": "off"
+    },
     "PHP": {
       "format_on_save": "off"
     },
