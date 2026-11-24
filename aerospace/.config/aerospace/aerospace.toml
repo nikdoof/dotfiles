@@ -221,12 +221,6 @@ run = "move-node-to-workspace B"
 if = 'test %{app-name} ~= telegram'
 run = ["move-node-to-workspace S"]
 
-# Microsoft Teams — float meeting/call windows
-[[on-window-detected]]
-if = 'test %{app-bundle-id} = com.microsoft.teams2 && test %{window-title} ~= "(Meeting|Call|Screen.?Share)"'
-run = ["layout floating"]
-check-further-callbacks = false
-
 # Microsoft Teams — float settings/dialog windows
 [[on-window-detected]]
 if = 'test %{app-bundle-id} = com.microsoft.teams2 && test %{window-title} ~= "(Settings|Options|Preferences|Join|Audio|Video)"'
@@ -236,7 +230,7 @@ check-further-callbacks = false
 # Microsoft Teams to workspace W
 [[on-window-detected]]
 if = 'test %{app-bundle-id} = com.microsoft.teams2'
-run = "move-node-to-workspace W"
+run = ["move-node-to-workspace W", "layout tiling"]
 
 # VSCode to workspace C
 [[on-window-detected]]
