@@ -1,0 +1,10 @@
+{
+  "attribution": {
+    "commit": "",
+    "pr": ""
+  },
+  "effortLevel": "high",
+  "theme": "dark-ansi",
+  "verbose": true,
+  "tui": "fullscreen"
+}
